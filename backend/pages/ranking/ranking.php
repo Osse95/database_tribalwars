@@ -1,0 +1,520 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-secondary">
+                <div class="card-body table-responsive">
+                    <h5 class="card-title">Spieler Rangliste</h5>
+                    <table id="playerRanking" class="table table-dark  table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th> Rang</th>
+                            <th> Spieler</th>
+                            <th> Punkte</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card bg-secondary">
+                <div class="card-body table-responsive">
+                    <h5 class="card-title">Stamm Rangliste</h5>
+                    <table id="tribeRanking" class="table table-dark table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th> Rang</th>
+                            <th> Spieler</th>
+                            <th> Member</th>
+                            <th> Punkte</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="accordionFlushExample">
+    <div class="container p-4" id="dailysBashis">
+        <div class="accordion accordion-flush">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Daily Spieler
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Angreifer</h5>
+                                        <table id="dailyPlayerAtt" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Angreifer</th>
+                                                <th>Bes. Gegner</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Verteidiger</h5>
+                                        <table id="dailyPlayerDef" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Verteidiger</th>
+                                                <th>Bes. Gegner</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Unterstützer</h5>
+                                        <table id="dailyPlayerSup" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Unterstützer</th>
+                                                <th>Bes. Gegner</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Daily Stamm
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Angreifer</h5>
+                                        <table id="dailyTribeAtt" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Stamm</th>
+                                                <th> Bes. Gegner</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Verteidiger</h5>
+                                        <table id="dailyTribeDef" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Stamm</th>
+                                                <th> Bes. Gegner</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                        Bashis Spieler
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Angreifer</h5>
+                                        <table id="bashisPlayersAtt" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Spieler</th>
+                                                <th> Bashis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Verteidiger</h5>
+                                        <table id="bashisPlayersDef" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Spieler</th>
+                                                <th> Bashis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Unterstützer</h5>
+                                        <table id="bashisPlayersSup" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Spieler</th>
+                                                <th> Punkte</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFour">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour" aria-expanded="false"
+                            aria-controls="flush-collapseFour">
+                        Bashis Stamm
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Angreifer</h5>
+                                        <table id="bashisTribesAtt" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Stamm</th>
+                                                <th> Punkte</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Verteidiger</h5>
+                                        <table id="bashisTribesDef" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Stamm</th>
+                                                <th> Punkte</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-4" id="conquers">
+        <div class="accordion accordion-flush">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFive" aria-expanded="false"
+                            aria-controls="flush-collapseFive">
+                        Babaadelungen
+                    </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Barbarenadelungen</h5>
+                                        <table id="barbarianConquers"
+                                               class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Spieler</th>
+                                                <th> maximale Dörfer</th>
+                                                <th> Babaadelungen</th>
+                                                <th> Prozentual</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSix">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        Internadelungen
+                    </button>
+                </h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Internadelungen</h5>
+                                        <table id="internalConquers" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Spieler</th>
+                                                <th> maximale Dörfer</th>
+                                                <th> Internadelungen</th>
+                                                <th> Prozentual</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p-4" id="showDailys">
+        <div class="accordion accordion-flush">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                            aria-controls="flush-collapseSeven">
+                        Tägliche Erfolge
+                    </button>
+                </h2>
+                <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card bg-secondary">
+                                    <div id="dailys" class="card-body text-center">
+                                        <h5 class="card-title">Erfolge</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br></br>
+</div>
+
+<script>
+    $.getJSON("/ajax/ranking/ranking.php", function (result) {
+        result["playerRanking"].forEach(element => {
+            let row = `<tr>
+                           <td> ${element["rank"]} </td>
+                           <td> <a href="/playerInfo?ID=${element["playerName"]}" target="_blank">${element["playerName"]}</a> </td>
+                           <td> ${formatNumber(element["points"])}</td>
+                       </tr>`
+            $("#playerRanking > tbody").append(row)
+        });
+        result["tribeRanking"].forEach(element => {
+            let row = `<tr>
+                           <td> ${element["rank"]} </td>
+                           <td> <a href="/tribeInfo?ID=${element["tribeName"]}" target="_blank">${element["tribeName"]}</a> </td>
+                           <td> ${element["tribeMembers"]} </td>
+                           <td> ${formatNumber(element["points"])}</td>
+                       </tr>`
+            $("#tribeRanking > tbody").append(row)
+        });
+    });
+
+    let dailyBashis = false;
+    $("#dailysBashis").on("click", function () {
+        if (!dailyBashis) {
+            dailyBashis = true;
+            $.getJSON("/ajax/ranking/dailys_bashis.php", function (result) {
+                result["dailyPlayers"].forEach(element => {
+                    let row = `<tr>
+                           <td> <a href="/playerInfo?ID=${element["attID"]}" target="_blank">${element["attName"]}</a> </td>
+                           <td> ${formatNumber(element["attDiff"])}</td>
+                       </tr>`
+                    $("#dailyPlayerAtt > tbody").append(row)
+
+                    row = `<tr>
+                       <td> <a href="/playerInfo?ID=${element["defID"]}" target="_blank">${element["defName"]}</a> </td>
+                       <td> ${formatNumber(element["defDiff"])}</td>
+                    </tr>`
+                    $("#dailyPlayerDef > tbody").append(row)
+                    row = `<tr>
+                       <td> <a href="/playerInfo?ID=${element["supID"]}" target="_blank">${element["supName"]}</a> </td>
+                       <td> ${formatNumber(element["supDiff"])}</td>
+                    </tr>`
+                    $("#dailyPlayerSup > tbody").append(row)
+                });
+                result["dailyTribes"].forEach(element => {
+                    let row = `<tr>
+                           <td> <a href="/tribeInfo?ID=${element["attID"]}" target="_blank">${element["attTag"]}</a> </td>
+                           <td> ${formatNumber(element["attDiff"])}</td>
+                       </tr>`
+                    $("#dailyTribeAtt > tbody").append(row)
+                    row = `<tr>
+                       <td> <a href="/tribeInfo?ID=${element["defID"]}" target="_blank">${element["defTag"]}</a> </td>
+                       <td> ${formatNumber(element["defDiff"])}</td>
+                    </tr>`
+                    $("#dailyTribeDef > tbody").append(row)
+                });
+                let playerBashis = ["Att", "Def", "Sup"];
+                playerBashis.forEach(e => {
+                    result["bashisPlayers"][e].forEach(element => {
+                        let row = `<tr>
+                       <td> <a href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                       <td> ${formatNumber(element["kills"])}</td>
+                    </tr>`
+                        $(`#bashisPlayers${e} > tbody`).append(row)
+                    })
+                });
+                let tribeBashis = ["Att", "Def"];
+                tribeBashis.forEach(e => {
+                    result["bashisTribes"][e].forEach(element => {
+                        let row = `<tr>
+                       <td> <a href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                       <td> ${formatNumber(element["kills"])}</td>
+                    </tr>`
+                        $(`#bashisTribes${e} > tbody`).append(row)
+                    })
+                });
+            })
+        }
+    })
+    let conquers = false;
+    $("#conquers").on("click", function () {
+        if (!conquers) {
+            conquers = true;
+            $.getJSON("/ajax/ranking/conquers.php", function (result) {
+                result["internalConquers"].forEach(element => {
+                    let row = `<tr>
+                        <td> <a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                        <td> ${element["maxVillages"]}</td>
+                        <td> ${element["internalConquers"]}</td>
+                        <td> ${element["percent"]} %</td>
+                       </tr>`
+                    $("#internalConquers > tbody").append(row)
+                })
+                result["barbarianConquers"].forEach(element => {
+                    let row = `<tr>
+                        <td> <a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                        <td> ${element["maxVillages"]}</td>
+                        <td> ${element["barbarianConquers"]}</td>
+                        <td> ${element["percent"]} %</td>
+                       </tr>`
+                    $("#barbarianConquers > tbody").append(row)
+                })
+            })
+        }
+    })
+
+    let showDailys = false;
+    $("#showDailys").on("click", function () {
+        if(!showDailys){
+            showDailys = true;
+            $.ajax({
+                url: "https://testdb.de/ajax/inno/HallOfFame.php",
+                type: 'post',
+                success: function (data) {
+                    $("#dailys").append($(data).find(".bordered-box-content").eq(5).html());
+                    $("#dailys a").each(function () {
+                        let url = $(this).attr("href").replace("/guest.php?screen=info_player&id=", "/playerInfo?ID=");
+                        $(this).attr("href", url)
+                    })
+                }
+            });
+        }
+    })
+
+
+    function formatNumber(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+</script>

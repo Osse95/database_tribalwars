@@ -1,0 +1,127 @@
+.nav-link,
+.dropdown-item,
+.navbar-brand,
+.footertext,
+body,
+a {
+    color: rgb(170, 170, 170) !important;
+}
+
+.navbar {
+    outline: 1px ridge rgb(122, 122, 122);
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+
+.container,
+.navbar-dark,
+.bg-primary {
+    background-color: rgba(33, 37, 41, 0.95) !important;
+}
+
+.bg-secondary,
+.accordion-item {
+    background-color: rgba(189, 189, 189, 0.1) !important;
+}
+
+.accordion-button,
+.accordion-button.collapsed,
+.accordion-button a {
+    color: rgb(170, 170, 170) !important;
+    background-color: rgba(95, 95, 95, 0.3) !important;
+}
+
+.accordion-button {
+    color: #d18e41 !important;
+}
+
+.dropdown-item {
+    border-top: 3px ridge rgba(122, 122, 122, 0.3);
+}
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ff9e1f'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.accordion-button.collapsed:after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.btn-primary {
+    background-color: rgba(189, 189, 189, 0.4) !important;
+    border-color: rgba(189, 189, 189, 0.2) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:checked,
+.input-group textarea:focus,
+.accordion-button:focus {
+    box-shadow: 0px 1px 2px 3px rgba(189, 189, 189, 0.2) !important;
+}
+
+.form-control:focus,
+.form-control:active,
+.form-select:focus {
+    box-shadow: 0px 1px 2px 3px rgba(189, 189, 189, 0.2) !important;
+    border-color: rgba(189, 189, 189, 1) !important;
+}
+
+
+.form-control,
+.form-select {
+    color: rgba(255, 255, 255, 0.7) !important;
+    background-color: rgba(189, 189, 189, 0.4) !important;
+}
+ 
+.form-select option,.form-control option{
+    color: rgba(255, 255, 255, 0.7) !important;
+    background-color: rgb(88, 88, 88) !important;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.infobox{
+	background-color: rgba(41, 49, 51,0.8);
+
+}
+
+.infobox2{
+	background-color: rgb(41, 49, 51);
+
+}
+
+
+.infobox3{
+	background-color: rgb(41, 49, 51);
+}
+
+.infobox4{
+	background-color: rgb(41, 49, 51);
+}
+
+.centered a:link{
+    color: black !important;
+}
+
+.moff td{
+    background-color: rgba(255,0,0,0.1) !important;
+}
+.ag td{
+    background-color: rgba(255, 251, 0, 0.144) !important;
+}
+
+.fake td{
+    background-color: rgba(47, 0, 255, 0.05) !important;
+}
+
+.popupDorfInfo{
+    background-color: rgba(39, 39, 39, 0.8);
+}
+
+
