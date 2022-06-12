@@ -503,7 +503,7 @@
                 url: "https://testdb.de/ajax/inno/HallOfFame.php",
                 type: 'post',
                 success: function (data) {
-                    $("#dailys").append($(data).find(".bordered-box-content").eq(5).html());
+                    $("#dailys").append($(".bordered-box-content",$(data)).eq(5).html());
                     $("#dailys a").each(function () {
                         let url = $(this).attr("href").replace("/guest.php?screen=info_player&id=", "/playerInfo?ID=");
                         $(this).attr("href", url)

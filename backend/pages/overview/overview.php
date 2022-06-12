@@ -147,11 +147,11 @@
 </div>
 
 <script>
+
     createAttackDiagram()
     setInterval(function () {
         createAttackDiagram()
     }, 30000)
-
     let ChartID = [];
 
     function createAttackDiagram() {
@@ -169,6 +169,7 @@
                 $("#attackContainer").show();
                 if (ChartID.length > 0) {
                     ChartID[0].destroy();
+                    ChartID = []
                 }
                 ChartID.push(new Chart(document.getElementById("attacks").getContext('2d'), {
                     type: 'bar',

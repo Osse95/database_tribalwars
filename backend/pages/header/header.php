@@ -298,6 +298,25 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
             });
         }
     });
+    $("#tribeIcon").css("visibility", "hidden");
+    $.getJSON("/ajax/general/getTribeID.php", function (result) {
+        let post = {
+            id: result
+        }
+        $.ajax({
+            url: "/ajax/inno/guestTribePage.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                if($("img",$(".vis",$(data)).eq(3)).length > 0){
+                     let src = $("img",$(".vis",$(data)).eq(3)).attr("src");
+                    $("#tribeIcon").attr("src", src);
+                    $("#tribeIcon").css("border-radius", "5px");
+                    $("#tribeIcon").css("visibility", "visible");
+                }
+            }
+        });
+    })
 
     refreshCounters();
     setInterval(function () {
