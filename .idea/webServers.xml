@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2ea3dc35-cb98-4c57-8f15-d0d0f91e1358" name="Datenbank" url="http://202.61.232.52">
+        <fileTransfer rootFolder="/httpdocs/newDatenbank" accessType="FTPS" host="202.61.232.52" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

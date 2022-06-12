@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row p-4" ID="sendInputs">
+        <div class="col-12 text-center" ID="msg"></div>
+        <div class="col-sm-6">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">SoS Anfrage</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">SoS</span>
+                        <textarea class="form-control" name="sos" aria-label="With textarea"
+                                  placeholder="Ankommende Angriffe->SoS Anfrage erstellen"></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Berichte</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">Berichte</span>
+                        <textarea name="reports" class="form-control" aria-label="With textarea"
+                                  placeholder="Berichte->Alle markieren->Veröffentlichen"></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Truppen</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">Truppen</span>
+                        <textarea class="form-control" name="troops" aria-label="With textarea"
+                                  placeholder="Übersicht->Truppen"></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Gebäude</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">Gebäude</span>
+                        <textarea class="form-control" name="buildings" aria-label="With textarea"
+                                  placeholder="Übersichten->Gebäude"></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Unterstützung</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">Unterstützung</span>
+                        <textarea class="form-control " name="support" aria-label="With textarea"
+                                  placeholder="Übersichten->Truppen->Unterstützung"></textarea></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Verteidigung</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">Verteidigung</span>
+                        <textarea class="form-control" name="defense" aria-label="With textarea"
+                                  placeholder="Übersichten->Truppen->Verteidigung"></textarea>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">freies AG Limit</h5>
+                    <p class="card-text">
+                    <div class="input-group">
+                        <span class="input-group-text">AG</span>
+                        <input type="number" name="snobLimit" class="form-control" placeholder="0"
+                               aria-label="With textarea">
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="placeholder">
+    <br></br>
+</div>
+
+<script>
+    $("#sendInputs :INPUT").on("change", function () {
+        $("#msg").append(`<div class="m-2 spinner-border" role="status"></div>`)
+        $("#msg").append(`<br>Daten werden verarbeitet.<br></br>`)
+        let post = {};
+        $("#sendInputs :INPUT").each(function () {
+            if ($(this).val() !== "") {
+                post[$(this).attr("name")] = $(this).val();
+                $(this).val("");
+            }
+        })
+    })
+</script>

@@ -1,0 +1,313 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-secondary table-responsive">
+                <div class="card-body">
+                    <h5 class="card-title">bekommene Angriffe</h5>
+                    <p class="card-text">
+                    <table id="attacks" class="table table-dark table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th> Rang</th>
+                            <th> Account</th>
+                            <th> bekommene Angriffe</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card bg-secondary table-responsive">
+                <div class="card-body">
+                    <h5 class="card-title">hochgeladene Berichte</h5>
+                    <p class="card-text">
+                    <table id="reports" class="table table-dark table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th> Rang</th>
+                            <th> Spieler</th>
+                            <th> Anzahl</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="accordionFlushExample">
+    <div class="container p-4">
+        <div class="accordion accordion-flush">
+            <div id="showAttacks" class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Angriffe
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">große Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="largeAttacks" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">mittlere Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="mediumAttacks" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">kleine Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="smallAttacks" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="showDefense" class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="fw-bold accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Verteidigung
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">große Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="largeDefense" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">mittlere Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="mediumDefense" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card bg-secondary table-responsive">
+                                    <div class="card-body">
+                                        <h5 class="card-title">kleine Angriffe</h5>
+                                        <p class="card-text">
+                                        <table id="smallDefense" class="table table-dark table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th> Rang</th>
+                                                <th> Spieler</th>
+                                                <th> Angriffe</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br></br>
+</div>
+
+<script>
+    $.getJSON("/ajax/ranking/dbRanking.php", function (result) {
+        let count = 1;
+        result["attacks"].forEach(element => {
+            let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+            $("#attacks > tbody").append(row);
+            count++;
+        })
+        count = 1;
+        result["reports"].forEach(element => {
+            let row = `<tr>
+                        <td>${count}</td>
+                        <td>${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+            $("#reports > tbody").append(row);
+            count++;
+        })
+    })
+
+    let attacks = false;
+    $("#showAttacks").on("click", function () {
+        if (!attacks) {
+            attacks = true;
+            $.getJSON("/ajax/ranking/getAttacks.php", function (result) {
+                let count = 1;
+                result["large"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#largeAttacks > tbody").append(row);
+                    count++;
+                })
+                count = 1;
+                result["medium"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#mediumAttacks > tbody").append(row);
+                    count++;
+                })
+                count = 1;
+                result["small"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#smallAttacks > tbody").append(row);
+                    count++;
+                })
+            })
+        }
+    })
+
+    let defense = false;
+    $("#showDefense").on("click", function () {
+        if (!defense) {
+            defense = true;
+            $.getJSON("/ajax/ranking/getDefense.php", function (result) {
+                let count = 1;
+                result["large"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#largeDefense > tbody").append(row);
+                    count++;
+                })
+                count = 1;
+                result["medium"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#mediumDefense > tbody").append(row);
+                    count++;
+                })
+                count = 1;
+                result["small"].forEach(element => {
+                    let row = `<tr>
+                        <td>${count}</td>
+                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td>${formatNumber(element["quantity"])}</td>
+                     </tr>`
+                    $("#smallDefense > tbody").append(row);
+                    count++;
+                })
+            })
+        }
+    })
+
+        function formatNumber(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+</script>
