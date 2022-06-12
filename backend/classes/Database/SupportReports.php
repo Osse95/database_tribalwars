@@ -16,7 +16,15 @@ class SupportReports extends DB
         $this->worldName = $match["world"];
         $this->playersClass = new Players($this->worldName);
     }
-
+    function getNames(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT supporter_nick AS accountName FROM `ut_reports` UNION DISTINCT SELECT defender_nick FROM `ut_reports`;");
+        foreach ($query as $nick) {
+            $return[] = $nick["accountName"];
+        }
+        return $return;
+    }
     function getPlayerNames()
     {
         $this->userNames = $this->playersClass->getAllPlayersDataSortByID();
