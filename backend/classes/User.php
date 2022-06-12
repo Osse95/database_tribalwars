@@ -1,7 +1,7 @@
 <?php
 
 require_once "DB.php";
-
+require_once "Utilities.php";
 class User extends DB
 {
     private $name;
@@ -71,4 +71,6 @@ class User extends DB
             return false;
         }
     }
+
+
 }

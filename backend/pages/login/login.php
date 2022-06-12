@@ -86,6 +86,16 @@
         </div>
         <div class="col-xl-4 col-xs-12"></div>
 
+        <div class="col-xl-4 col-xs-12 mt-2">
+            <div class="form-check">
+                <input class="form-check-input" id="stayLogged" type="checkbox" checked>
+                <label class="form-check-label" for="flexCheckDefault">
+                    Eingeloggt bleiben?
+                </label>
+            </div>
+        </div>
+        <div class="col-xl-4 col-xs-12"></div>
+
         <div class="col-xl-4 col-xs-12"></div>
         <div class="col-xl-4 col-xs-12 mt-2 text-center">
             <button id="loginBtn" class="btn btn-primary"> Einloggen</button>
@@ -220,7 +230,8 @@
         let post = {
             name: userName,
             password: userPassword,
-            world: World
+            world: World,
+            stayLogged: $("#stayLogged").prop("checked")
         }
         $.ajax({
             url: "/ajax/login/login.php",

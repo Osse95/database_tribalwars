@@ -3,8 +3,9 @@
 class General{
 
     static function redirectHeader(){
+        $serverUrl = self::getServerUrl();
         header("HTTP/1.1 301 Moved Permanently");
-        header("Location: https://diestaemmedb.de");
+        header("Location: $serverUrl");
         header("Connection: close");
     }
 
@@ -14,6 +15,6 @@ class General{
     }
 
     static function getServerUrl(){
-        return $_SERVER[HTTP_HOST];
+        return $_SERVER["HTTP_HOST"];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 require_once dirname(__DIR__,2)."/backend/classes/User.php";
 require_once dirname(__DIR__,2)."/backend/classes/World_User.php";
 
@@ -31,6 +35,9 @@ if($User->exists){
                 $Return["result"] = true;
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["world"] = $_POST["world"];
+                if($_POST["stayLogged"]== "true"){
+                    setcookie('cookie', $World_User->createCookie(), time() + (3600 * 96));
+                }
             }else{
                 $Return["result"] = false;
                 $Return["msg"] = "Lass dich bitte von der SF aktivieren.";

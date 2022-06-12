@@ -7,7 +7,7 @@ class World_User extends DB
     public bool $exists = false;
     private array $World_Account;
 
-    function __construct($user, $world)
+    function __construct($user = "", $world = "")
     {
         parent::__construct();
         $stmt = $this->conn->prepare("SELECT * FROM `Allgemein`.`userrollen` WHERE name = ? and world = ?");
@@ -72,9 +72,19 @@ class World_User extends DB
         return $this->World_Account["worldVersion"];
     }
 
+    function getVersion()
+    {
+        return $this->World_Account["version"];
+    }
+
     function getWorld()
     {
         return $this->World_Account["world"];
+    }
+
+    function getName()
+    {
+        return $this->World_Account["name"];
     }
 
     function getPlayerID()
@@ -148,5 +158,27 @@ class World_User extends DB
     {
         $maxID = $this->query("SELECT MAX(Version) as MAX FROM `userrollen` WHERE world = '$world'");
         return intval($maxID[0]["MAX"]);
+    }
+
+    function createCookie(): string
+    {
+        $cookie = Utilities::createRandomString();
+        $this->query("REPLACE INTO `cookies` (username,world,version,cookie) VALUES ('{$this->name}','{$this->getWorld()}','{$this->getVersion()}','$cookie')");
+
+        return $cookie;
+    }
+
+    function loadCookie($cookie): bool|array
+    {
+        $bindParams = [$cookie];
+        $Query = "SELECT * FROM `cookies` WHERE cookie = ?";
+        $stmt = $this->conn->prepare($Query);
+        $stmt->execute($bindParams);
+        $result = [];
+        foreach ($stmt->get_result() as $row) {
+            $result["name"] = $row["username"];
+            $result["world"] = $row["world"];
+        }
+        return $result ?? false;
     }
 }

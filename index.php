@@ -6,6 +6,16 @@ require_once __DIR__ . "/backend/classes/World_User.php";
 require_once __DIR__ . "/backend/classes/General.php";
 require_once __DIR__ . "/backend/classes/Players.php";
 
+
+if(!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])){
+    $World_User = new World_User();
+    $Cookie = $World_User->loadCookie($_COOKIE["cookie"]);
+    if($Cookie){
+        $_SESSION["name"] = $Cookie["name"];
+        $_SESSION["world"] = $Cookie["world"];
+    }
+}
+
 if (!isset($_SESSION["name"])) {
     require __DIR__ . "/backend/pages/login/login.php";
 } else {
@@ -39,7 +49,6 @@ if (!isset($_SESSION["name"])) {
     if($side == "logout"){
             General::destroySession();
             General::redirectHeader();
-            die();
     }
     require "./backend/pages/header/header.php";
     switch ($side) {
