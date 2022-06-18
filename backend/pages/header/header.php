@@ -111,7 +111,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                                 <font class="dropitem">Eigene Angriffe <span class="quantityOwnAttacks"></span>
                                 </font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/attacks">
+                        <li><a class="dropdown-item bg-primary" href="/allAttacks">
                                 <font class="dropitem">Angriffe <span class="quantityAllAttacks"></span>
                                 </font>
                             </a></li>

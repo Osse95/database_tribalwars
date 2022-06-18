@@ -5,7 +5,8 @@ require_once __DIR__ . "/backend/classes/User.php";
 require_once __DIR__ . "/backend/classes/World_User.php";
 require_once __DIR__ . "/backend/classes/General.php";
 require_once __DIR__ . "/backend/classes/Players.php";
-
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 
 if(!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])){
     $World_User = new World_User();
@@ -66,6 +67,9 @@ if (!isset($_SESSION["name"])) {
             break;
         case("dbRanking"):
             require __DIR__ . "/backend/pages/ranking/dbRanking.php";
+            break;
+        case("allAttacks"):
+            require __DIR__ . "/backend/pages/attacks/allAttacks.php";
             break;
         default:
             require __DIR__ . "/backend/pages/overview/overview.php";

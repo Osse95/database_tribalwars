@@ -77,4 +77,17 @@ class Attacks extends DB
         $query = $this->query("SELECT count(*) AS quantity FROM `daily_attacks`");
         return $query[0]["quantity"];
     }
+
+    function getNames(): array
+    {
+        $this->getPlayerNames();
+        $return = [];
+        $query = $this->query("SELECT attackerid AS id FROM `sos` UNION DISTINCT SELECT defenderid FROM `sos`;");
+        foreach ($query as $id) {
+            if (isset($this->userNames[$id["id"]])) {
+                $return[] = $this->userNames[$id["id"]]["playerName"];
+            }
+        }
+        return $return;
+    }
 }
