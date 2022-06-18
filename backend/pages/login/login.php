@@ -86,6 +86,7 @@
         </div>
         <div class="col-xl-4 col-xs-12"></div>
 
+        <div class="col-xl-4 col-xs-12"></div>
         <div class="col-xl-4 col-xs-12 mt-2">
             <div class="form-check">
                 <input class="form-check-input" id="stayLogged" type="checkbox" checked>
