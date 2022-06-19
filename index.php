@@ -71,6 +71,9 @@ if (!isset($_SESSION["name"])) {
         case("allAttacks"):
             require __DIR__ . "/backend/pages/attacks/allAttacks.php";
             break;
+        case("ownAttacks"):
+            require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
+            break;
         default:
             require __DIR__ . "/backend/pages/overview/overview.php";
     }
