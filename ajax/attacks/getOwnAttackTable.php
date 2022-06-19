@@ -11,7 +11,8 @@ require dirname(__DIR__, 2) . "/backend/classes/Players.php";
 require dirname(__DIR__, 2) . "/backend/classes/Player.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
 require dirname(__DIR__, 2) . "/backend/classes/DataTables.php";
-
+require dirname(__DIR__, 2) . "/backend/classes/Database/Reports.php";
+require dirname(__DIR__, 2) . "/backend/classes/Villages.php";
 $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
 if (!$World_User->isActivated()) {
@@ -21,6 +22,12 @@ $DB = new DB();
 $DB->connectTo($World_User->getWorldVersion());
 
 $World = new World($_SESSION["world"]);
+
+$Reports = new Reports($World_User->getWorldVersion());
+$knownVillages = $Reports->getAllReportsSortByCoordID();
+
+$Villages = new Villages($World_User->getWorld());
+$villageInfos = $Villages->getAllVillagesSortByID();
 
 $bindParams = [];
 $Query = "SELECT * FROM `sos` WHERE 1 = 1";
@@ -32,8 +39,8 @@ $Query .= " AND (attackerid = ? OR defenderid = ?)";
 
 $accountName = $_POST["playerName"] ?? "";
 if (strlen($accountName) > 0) {
-    $Player = new Player($_SESSION["world"],$accountName);
-    if($Player->exists){
+    $Player = new Player($_SESSION["world"], $accountName);
+    if ($Player->exists) {
         $bindParams[] = $Player->playerArray["ID"];
         $bindParams[] = $Player->playerArray["ID"];
         $Query .= " AND (attackerid = ? OR defenderid = ?)";
@@ -49,42 +56,41 @@ if (strlen($coord) == 9) {
     $Query .= " AND (attacker_coords = ? OR defender_coords = ?)";
 }
 
-$type = $_POST["type"]??"";
-if(strlen($type)>0){
+$type = $_POST["type"] ?? "";
+if (strlen($type) > 0) {
     $bindParams[] = $type;
     $Query .= " AND type2 = ?";
 }
 
-$off = $_POST["off"]??"false";
-if($off == "true"){
+$off = $_POST["off"] ?? "false";
+if ($off == "true") {
     $Query .= " AND predictedLabel >= 2";
 }
 
-$fake = $_POST["fake"]??"false";
-if($fake == "true"){
+$fake = $_POST["fake"] ?? "false";
+if ($fake == "true") {
     $Query .= " AND predictedLabel = 1";
 }
 
-$doubler = $_POST["double"]??"false";
-if($doubler == "true"){
+$doubler = $_POST["double"] ?? "false";
+if ($doubler == "true") {
     $Query .= " AND counter > 0";
 }
 
 
-
-if($World->isWatchtowerAvailable()){
-    $Query .= " ORDER BY ".DataTables::sortOwnAttacksWithWatchtower($_POST["order"][0]["column"]);
-}else{
-    $Query .= " ORDER BY ".DataTables::sortOwnAttacksWithoutWatchtower($_POST["order"][0]["column"]);
+if ($World->isWatchtowerAvailable()) {
+    $Query .= " ORDER BY " . DataTables::sortOwnAttacksWithWatchtower($_POST["order"][0]["column"]);
+} else {
+    $Query .= " ORDER BY " . DataTables::sortOwnAttacksWithoutWatchtower($_POST["order"][0]["column"]);
 }
 $Query .= DataTables::sortBy($_POST["order"][0]["dir"]);
 
 if (isset($_POST["order"][1]["column"])) {
-    for($i=1;$i<count($_POST["order"]);$i++){
-        if($World->isWatchtowerAvailable()){
-            $Query .= " ,".DataTables::sortOwnAttacksWithWatchtower($_POST["order"][$i]["column"]);
-        }else{
-            $Query .= " ,".DataTables::sortOwnAttacksWithoutWatchtower($_POST["order"][$i]["column"]);
+    for ($i = 1; $i < count($_POST["order"]); $i++) {
+        if ($World->isWatchtowerAvailable()) {
+            $Query .= " ," . DataTables::sortOwnAttacksWithWatchtower($_POST["order"][$i]["column"]);
+        } else {
+            $Query .= " ," . DataTables::sortOwnAttacksWithoutWatchtower($_POST["order"][$i]["column"]);
         }
         $Query .= DataTables::sortBy($_POST["order"][$i]["dir"]);
     }
@@ -116,27 +122,44 @@ $playerNames = $playerNames->getAllPlayersDataSortByID();
 
 foreach ($stmt->get_result() as $row) {
     $type = strtolower($row["type2"]);
-    $file = dirname(__DIR__,2)."/assets/images/inno/units/$type.png";
-    if(file_exists($file)){
+    $file = dirname(__DIR__, 2) . "/assets/images/inno/units/$type.png";
+    if (file_exists($file)) {
         $type = "<img src='/assets/images/inno/units/$type.png' alt='$type'> " . $row["type"];
-    }else{
-        $type = $row["type2"] ." ". $row["type"];
+    } else {
+        $type = $row["type2"] . " " . $row["type"];
     }
 
     $defenderCoordUrl = "/villageInfo?ID={$row["defenderdorfid"]}";
     $defenderCoordUrl = "<a href='$defenderCoordUrl' target='_blank'> {$row["defendercoords"]} </a>";
 
     $attackerUrl = "/playerInfo?ID={$row["attackerid"]}";
-    $attackerName = $playerNames[$row["attackerid"]]["playerName"]??"Barbar";
+    $attackerName = $playerNames[$row["attackerid"]]["playerName"] ?? "Barbar";
     $attackerUrl = "<a href='$attackerUrl' target='_blank'> $attackerName </a>";
 
     $attackerCoordUrl = "/villageInfo?ID={$row["attackerdorfid"]}";
     $attackerCoordUrl = "<a href='$attackerCoordUrl' target='_blank'> {$row["attackercoords"]} </a>";
 
+    if(isset($villageInfos[$row["attackerdorfid"]])){
+        $attackerVillagePoints = $villageInfos[$row["attackerdorfid"]]["points"];
+    }else{
+        $attackerVillagePoints = 0;
+    }
+
+    if (isset($knownVillages[$row["attackerdorfid"]])) {
+        $knownVillage = $knownVillages[$row["attackerdorfid"]];
+        $knownVillage = "<a href='/showReport?id=$knownVillage'target='_blank'>Report</a>
+                            <div class='box2'>
+                                <object data='/showReportPrevAttacks?id=$knownVillage' class='testbox'>
+                                </object>
+                            </div>";
+    }else{
+        $knownVillage = "";
+    }
+
     $reason = $row["reason"];
 
     $watchtowerTime = "";
-    if($row["watchtowertime"] > 1 && $row["watchtowertime"] < $row["timeunix"]){
+    if ($row["watchtowertime"] > 1 && $row["watchtowertime"] < $row["timeunix"]) {
         $watchtowerTime = date("d.m.Y h:i:s", $row["eingelesen_am"]);
     }
 
@@ -164,10 +187,10 @@ foreach ($stmt->get_result() as $row) {
     $arrivalTime = date("d.m.Y h:i:s", $row["timeunix"]);
 
     $deleteButton = "<input type='checkbox' class='deleteAttack' id='{$row["id"]}'>";
-    if($World->isWatchtowerAvailable()){
-        $rows["data"][] = array($type,$defenderCoordUrl,"Später",$reason,$attackerUrl,$attackerCoordUrl,"Punkte_Später",$doubler,$typ,$watchtowerTime,$arrivalTime,$deleteButton);
-    }else{
-        $rows["data"][] = array($type,$defenderCoordUrl,"Später",$reason,$attackerUrl,$attackerCoordUrl,"Punkte_Später",$doubler,$typ,$arrivalTime,$deleteButton);
+    if ($World->isWatchtowerAvailable()) {
+        $rows["data"][] = array($type, $defenderCoordUrl, $knownVillage, $reason, $attackerUrl, $attackerCoordUrl, $attackerVillagePoints, $doubler, $typ, $watchtowerTime, $arrivalTime, $deleteButton);
+    } else {
+        $rows["data"][] = array($type, $defenderCoordUrl, $knownVillage, $reason, $attackerUrl, $attackerCoordUrl, $attackerVillagePoints, $doubler, $typ, $arrivalTime, $deleteButton);
     }
 
 
