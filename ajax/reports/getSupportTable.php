@@ -8,6 +8,7 @@ require dirname(__DIR__, 2) . "/backend/classes/DB.php";
 require dirname(__DIR__, 2) . "/backend/classes/World_User.php";
 require dirname(__DIR__, 2) . "/backend/classes/Tribe.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
+require dirname(__DIR__, 2) . "/backend/classes/DataTables.php";
 
 $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
@@ -21,6 +22,11 @@ $DB->connectTo($World_User->getWorldVersion());
 $bindParams = [];
 $Query = "SELECT supporter_nick,supporter_id,defender_nick,defender_id,betreff,id,support_time FROM `ut_reports` WHERE 1 = 1";
 
+
+if(!$World_User->seeAllReports()){
+    $playerID = $World_User->getPlayerID();
+    $Query .= " AND (supporter_id = '$playerID' OR defender_id = '$playerID')";
+}
 
 $accountName = $_POST["playerName"] ?? "";
 if (strlen($accountName) > 0) {
@@ -78,43 +84,16 @@ if (strlen($dateAfter) > 0) {
     }
 }
 
-switch ($_POST["order"][0]["column"]) {
-    case "0":
-        $Query .= " ORDER BY supporter_nick ";
-        break;
-    case "1":
-        $Query .= " ORDER BY defender_nick ";
-        break;
-    case "3":
-        $Query .= " ORDER BY support_time ";
-}
-$Query .= $_POST["order"][0]["dir"];
+$Query .= " ORDER BY ".DataTables::sortSupportReportTable($_POST["order"][0]["column"]);
+$Query .= DataTables::sortBy($_POST["order"][0]["dir"]);
 
 if (isset($_POST["order"][1]["column"])) {
-    switch ($_POST["order"][1]["column"]) {
-        case "0":
-            $Query .= " ,supporter_nick ";
-            break;
-        case "1":
-            $Query .= " ,defender_nick ";
-            break;
-        case "3":
-            $Query .= " ,support_time ";
-    }
-    $Query .= $_POST["order"][1]["dir"];
+    $Query .= " ,".DataTables::sortSupportReportTable($_POST["order"][1]["column"]);
+    $Query .= DataTables::sortBy($_POST["order"][1]["dir"]);
 }
 if (isset($_POST["order"][2]["column"])) {
-    switch ($_POST["order"][2]["column"]) {
-        case "0":
-            $Query .= " ,supporter_nick ";
-            break;
-        case "1":
-            $Query .= " ,defender_nick ";
-            break;
-        case "3":
-            $Query .= " ,support_time ";
-    }
-    $Query .= $_POST["order"][2]["dir"];
+    $Query .= " ,".DataTables::sortSupportReportTable($_POST["order"][2]["column"]);
+    $Query .= DataTables::sortBy($_POST["order"][2]["dir"]);
 }
 
 $allResultsQuery = str_replace("SELECT supporter_nick,supporter_id,defender_nick,defender_id,betreff,id,support_time", "SELECT COUNT(*) as quantity", $Query);

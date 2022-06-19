@@ -7,6 +7,7 @@ require dirname(__DIR__, 2) . "/backend/classes/DB.php";
 require dirname(__DIR__, 2) . "/backend/classes/World_User.php";
 require dirname(__DIR__, 2) . "/backend/classes/Tribe.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
+require dirname(__DIR__, 2) . "/backend/classes/DataTables.php";
 
 $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
@@ -20,6 +21,11 @@ $DB->connectTo($World_User->getWorldVersion());
 $bindParams = [];
 $Query = "SELECT attacker_nick,attacker_id,defender_nick,defender_id,bericht,id,fighttime FROM `reports` WHERE 1 = 1";
 
+
+if(!$World_User->seeAllReports()){
+    $playerID = $World_User->getPlayerID();
+    $Query .= " AND (attacker_id = '$playerID' OR defender_id = '$playerID')";
+}
 
 $accountName = $_POST["playerName"] ?? "";
 if (strlen($accountName) > 0) {
@@ -146,43 +152,16 @@ if (strlen($cataTarget) > 0) {
 }
 
 
-switch ($_POST["order"][0]["column"]) {
-    case "0":
-        $Query .= " ORDER BY attacker_nick ";
-        break;
-    case "1":
-        $Query .= " ORDER BY defender_nick ";
-        break;
-    case "3":
-        $Query .= " ORDER BY fighttime ";
-}
-$Query .= $_POST["order"][0]["dir"];
+$Query .= " ORDER BY ".DataTables::sortReportTable($_POST["order"][0]["column"]);
+$Query .= DataTables::sortBy($_POST["order"][0]["dir"]);
 
 if (isset($_POST["order"][1]["column"])) {
-    switch ($_POST["order"][1]["column"]) {
-        case "0":
-            $Query .= " ,attacker_nick ";
-            break;
-        case "1":
-            $Query .= " ,defender_nick ";
-            break;
-        case "3":
-            $Query .= " ,fighttime ";
-    }
-    $Query .= $_POST["order"][1]["dir"];
+    $Query .= " ,".DataTables::sortReportTable($_POST["order"][1]["column"]);
+    $Query .= DataTables::sortBy($_POST["order"][1]["dir"]);
 }
 if (isset($_POST["order"][2]["column"])) {
-    switch ($_POST["order"][2]["column"]) {
-        case "0":
-            $Query .= " ,attacker_nick ";
-            break;
-        case "1":
-            $Query .= " ,defender_nick ";
-            break;
-        case "3":
-            $Query .= " ,fighttime ";
-    }
-    $Query .= $_POST["order"][2]["dir"];
+    $Query .= " ,".DataTables::sortReportTable($_POST["order"][2]["column"]);
+    $Query .= DataTables::sortBy($_POST["order"][2]["dir"]);
 }
 
 $allResultsQuery = str_replace("SELECT attacker_nick,attacker_id,defender_nick,defender_id,bericht,id,fighttime", "SELECT COUNT(*) as quantity", $Query);
@@ -215,7 +194,10 @@ foreach ($stmt->get_result() as $row) {
     $defenderUrl = "<a href='$defenderUrl' target='_blank'> {$row["defender_nick"]} </a>";
 
     $reportUrl = "/showReport?ID={$row["id"]}";
-    $reportUrl = "<a href='$reportUrl' target='_blank'> {$row["bericht"]} </a>";
+    $reportUrl = "<a href='$reportUrl' target='_blank'> {$row["bericht"]} </a>
+                    <div class='box'>
+					<object data='/pages/report/showReportPrev.php?id={$row["id"]}' class='testbox2'>
+					</object></div>";
     $fightTime = date("h:i:s d.m.Y", $row["fighttime"]);
     $deleteButton = "<input type='checkbox' class='deleteReport' id='{$row["id"]}'>";
     if($World_User->isSF() || $World_User->isMod()){
