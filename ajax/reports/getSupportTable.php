@@ -149,8 +149,14 @@ foreach ($stmt->get_result() as $row) {
     $reportUrl = "/showSupportReport?ID={$row["id"]}";
     $reportUrl = "<a href='$reportUrl' target='_blank'> {$row["betreff"]} </a>";
     $supportTime = date("h:i:s d.m.Y", $row["support_time"]);
+    $deleteButton = "<input type='checkbox' class='deleteReport' id='{$row["id"]}'>";
 
-    $rows["data"][] = array($attackerUrl, $defenderUrl, $reportUrl, $supportTime);
+    if($World_User->isSF() || $World_User->isMod()){
+        $rows["data"][] = array($attackerUrl, $defenderUrl, $reportUrl, $supportTime,$deleteButton);
+    }else{
+        $rows["data"][] = array($attackerUrl, $defenderUrl, $reportUrl, $supportTime);
+    }
+
 }
 
 $stmt->close();

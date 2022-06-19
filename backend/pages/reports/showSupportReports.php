@@ -1,3 +1,7 @@
+<?php
+require_once dirname(__DIR__, 3) . "/backend/classes/World_User.php";
+$User = new World_User($_SESSION["name"], $_SESSION["world"]);
+?>
 <div class="container p-4">
     <form id="ValuesTable">
         <div class="row">
@@ -100,6 +104,13 @@
             <th> Verteidiger</th>
             <th> Befehl</th>
             <th> Zeit</th>
+            <?php
+            if ($User->isSF() || $User->isMod()) {
+                ?>
+                <th><input type='checkbox' id='deleteAll'> Löschen</th>
+                <?php
+            }
+            ?>
         </tr>
         </thead>
         <tbody>
@@ -166,4 +177,41 @@
             }, 5);
         }
     });
+
+    <?php
+    if($User->isMod() || $User->isSF()){
+    ?>
+    $("#deleteAll").on("click", function () {
+        let deleteIDs = [];
+        $(".deleteReport").each(function () {
+            deleteIDs.push($(this).attr("id"))
+        })
+        if (deleteIDs.length > 0) {
+            deleteReports(deleteIDs);
+        }
+    })
+
+    $(document).on("change", ".deleteReport", function () {
+        deleteReports([$(this).attr("id")])
+    })
+
+    function deleteReports(ids) {
+        let post = {
+            deleteIDS: ids
+        }
+        $.ajax({
+            url: "/ajax/reports/ut_delete.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                let result = JSON.parse(data);
+                if (result["return"] == true) {
+                    DataTable.ajax.reload();
+                }
+            }
+        });
+    }
+    <?php
+    }
+    ?>
 </script>
