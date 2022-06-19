@@ -181,4 +181,22 @@ class World_User extends DB
         }
         return $result ?? false;
     }
+
+    function seeAllAttacks() : bool
+    {
+        if($this->World_Account["attacks"] == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function seeAllReports() : bool
+    {
+        if($this->World_Account["reports"] == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
