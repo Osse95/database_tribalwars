@@ -1,6 +1,8 @@
 <?php
 require_once dirname(__DIR__, 3) . "/backend/classes/World.php";
+require_once dirname(__DIR__, 3) . "/backend/classes/World_User.php";
 $World = new World($_SESSION["world"]);
+$User = new World_User($_SESSION["name"], $_SESSION["world"]);
 ?>
 
 <div class="container p-4">
@@ -77,11 +79,21 @@ $World = new World($_SESSION["world"]);
             <th> Eingelesen am</th>
             <th> Doppler</th>
             <th> Typ</th>
-            <?php if (!$World->isWatchtowerAvailable()) { ?>
+            <?php
+            if (!$World->isWatchtowerAvailable()) {
+                ?>
                 <th> Ankunft</th>
-            <?php } else { ?>
+                <?php
+            } else {
+                ?>
                 <th> Ankunft (Ankunft im WT)</th>
-            <?php } ?>
+            <?php }
+            if ($User->isSF() || $User->isMod()) {
+                ?>
+                <th><input type='checkbox' id='deleteAll'> Löschen</th>
+                <?php
+            }
+            ?>
         </tr>
         </thead>
         <tbody>
@@ -123,5 +135,42 @@ $World = new World($_SESSION["world"]);
         $("#ValuesTable Input").on("change", function () {
             DataTable.ajax.reload();
         });
+
+        <?php
+        if($User->isMod() || $User->isSF()){
+        ?>
+        $("#deleteAll").on("click", function () {
+            let deleteIDs = [];
+            $(".deleteAttack").each(function () {
+                deleteIDs.push($(this).attr("id"))
+            })
+            if (deleteIDs.length > 0) {
+                deleteAttacks(deleteIDs);
+            }
+        })
+
+        $(document).on("change", ".deleteAttack", function () {
+            deleteAttacks([$(this).attr("id")])
+        })
+
+        function deleteAttacks(ids) {
+            let post = {
+                deleteIDS: ids
+            }
+            $.ajax({
+                url: "/ajax/attacks/delete.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (result["return"] == true) {
+                        DataTable.ajax.reload();
+                    }
+                }
+            });
+        }
+        <?php
+        }
+        ?>
     });
 </script>

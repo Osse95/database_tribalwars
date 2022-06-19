@@ -441,8 +441,13 @@ $playerNames = new Players($_SESSION["world"]);
 $playerNames = $playerNames->getAllPlayersDataSortByID();
 
 foreach ($stmt->get_result() as $row) {
-    $type = $row["type2"];
-
+    $type = strtolower($row["type2"]);
+    $file = dirname(__DIR__,2)."/assets/images/inno/units/$type.png";
+    if(file_exists($file)){
+        $type = "<img src='/assets/images/inno/units/$type.png' alt='$type'> " . $row["type"];
+    }else{
+        $type = $row["type2"] ." ". $row["type"];
+    }
     $defenderUrl = "/playerInfo?ID={$row["defenderid"]}";
     $defenderName = $playerNames[$row["defenderid"]]["playerName"]??"Barbar";
     $defenderUrl = "<a href='$defenderUrl' target='_blank'> $defenderName </a>";
@@ -459,7 +464,7 @@ foreach ($stmt->get_result() as $row) {
 
     $reason = $row["reason"];
 
-    $readInTime = date("h:i:s d.m.Y", $row["eingelesen_am"]);
+    $readInTime = date("d.m.Y h:i:s", $row["eingelesen_am"]);
 
     $doubler = $row["counter"];
 
@@ -482,9 +487,16 @@ foreach ($stmt->get_result() as $row) {
             break;
     }
 
-    $arrivalTime = date("h:i:s d.m.Y", $row["timeunix"]);
+    $arrivalTime = date("d.m.Y h:i:s", $row["timeunix"]);
 
-    $rows["data"][] = array($type,$defenderUrl,$defenderCoordUrl,$attackerUrl,$attackerCoordUrl,$reason,$readInTime,$doubler,$typ,$arrivalTime);
+    $deleteButton = "<input type='checkbox' class='deleteAttack' id='{$row["id"]}'>";
+
+    if($World_User->isMod() || $World_User->isSF()){
+        $rows["data"][] = array($type,$defenderUrl,$defenderCoordUrl,$attackerUrl,$attackerCoordUrl,$reason,$readInTime,$doubler,$typ,$arrivalTime,$deleteButton);
+    }else{
+        $rows["data"][] = array($type,$defenderUrl,$defenderCoordUrl,$attackerUrl,$attackerCoordUrl,$reason,$readInTime,$doubler,$typ,$arrivalTime);
+    }
+
 }
 
 $stmt->close();
