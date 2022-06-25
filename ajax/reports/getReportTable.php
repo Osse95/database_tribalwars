@@ -195,8 +195,8 @@ foreach ($stmt->get_result() as $row) {
 
     $reportUrl = "/showReport?ID={$row["id"]}";
     $reportUrl = "<a href='$reportUrl' target='_blank'> {$row["bericht"]} </a>
-                    <div class='box'>
-					<object data='/showReport?id={$row["id"]}=preview' class='testbox2'>
+                    <div class='preview'>
+					<object data='/showReport?id={$row["id"]}=preview' class='previewBox'>
 					</object></div>";
     $fightTime = date("h:i:s d.m.Y", $row["fighttime"]);
     $deleteButton = "<input type='checkbox' class='deleteReport' id='{$row["id"]}'>";
