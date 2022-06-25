@@ -36,7 +36,7 @@
         <div class="col-sm-6 mt-4">
             <div class="card bg-secondary">
                 <div class="card-body">
-                    <h5 class="card-title">Spende</h5>
+                    <h5 class="card-title">Spende <i class="fa-brands fa-paypal"></i></h5>
                     <p class="card-text"><a href="https://paypal.me/johnbern" target="_blank">Spenden (Klick mich)</a>
                         <br></br>
                     </p>
