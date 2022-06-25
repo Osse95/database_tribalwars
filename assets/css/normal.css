@@ -1,3 +1,4 @@
+/* Start general CSS informations */
 .nav-link,
 .dropdown-item,
 .navbar-brand,
@@ -14,7 +15,6 @@ a {
 .nav-link.active {
     font-weight: bold;
 }
-
 
 .container,
 .navbar-dark,
@@ -85,18 +85,17 @@ a {
 .form-control::placeholder {
     color: rgba(255, 255, 255, 0.4) !important;
 }
+/* Start general CSS informations */
+
 
 .infobox{
 	background-color: rgba(41, 49, 51,0.8);
 
 }
-
 .infobox2{
 	background-color: rgb(41, 49, 51);
 
 }
-
-
 .infobox3{
 	background-color: rgb(41, 49, 51);
 }
@@ -109,13 +108,12 @@ a {
     color: black !important;
 }
 
-.moff td{
+.off td{
     background-color: rgba(255,0,0,0.1) !important;
 }
-.ag td{
+.snob td{
     background-color: rgba(255, 251, 0, 0.144) !important;
 }
-
 .fake td{
     background-color: rgba(47, 0, 255, 0.05) !important;
 }

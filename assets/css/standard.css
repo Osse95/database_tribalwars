@@ -1,3 +1,4 @@
+/* Start general CSS informations */
 body {
     background: url(/assets/images/background/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -16,12 +17,6 @@ body {
 .dropdown-item:hover {
     font-weight: bold;
 }
-
-.map {
-    border-radius: 50%;
-    width: 80%;
-}
-
 .placeholder {
     width: 100%;
     margin-top: 50px;
@@ -40,44 +35,33 @@ body {
     }
     
 }
+/* End */
 
-.box {
+
+/* Preview classes for reports start*/
+.preview {
     display: none;
-
-
 }
 
-a:hover+.box,
-.box:hover {
+a:hover+.preview,
+.preview:hover {
     display: block;
     position: fixed;
     top: 20%;
     left: 55%;
-
 }
-
-.testbox {
+.previewBox {
     width: 250%;
     height: 660px;
 }
 
-.box2 {
-    display: none;
+@media screen and (max-width:1200px) {
+    a:hover + .preview,.preview:hover{
+        display: none;
+    }
 }
+/* End */
 
-a:hover+.box2,
-.box2:hover {
-    display: block;
-    position: fixed;
-    top: 25%;
-    left: 45%;
-}
-
-.testbox2 {
-    width: 250%;
-    height: 660px;
-
-}
 
 
 .infobox {
@@ -166,19 +150,4 @@ a:hover+.box2,
 .popupDorfInfo{
     padding: 10px;
     border-radius: 5px;
-}
-
-
-@media screen and (max-width:1200px) {
-	a:hover + .box,.box:hover{
-		display: none;
-	}
-	
-}
-
-@media screen and (max-width:1200px) {
-	a:hover + .box2,.box2:hover{
-		display: none;
-	}
-	
 }
