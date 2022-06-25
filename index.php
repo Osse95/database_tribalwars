@@ -51,7 +51,11 @@ if (!isset($_SESSION["name"])) {
             General::destroySession();
             General::redirectHeader();
     }
-    require "./backend/pages/header/header.php";
+    if(!str_contains($_SERVER['REQUEST_URI'],"preview")){
+        require "./backend/pages/header/header.php";
+    }else{
+        require "./backend/pages/header/headerPreview.php";
+    }
     switch ($side) {
         case("showReports"):
             require __DIR__ . "/backend/pages/reports/showReports.php";

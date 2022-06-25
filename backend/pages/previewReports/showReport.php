@@ -1,0 +1,604 @@
+<style>
+    body {
+        background: none;
+        background: rgba(44, 48, 51, 1);
+    }
+</style>
+
+<div class="justify-content-center d-flex">
+    <table id="showReport">
+        <tbody>
+        <tr style="border: solid 1px black; padding: 4px;">
+            <th width="140" align="LEFT">Betreff</th>
+            <th width="400" align="LEFT" id="subject">
+            </th>
+        </tr>
+        <tr style="border: solid 1px black; padding: 4px;">
+            <td align="LEFT">
+                Kampfzeit
+            </td>
+            <td align="LEFT" id="fightTime">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" valign="top" height="160" style="border: solid 1px black; padding: 4px;">
+                <h3 id="winner"></h3>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h5>Angreiferglück</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0;"><b id="luck"></b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>Moral</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0;"><b id="moral"></b></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="border: 1px solid #DED3B9">
+                    <tbody>
+                    <tr>
+                        <th align="LEFT">Angreifer:</th>
+                        <th id="attackerLink" align="LEFT">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="LEFT">Herkunft:</th>
+                        <th id="attackerVillage" align="LEFT">
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table>
+                                <tbody>
+                                <tr class="center">
+                                    <td align="CENTER"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_spear.png"
+                                                title="Speerträger" alt=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_sword.png"
+                                                title="Schwertkämpfer" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_axe.png"
+                                                title="Axtkämpfer" alt="" class="faded"></td>
+                                    <td class="archerWorld" width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_archer.png"
+                                                title="Bogenschütze" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_spy.png"
+                                                title="Späher"
+                                                alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_light.png"
+                                                title="Leichte Kavallerie" alt=""></td>
+                                    <td class="archerWorld" width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_marcher.png"
+                                                title="Berittener Bogenschütze" alt=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_heavy.png"
+                                                title="Schwere Kavallerie" alt=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_ram.png"
+                                                title="Rammbock"
+                                                alt="" class=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_catapult.png"
+                                                title="Katapult" alt=""></td>
+                                    <td class="knightWorld" width="35" align="CENTER">
+                                        <img src="/assets/images/inno/report/unit_knight.png"
+                                             title="Paladin"
+                                             alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_snob.png"
+                                                title="Adelsgeschlecht" alt="" class="faded"></td>
+                                </tr>
+                                <tr id="attackerTroops">
+                                    <td width="20%">Anzahl:</td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="knightWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                </tr>
+                                <tr id="attackerLosses">
+                                    <td width="20%">Verlust:</td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="knightWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="attackerFaith">
+                        <td colspan="2" style="padding-top:5px">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table width="100%" style="border: 1px solid #DED3B9">
+                    <tbody>
+                    <tr>
+                        <th align="LEFT">Verteidiger:</th>
+                        <th align="LEFT" id="defenderLink"></th>
+                    </tr>
+                    <tr>
+                        <td align="LEFT">Ziel:</td>
+                        <td align="LEFT" id="defenderVillage"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table>
+                                <tbody>
+                                <tr class="center">
+                                    <td align="CENTER"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_spear.png"
+                                                title="Speerträger" alt="">
+                                    </td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_sword.png"
+                                                title="Schwertkämpfer" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_axe.png"
+                                                title="Axtkämpfer" alt="" class="faded"></td>
+                                    <td class="archerWorld" width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_archer.png"
+                                                title="Bogenschütze" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_spy.png"
+                                                title="Späher"
+                                                alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_light.png"
+                                                title="Leichte Kavallerie" alt="">
+                                    </td>
+                                    <td class="archerWorld" width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_marcher.png"
+                                                title="Berittene Bogenschützen" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_heavy.png"
+                                                title="Schwere Kavallerie" alt=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_ram.png"
+                                                title="Rammbock"
+                                                alt="" class=""></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_catapult.png"
+                                                title="Katapult" alt=""></td>
+                                    <td class="knightWorld" width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_knight.png"
+                                                title="Paladin" alt="" class="faded"></td>
+                                    <td width="35" align="CENTER"><img
+                                                src="/assets/images/inno/report/unit_snob.png"
+                                                title="Adelsgeschlecht" alt="" class="faded"></td>
+                                </tr>
+                                <tr id="defenderTroops">
+                                    <td width="20%">Anzahl:</td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="knightWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                </tr>
+                                <tr id="defenderLosses">
+                                    <td width="20%">Verlust:</td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="archerWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                    <td class="knightWorld" align="CENTER"></td>
+                                    <td align="CENTER"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="defenderFaith">
+                        <td colspan="2" style="padding-top:5px">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="buildings"
+                       style="border: 1px solid #DED3B9; width:50%; margin-top:5px; margin-bottom:5px; float:left;">
+                    <tbody>
+                    <tr>
+                        <th style="width: 50%">Gebäude</th>
+                        <th>Stufe</th>
+                    </tr>
+                    <tr id="mainBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/main.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Hauptgebäude</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="barracksBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/barracks.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Kaserne</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="stableBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/stable.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Stall</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="garageBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/garage.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Werkstatt</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="churchBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/church.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Kirche</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="firstChurchBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/church_f.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >erste Kirche</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="smithBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/smith.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Schmiede</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="placeBuilding">
+                        <td style="vertical-align:middle;">
+                            <nobr><img src="/assets/images/inno/report/place.png"
+                                       style="max-height:16px;" alt=""> <span>Versammlungsplatz</span></nobr>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="statueBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/statue.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Statue</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="buildings"
+                       style="border: 1px solid #DED3B9; width:50%; margin-top:5px; margin-bottom:5px; float:left;">
+                    <tbody>
+                    <tr>
+                        <th style="width: 50%">Gebäude</th>
+                        <th>Stufe</th>
+                    </tr>
+                    <tr id="marketBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/market.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Marktplatz</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="woodBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/wood.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Holzfällerlager</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr id="stoneBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/stone.png"
+                                 style="max-height:16px;" alt=""> <span
+                            >Lehmgrube</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="ironBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/iron.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Eisenmine</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="farmBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/farm.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Bauernhof</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="storageBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/storage.png"
+                                 style="max-height:16px;" alt=""> <span>Speicher</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="snobBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/snob.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Adelshof</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="hideBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/hide.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Versteck</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="watchtowerBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/watchtower.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Wachturm</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="wallBuilding">
+                        <td style="vertical-align:middle;">
+                            <img src="/assets/images/inno/report/wall.png"
+                                 style="max-height:16px;"
+                                 alt=""> <span>Wall</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table id="ramBeforeAfter" width="100%" style="border: 1px solid #DED3B9">
+                    <tbody>
+                    <tr>
+                        <th>Schaden durch Rammböcke:</th>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table id="cataBeforeAfter" width="100%" style="border: 1px solid #DED3B9">
+                    <tbody>
+                    <tr>
+                        <th>Schaden durch Katapult:</th>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h5> Truppen des Verteidiger,die unterwegs waren:</h5>
+                <table align="CENTER">
+                    <tbody>
+                    <tr class="center">
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_spear.png"
+                                    title="Speerträger" alt="">
+                        </td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_sword.png"
+                                    title="Schwertkämpfer" alt="" class="faded"></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_axe.png"
+                                    title="Axtkämpfer" alt="" class="faded"></td>
+                        <td class="archerWorld" width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_archer.png"
+                                    title="Bogenschütze" alt="" class="faded"></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_spy.png"
+                                    title="Späher"
+                                    alt="" class="faded"></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_light.png"
+                                    title="Leichte Kavallerie" alt="">
+                        </td>
+                        <td class="archerWorld" width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_marcher.png"
+                                    title="Berittene Bogenschützen" alt="" class="faded"></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_heavy.png"
+                                    title="Schwere Kavallerie" alt=""></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_ram.png"
+                                    title="Rammbock"
+                                    alt="" class=""></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_catapult.png"
+                                    title="Katapult" alt=""></td>
+                        <td class="knightWorld" width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_knight.png"
+                                    title="Paladin" alt="" class="faded"></td>
+                        <td width="35" align="CENTER"><img
+                                    src="/assets/images/inno/report/unit_snob.png"
+                                    title="Adelsgeschlecht" alt="" class="faded"></td>
+                    </tr>
+                    <tr id="defenderTroopsOutside">
+                        <td align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td class="archerWorld" align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td class="archerWorld" align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td align="CENTER"></td>
+                        <td class="knightWorld" align="CENTER"></td>
+                        <td align="CENTER"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table id="moodBeforeAfter" width="100%" style="border: 1px solid #DED3B9">
+                    <tbody>
+                    <tr>
+                        <th>Zustimmung:</th>
+                        <td colspan="2"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    let id = window.location.search.substring(1).split("=");
+
+    if (window.location.search.includes("preview")) {
+        $("#subject").parent().hide();
+    }
+    if (window.location.search.includes("attack")) {
+        $("#subject").parent().hide();
+        $(".buildings").hide();
+    }
+    $.ajax({
+        url: "/ajax/report/getReportData.php",
+        data: {id: id[1]},
+        type: 'post',
+        success: function (data) {
+            let result = JSON.parse(data);
+            if (result["reportAvailable"] === true) {
+                $("#subject").text(result["subject"]);
+                $("#fightTime").text(result["fighttime"]);
+                $("#luck").text(result["luck"] + " %");
+                $("#moral").text(result["moral"] + " %");
+                $("#attackerLink").html(`<a href="${result["attackerInfos"]["attackerIngameLink"]}" target="_blank"> ${result["attackerInfos"]["attackerName"]}`)
+                $("#attackerVillage").html(`<a href="${result["attackerInfos"]["attackerCoordUrl"]}" target="_blank"> ${result["attackerInfos"]["attackerVillageName"]} ${result["attackerInfos"]["attackerCoord"]}`)
+                for (let i = 0; i < result["attackerUnits"].length; i++) {
+                    let unit = result["attackerUnits"][i];
+                    $(`#attackerTroops > td:eq(${i + 1})`).text(unit)
+                    unit = result["attackerUnitsLoss"][i];
+                    $(`#attackerLosses > td:eq(${i + 1})`).text(unit)
+                }
+                if (result["attackerInfos"]["attackerFaith"] == 1) {
+                    $("#attackerFaith").html("<nobr>Glauben: Die Truppen waren gläubig.</nobr>");
+                } else {
+                    $("#attackerFaith").html("<nobr>Glauben: Die Truppen waren nicht gläubig.</nobr>");
+                }
+
+                $("#defenderLink").html(`<a href="${result["defenderInfos"]["defenderIngameLink"]}" target="_blank"> ${result["defenderInfos"]["defenderName"]}`)
+                $("#defenderVillage").html(`<a href="${result["defenderInfos"]["defenderCoordUrl"]}" target="_blank"> ${result["defenderInfos"]["defenderVillageName"]} ${result["defenderInfos"]["defenderCoord"]}`)
+                for (let i = 0; i < result["defenderUnits"].length; i++) {
+                    let unit = result["defenderUnits"][i];
+                    $(`#defenderTroops > td:eq(${i + 1})`).text(unit)
+                    unit = result["defenderUnitsLoss"][i];
+                    $(`#defenderLosses > td:eq(${i + 1})`).text(unit)
+                    unit = result["defenderUnitsOutside"][i];
+                    $(`#defenderTroopsOutside > td:eq(${i})`).text(unit)
+                }
+                if(result["defenderInfos"]["defenderTroopsInside"] < 1){
+                    $("#defenderTroops").parent().text("Es konnten keine Informationen über die Truppenstärke des Feindes erlangt werden.")
+                    $("#defenderFaith").hide()
+                }
+                if(result["defenderInfos"]["defenderTroopsOutside"] < 1){
+                    $(`#defenderTroopsOutside`).parent().parent().hide();
+                    $("h5:eq(2)").hide();
+
+                }
+                if (result["defenderInfos"]["defenderFaith"] == 1) {
+                    $("#defenderFaith").html("<nobr>Glauben: Die Truppen waren gläubig.</nobr>");
+                } else {
+                    $("#defenderFaith").html("<nobr>Glauben: Die Truppen waren nicht gläubig.</nobr>");
+                }
+
+                for (const [key, value] of Object.entries(result["buildings"])) {
+                    if (value > -1) {
+                        $(`#${key}Building > td:eq(1)`).text(value)
+                    } else {
+                        $(`#${key}Building`).hide()
+                    }
+                }
+
+                $(".buildings").height(Math.max($(".buildings:eq(1)").height(), $(".buildings:eq(0)").height()));
+
+                if (result["damageRam"]["after"] > -1) {
+                    $("#ramBeforeAfter>tbody>tr>td:eq(0)").text(`Wall beschädigt von Level ${result["damageRam"]["before"]} auf Level ${result["damageRam"]["after"]}`)
+                } else {
+                    $("#ramBeforeAfter").hide()
+                }
+                if (result["damageCata"]["after"] > -1) {
+                    $("#cataBeforeAfter>tbody>tr>td:eq(0)").text(`${result["damageCata"]["target"]} beschädigt von Level ${result["damageCata"]["before"]} auf Level ${result["damageCata"]["after"]}`)
+                } else {
+                    $("#cataBeforeAfter").hide()
+                }
+                if (result["moodDeduction"]["after"] > -1) {
+                    $("#moodBeforeAfter>tbody>tr>td:eq(0)").text(`von ${result["moodDeduction"]["before"]} auf ${result["moodDeduction"]["after"]} gesunken`)
+                } else {
+                    $("#moodBeforeAfter").hide()
+                }
+                if (!result["archer"]) {
+                    $(".archerWorld").hide();
+                }
+                if (!result["knight"]) {
+                    $(".knightWorld").hide();
+                }
+                if (!result["church"]) {
+                    $("#attackerFaith").hide();
+                    $("#defenderFaith").hide();
+                }
+            } else {
+                $("#showReport").html("<div class='text-center'>Bericht nicht gefunden</div>");
+            }
+        }
+    });
+</script>
