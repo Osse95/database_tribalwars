@@ -148,8 +148,8 @@ foreach ($stmt->get_result() as $row) {
     if (isset($knownVillages[$row["attackerdorfid"]])) {
         $knownVillage = $knownVillages[$row["attackerdorfid"]];
         $knownVillage = "<a href='/showReport?id=$knownVillage'target='_blank'>Report</a>
-                            <div class='box2'>
-                                <object data='/showReport?id=$knownVillage'&type=Attack class='testbox'>
+                            <div class='preview'>
+                                <object data='/showReport?id=$knownVillage=preview=attack' class='previewBox'>
                                 </object>
                             </div>";
     }else{

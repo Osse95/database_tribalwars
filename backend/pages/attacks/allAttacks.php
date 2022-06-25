@@ -115,6 +115,14 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             "info": true,
             processing: true,
             serverSide: true,
+            "createdRow": function( row, data, dataIndex){
+                if( data[8] ==  `Fake`){
+                    $(row).addClass('fake');
+                }else if( data[8] ==  `mögliche Off` || data[8] ==  `Off`){
+                    $(row).addClass('off');
+                }
+            },
+            stateSave: true,
             order: [[9, 'asc']],
             ajax: {
                 url: '/ajax/attacks/getAllAttackTable.php',

@@ -108,6 +108,14 @@ $World = new World($_SESSION["world"]);
                 "targets": [2, 6],
                 "orderable": false
             }],
+            "createdRow": function( row, data, dataIndex){
+                if( data[8] ==  `Fake`){
+                    $(row).addClass('fake');
+                }else if( data[8] ==  `mögliche Off` || data[8] ==  `Off`){
+                    $(row).addClass('off');
+                }
+            },
+            stateSave: true,
             ajax: {
                 url: '/ajax/attacks/getOwnAttackTable.php',
                 type: 'POST',

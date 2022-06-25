@@ -213,6 +213,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
                 "targets": 2,
                 "orderable": false
             }],
+            stateSave: true,
             order: [[3, 'desc']],
             ajax: {
                 url: '/ajax/reports/getReportTable.php',
