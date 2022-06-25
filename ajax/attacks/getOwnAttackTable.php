@@ -149,7 +149,7 @@ foreach ($stmt->get_result() as $row) {
         $knownVillage = $knownVillages[$row["attackerdorfid"]];
         $knownVillage = "<a href='/showReport?id=$knownVillage'target='_blank'>Report</a>
                             <div class='box2'>
-                                <object data='/showReportPrevAttacks?id=$knownVillage' class='testbox'>
+                                <object data='/showReport?id=$knownVillage'&type=Attack class='testbox'>
                                 </object>
                             </div>";
     }else{
