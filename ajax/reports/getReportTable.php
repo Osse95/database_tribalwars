@@ -124,7 +124,7 @@ $moodUnder = $_POST["moodUnder"] ?? "";
 if (intval($moodUnder) > 0) {
     $bindParams[] = $moodUnder;
     $bindParams[] = time() - 86400;
-    $Query .= " AND mood_after < ? mood_after > -1 and fighttime > ?";
+    $Query .= " AND mood_after < ? AND mood_after > -1 AND fighttime > ?";
 }
 
 $dateBefore = $_POST["dateBefore"] ?? "";
@@ -200,6 +200,7 @@ foreach ($stmt->get_result() as $row) {
 					</object></div>";
     $fightTime = date("h:i:s d.m.Y", $row["fighttime"]);
     $deleteButton = "<input type='checkbox' class='deleteReport' id='{$row["id"]}'>";
+
     if($World_User->isSF() || $World_User->isMod()){
         $rows["data"][] = array($attackerUrl, $defenderUrl, $reportUrl, $fightTime,$deleteButton);
     }else{
