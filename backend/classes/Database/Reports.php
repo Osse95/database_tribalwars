@@ -138,7 +138,7 @@ class Reports extends DB
     function getAllReportsSortByCoordID(): array
     {
         $return = [];
-        $query = $this->query("SELECT fighttime,defender_coordsid as coordsID,id as reportID,defender_id as playerID FROM `reports` WHERE defender_coordtyp > '-1' UNION SELECT fighttime,attacker_coordsid,attacker_id,id FROM `reports` WHERE attacker_coordtyp > '-1' and size > '2' ORDER by fighttime asc;");
+        $query = $this->query("SELECT fighttime,defender_coordsid as coordsID,id as reportID,defender_id as playerID FROM `reports` WHERE defender_coordtyp > '-1' UNION SELECT fighttime,attacker_coordsid,id,attacker_id FROM `reports` WHERE attacker_coordtyp > '-1' and size > '2' ORDER by fighttime asc;");
         foreach($query as $report){
             $return[$report["coordsID"]] = $report["reportID"];
         }
