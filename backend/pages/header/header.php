@@ -77,7 +77,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/dbRanking">
                                 <font class="dropitem">DB Rangliste</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/auswertungIncs">
+                        <li><a class="dropdown-item bg-primary" href="/evaluation">
                                 <font class="dropitem">Auswertung der Incs</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/createDiagram">
@@ -91,7 +91,8 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                       aria-expanded="false"><i class="fa-solid fa-paperclip tablet"></i> Berichte <span class="quantityReports"></span></a>
+                       aria-expanded="false"><i class="fa-solid fa-paperclip tablet"></i> Berichte <span
+                                class="quantityReports"></span></a>
                     <ul class="dropdown-menu bg-primary" aria-labelledby="dropdown01">
                         <li><a class="dropdown-item bg-primary" href="/showReports">
                                 <font class="dropitem">Angriffsberichte <span class="quantityReports"></span></font>
@@ -299,25 +300,31 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
         }
     });
     $("#tribeIcon").css("visibility", "hidden");
-    $.getJSON("/ajax/general/getTribeID.php", function (result) {
-        let post = {
-            id: result
-        }
-        $.ajax({
-            url: "/ajax/inno/guestTribePage.php",
-            data: post,
-            type: 'post',
-            success: function (data) {
-                if($("img",$(".vis",$(data)).eq(3)).length > 0){
-                     let src = $("img",$(".vis",$(data)).eq(3)).attr("src");
-                    $("#tribeIcon").attr("src", src);
-                    $("#tribeIcon").css("border-radius", "5px");
-                    $("#tribeIcon").css("visibility", "visible");
-                }
+    $("#tribeIcon").css("border-radius", "5px");
+    let tribeIcon = sessionStorage.getItem('tribeIcon');
+    if (tribeIcon !== null) {
+        $("#tribeIcon").attr("src", tribeIcon);
+        $("#tribeIcon").css("visibility", "visible");
+    } else {
+        $.getJSON("/ajax/general/getTribeID.php", function (result) {
+            let post = {
+                id: result
             }
-        });
-    })
-
+            $.ajax({
+                url: "/ajax/inno/guestTribePage.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    if ($("img", $(".vis", $(data)).eq(3)).length > 0) {
+                        let src = $("img", $(".vis", $(data)).eq(3)).attr("src");
+                        $("#tribeIcon").attr("src", src);
+                        $("#tribeIcon").css("visibility", "visible");
+                        sessionStorage.setItem('tribeIcon', src);
+                    }
+                }
+            });
+        })
+    }
     refreshCounters();
     setInterval(function () {
         refreshCounters()
