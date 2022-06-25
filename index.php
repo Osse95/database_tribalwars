@@ -75,6 +75,9 @@ if (!isset($_SESSION["name"])) {
         case("dbRanking"):
             require __DIR__ . "/backend/pages/ranking/dbRanking.php";
             break;
+        case("evaluation"):
+            require __DIR__ . "/backend/pages/ranking/evaluation.php";
+            break;
         case("allAttacks"):
             require __DIR__ . "/backend/pages/attacks/allAttacks.php";
             break;
