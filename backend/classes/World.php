@@ -27,6 +27,15 @@ class World extends DB
         }
     }
 
+    function isChurchAvailable(): bool
+    {
+        if ($this->worldConfig->game->church == "1") {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function isArcherAvailable(): bool
     {
         if ($this->worldConfig->game->archer == "1") {
