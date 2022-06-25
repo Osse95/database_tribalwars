@@ -164,7 +164,6 @@ class World_User extends DB
     {
         $cookie = Utilities::createRandomString();
         $this->query("REPLACE INTO `cookies` (username,world,version,cookie) VALUES ('{$this->name}','{$this->getWorld()}','{$this->getVersion()}','$cookie')");
-
         return $cookie;
     }
 

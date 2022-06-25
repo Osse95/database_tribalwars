@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
 require_once dirname(__DIR__,2)."/backend/classes/User.php";
 require_once dirname(__DIR__,2)."/backend/classes/World_User.php";
 
@@ -35,8 +32,9 @@ if($User->exists){
                 $Return["result"] = true;
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["world"] = $_POST["world"];
-                if($_POST["stayLogged"]== "true"){
-                    setcookie('cookie', $World_User->createCookie(), time() + (3600 * 96));
+                if($_POST["stayLogged"] == "true"){
+                    $Cookie = $World_User->createCookie();
+                    setcookie('cookie', $Cookie, time() + (3600 * 96), '/');
                 }
             }else{
                 $Return["result"] = false;
@@ -50,7 +48,6 @@ if($User->exists){
         $Return["result"] = false;
         $Return["msg"] = "Benutzername oder Passwort stimmen nicht.";
     }
-
 }else{
     $Return["result"] = false;
     $Return["msg"] = "Benutzername oder Passwort stimmen nicht.";
