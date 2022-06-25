@@ -56,6 +56,9 @@ if (!isset($_SESSION["name"])) {
         case("showReports"):
             require __DIR__ . "/backend/pages/reports/showReports.php";
             break;
+        case("showReport"):
+            require __DIR__ . "/backend/pages/previewReports/showReport.php";
+            break;
         case("showUTReports"):
             require __DIR__ . "/backend/pages/reports/showSupportReports.php";
             break;
