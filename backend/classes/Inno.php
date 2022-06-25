@@ -31,6 +31,8 @@ class Inno
 
     static function getServerUrl($world)
     {
+        preg_match("/(?<world>\w+\d+)/", $world, $match);
+        $world = $match["world"]??"";
         if (str_contains($world, "de")) {
             return "https://$world.die-staemme.de/";
         } elseif (str_contains($world, "ch")) {
