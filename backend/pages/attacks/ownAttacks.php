@@ -113,6 +113,8 @@ $World = new World($_SESSION["world"]);
                     $(row).addClass('fake');
                 }else if( data[8] ==  `mögliche Off` || data[8] ==  `Off`){
                     $(row).addClass('off');
+                }else if( data[8] ==  `AG`){
+                    $(row).addClass('snob');
                 }
             },
             stateSave: true,

@@ -179,7 +179,9 @@ foreach ($stmt->get_result() as $row) {
             $typ = "mittlerer Angriff";
             break;
     }
-
+    if(strtolower($row["type2"]) == "snob" OR strtolower($row["type2"]) == "ag"){
+        $typ = "AG";
+    }
     $arrivalTime = date("d.m.Y h:i:s", $row["timeunix"]);
 
     $deleteButton = "<input type='checkbox' class='deleteAttack' id='{$row["id"]}'>";
