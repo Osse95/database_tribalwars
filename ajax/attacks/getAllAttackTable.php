@@ -8,6 +8,7 @@ require dirname(__DIR__, 2) . "/backend/classes/Players.php";
 require dirname(__DIR__, 2) . "/backend/classes/Player.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
 require dirname(__DIR__, 2) . "/backend/classes/DataTables.php";
+
 $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
 if (!$World_User->isActivated()) {
