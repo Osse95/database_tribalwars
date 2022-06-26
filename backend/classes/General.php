@@ -9,6 +9,10 @@ class General{
         header("Connection: close");
     }
 
+    static function imageHeader(){
+        header("Content-type: image/png");
+    }
+
     static function destroySession(){
         setcookie("cookie", "",time()-3600,"/");
         session_destroy();
