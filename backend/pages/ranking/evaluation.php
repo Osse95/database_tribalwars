@@ -7,12 +7,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Fakes</h5>
                             <p class="card-text">
-                                Durch DB bestimmte Fakes = 0 <br>
-                                Eingelesene Berichte zu den Fakes = 0 <br>
-                                Durch Bericht zutreffende Fakes = 0 <br>
-                                Mittlere Offs anstatt Fakes = 0 <br>
-                                Große Offs anstatt Fakes = 0 <br>
-                                Prozentual richtige Fakes = 0
+                                Durch DB bestimmte Fakes = <span id="identifiedFakes">0</span> <br>
+                                Eingelesene Berichte zu den Fakes = <span id="readInReportsFakes">0</span> <br>
+                                Durch Bericht zutreffende Fakes = <span id="correctFakes">0</span> <br>
+                                Mittlere Offs anstatt Fakes = <span id="offMiddleInsteadOfFake">0</span> <br>
+                                Große Offs anstatt Fakes = <span id="offLargeInsteadOfFake">0</span> <br>
+                                Prozentual richtige Fakes = <span id="percentageFakes">0</span>
                             </p>
                         </div>
                     </div>
@@ -22,41 +22,11 @@
                         <div class="card-body">
                             <h5 class="card-title">Offs</h5>
                             <p class="card-text">
-                                Durch DB bestimmte mögliche Offs = 0 <br>
-                                Eingelesene Berichte zu den Offs = 0 <br>
-                                Durch Bericht zutreffende Offs = 0 <br>
-                                Fakes anstatt Offs = 0 (davon als Off deklarierter Fake = 0 <br>
-                                Prozentual richtige Offs = 0
-                                <br></br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 mt-4">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <h5 class="card-title">Eigene Fakes</h5>
-                            <p class="card-text">
-                                Durch DB bestimmte Fakes = 0 <br>
-                                Eingelesene Berichte zu den Fakes = 0 <br>
-                                Durch Bericht zutreffende Fakes = 0 <br>
-                                Mittlere Offs anstatt Fakes = 0 <br>
-                                Große Offs anstatt Fakes = 0 <br>
-                                Prozentual richtige Fakes = 0
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 mt-4">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <h5 class="card-title">Eigene Offs</h5>
-                            <p class="card-text">
-                                Durch DB bestimmte mögliche Offs = 0 <br>
-                                Eingelesene Berichte zu den Offs = 0 <br>
-                                Durch Bericht zutreffende Offs = 0 <br>
-                                Fakes anstatt Offs = 0 (davon als Off deklarierter Fake = 0 <br>
-                                Prozentual richtige Offs = 0
+                                Durch DB bestimmte mögliche Offs = <span id="identifiedOffs">0</span> <br>
+                                Eingelesene Berichte zu den Offs = <span id="readInReportsOffs">0</span> <br>
+                                Durch Bericht zutreffende Offs = <span id="correctOffs">0</span> <br>
+                                Fakes anstatt Offs = <span id="fakeInsteadOfOff">0</span> (davon als Off deklarierter Fake = <span id="offFakeInsteadOfOff">0</span> <br>
+                                Prozentual richtige Offs = <span id="percentageOff">0</span>
                                 <br></br>
                             </p>
                         </div>
@@ -66,3 +36,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    $.getJSON("/ajax/ranking/getEvaluation.php", function (result) {
+        for (const [key, value] of Object.entries(result)) {
+            $("#"+key).text(value);
+        }
+        let percentageFake = Number($("#correctFakes").text()/$("#readInReportsFakes").text()*100);
+        percentageFake = percentageFake.toFixed(2);
+        $("#percentageFakes").text(percentageFake+" %");
+
+        let percentageOff = Number($("#correctOffs").text()/$("#readInReportsOffs").text()*100);
+        percentageOff = percentageOff.toFixed(2);
+        $("#percentageOff").text(percentageOff+" %");
+    })
+</script>

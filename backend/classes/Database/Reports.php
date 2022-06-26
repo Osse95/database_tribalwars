@@ -60,7 +60,7 @@ class Reports extends DB
     function getMostAttacks(): array
     {
         $this->getPlayerNames();
-        $return = array("large"=>[],"medium"=>[],"small"=>[]);
+        $return = array("large" => [], "medium" => [], "small" => []);
         $query = $this->query("SELECT COUNT(*) AS quantity,attacker_id FROM `reports` WHERE size = '4' GROUP BY attacker_id ORDER BY `quantity` DESC LIMIT 10");
         foreach ($query as $attacks) {
             if (isset($this->userNames[$attacks["attacker_id"]])) {
@@ -91,7 +91,7 @@ class Reports extends DB
     function getMostDefense(): array
     {
         $this->getPlayerNames();
-        $return = array("large"=>[],"medium"=>[],"small"=>[]);
+        $return = array("large" => [], "medium" => [], "small" => []);
         $query = $this->query("SELECT COUNT(*) AS quantity,defender_id FROM `reports` WHERE size = '4' GROUP BY defender_id ORDER BY `quantity` DESC LIMIT 10");
         foreach ($query as $attacks) {
             if (isset($this->userNames[$attacks["defender_id"]])) {
@@ -130,7 +130,8 @@ class Reports extends DB
         return $return;
     }
 
-    function getAllReportsQuantity(){
+    function getAllReportsQuantity()
+    {
         $query = $this->query("SELECT COUNT(*) AS quantity FROM `reports`");
         return $query[0]["quantity"];
     }
@@ -139,8 +140,34 @@ class Reports extends DB
     {
         $return = [];
         $query = $this->query("SELECT fighttime,defender_coordsid as coordsID,id as reportID,defender_id as playerID FROM `reports` WHERE defender_coordtyp > '-1' UNION SELECT fighttime,attacker_coordsid,id,attacker_id FROM `reports` WHERE attacker_coordtyp > '-1' and size > '2' ORDER by fighttime asc;");
-        foreach($query as $report){
+        foreach ($query as $report) {
             $return[$report["coordsID"]] = $report["reportID"];
+        }
+        return $return;
+    }
+
+    function getAllIdentifiedReportsSortByType(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT fighttime,attacker_coordsid,defender_coordsid,attacker_coordtyp,size FROM `reports`");
+        foreach ($query as $report) {
+            $time = $report["fighttime"];
+            $attackerCoordID = $report["attacker_coordsid"];
+            $defenderCoordID = $report["defender_coordsid"];
+            $type = $report["attacker_coordtyp"];
+            $size = $report["size"];
+            $identifier = $time . $defenderCoordID . $attackerCoordID;
+            if ($type == 0 or $size <= 2) {
+                $return["fake"][$identifier] = 1;
+            } elseif ($type == 1 and $size == 4) {
+                $return["off"][$identifier] = 1;
+            } elseif ($type == 1 and $size == 3) {
+                $return["offMiddle"][$identifier] = 1;
+            }
+            if ($type == 1 and $size <= 2) {
+                $return["offFake"][$identifier] = 1;
+            }
+            $return["allReports"][$identifier] = 1;
         }
         return $return;
     }
