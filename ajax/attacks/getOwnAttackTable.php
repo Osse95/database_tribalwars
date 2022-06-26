@@ -121,12 +121,21 @@ $playerNames = new Players($_SESSION["world"]);
 $playerNames = $playerNames->getAllPlayersDataSortByID();
 
 foreach ($stmt->get_result() as $row) {
-    $type = strtolower($row["type2"]);
-    $file = dirname(__DIR__, 2) . "/assets/images/inno/units/$type.png";
-    if (file_exists($file)) {
-        $type = "<img src='/assets/images/inno/units/$type.png' alt='$type'> " . $row["type"];
-    } else {
-        $type = $row["type2"] . " " . $row["type"];
+
+    $size = $row["attack"];
+    $type = match ($size) {
+        "attack_small" => "<img src='/assets/images/inno/icons/attack_small.png' alt='attack_small'> ",
+        "attack_medium" => "<img src='/assets/images/inno/icons/attack_medium.png' alt='attack_medium'> ",
+        "attack_large" => "<img src='/assets/images/inno/icons/attack_large.png' alt='attack_large'> ",
+        default => "<img src='/assets/images/inno/icons/attack.png' alt='attack'> ",
+    };
+
+    $unitType = strtolower($row["type2"]);
+    $file = dirname(__DIR__,2)."/assets/images/inno/units/$unitType.png";
+    if(file_exists($file)){
+        $type .= "<img src='/assets/images/inno/units/$unitType.png' alt='$unitType'> " . $row["type"];
+    }else{
+        $type .= $row["type2"] ." ". $row["type"];
     }
 
     $defenderCoordUrl = "/villageInfo?ID={$row["defenderdorfid"]}";
