@@ -122,6 +122,8 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
                     $(row).addClass('off');
                 }else if( data[8] ==  `AG`){
                     $(row).addClass('snob');
+                }else if( data[8] ==  `mittlerer Angriff`){
+                    $(row).addClass('middle');
                 }
             },
             stateSave: true,
