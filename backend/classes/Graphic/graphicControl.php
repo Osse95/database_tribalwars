@@ -5,6 +5,7 @@ class graphicControl
 
     static function checkTopTenMap($world): bool
     {
+        //check if map exist or is older then 4hours
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world.".png";
         if (!file_exists($file)) {
             return false;
