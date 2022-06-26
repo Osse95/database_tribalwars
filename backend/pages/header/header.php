@@ -15,17 +15,17 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
     <!-- Fontawesome -->
     <link href="/assets/fontawesome/css/all.css" rel="stylesheet">
 
+    <!-- Datatables -->
+    <script type="text/javascript" src="/assets/js/datatables.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/datatables.min.css">
+
     <!-- Bootstrap -->
     <script type="text/javascript" src="/assets/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/standard.css">
     <link rel="stylesheet" href="/assets/css/normal.css">
 
-    <!-- Datatables -->
-    <script type="text/javascript" src="/assets/js/datatables.min.js"></script>
-    <link rel="stylesheet" href="/assets/css/datatables.min.css">
-
-    <!-- Jquery -->
+    <!-- Chart JS -->
     <script type="text/javascript" src="/assets/js/chart.min.js"></script>
 
     <!-- Matomo -->

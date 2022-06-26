@@ -117,7 +117,19 @@ a {
 .fake td{
     background-color: rgba(47, 0, 255, 0.05) !important;
 }
+.middle td{
+    background-color: rgba(25, 182, 25, 0.1) !important;
+}
 
+.page-link{
+    background-color: rgb(64, 76, 79) !important;
+}
+.page-link:hover{
+    background-color: rgb(98, 117, 122) !important;
+}
+.page-item.active .page-link {
+    background-color: rgb(57, 66, 68) !important;
+}
 .popupDorfInfo{
     background-color: rgba(39, 39, 39, 0.8);
 }
