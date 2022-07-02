@@ -184,7 +184,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                     <a class="nav-link dropdown-toggle id=" dropdown01" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fa-solid fa-earth-europe tablet"></i> Karten</a>
                     <ul class="dropdown-menu bg-primary" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item bg-primary" href="/worldmap">
+                        <li><a class="dropdown-item bg-primary" href="/topTen">
                                 <font class="dropitem">Top Ten Karte</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/createMap">
