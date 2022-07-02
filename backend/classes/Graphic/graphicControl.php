@@ -10,7 +10,7 @@ class graphicControl
         if (!file_exists($file)) {
             return false;
         }
-        if (filemtime($file) < time() - 14400) {
+        if (filemtime($file) < time() - 3600*4) {
             return false;
         }
         return true;
