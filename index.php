@@ -60,11 +60,11 @@ if (!isset($_SESSION["name"])) {
         case("showReports"):
             require __DIR__ . "/backend/pages/reports/showReports.php";
             break;
-        case("showReport"):
-            require __DIR__ . "/backend/pages/previewReports/showReport.php";
-            break;
         case("showUTReports"):
             require __DIR__ . "/backend/pages/reports/showSupportReports.php";
+            break;
+        case("showReport"):
+            require __DIR__ . "/backend/pages/previewReports/showReport.php";
             break;
         case("insert"):
             require __DIR__ . "/backend/pages/insert/insert.php";
@@ -77,6 +77,9 @@ if (!isset($_SESSION["name"])) {
             break;
         case("evaluation"):
             require __DIR__ . "/backend/pages/ranking/evaluation.php";
+            break;
+        case("villages"):
+            require __DIR__ . "/backend/pages/villages/villages.php";
             break;
         case("allAttacks"):
             require __DIR__ . "/backend/pages/attacks/allAttacks.php";
