@@ -29,7 +29,7 @@ class Inno
         }
     }
 
-    static function getServerUrl($world)
+    static function getServerUrl($world): bool|string
     {
         preg_match("/(?<world>\w+\d+)/", $world, $match);
         $world = $match["world"]??"";
