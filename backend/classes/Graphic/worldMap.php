@@ -111,7 +111,9 @@ class worldMap extends mapHelpers
             case("heatmap"):
                 break;
             case("diplomacy"):
-                $this->tribes = $this->getDiploTribes();
+                $diplomacy = $this->getDiploTribes();
+                $this->tribes = $diplomacy[0];
+                $this->legends = $diplomacy[1];
                 break;
             case("userMap"):
                 $this->villages = [3];

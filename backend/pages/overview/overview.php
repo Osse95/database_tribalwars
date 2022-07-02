@@ -132,7 +132,7 @@
                     <h5 class="card-title">Weltkarte</h5>
                     <p class="card-text text-center">
                         <a href="/graphic/map/heatmap.php" target="_blank">
-                            <img src="/graphic/map/heatmap.php" class="img-fluid Map">
+                            <img src="/ajax/graphic/diplomacyMap.php" class="img-fluid Map">
                         </a>
                     </p>
                 </div>

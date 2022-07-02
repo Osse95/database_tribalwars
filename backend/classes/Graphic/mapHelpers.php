@@ -17,20 +17,22 @@ class mapHelpers extends DB
     function getVillages(): bool|array
     {
         $return = [];
-        $this->connectTo($this->world);
+        $this->connectTo($this->worldName);
         return $this->query("SELECT * FROM `dorfdaten`");
     }
 
     function getVillagesByDate($date): bool|array
     {
         $return = [];
-        $this->connectTo($this->world);
+        $this->connectTo($this->worldName);
         return $this->query("SELECT * FROM `dorfdaten`");
     }
 
     function getDiploTribes(): array
     {
-        $return = [];
+        $proportion = $this->getTribeProportion();
+        $tribeReturn = [];
+        $tribeLegend = [];
         $this->connectTo($this->worldVersion);
         $query = $this->query("SELECT * FROM `tribes_map`");
         foreach ($query as $diploVillage) {
@@ -41,9 +43,16 @@ class mapHelpers extends DB
                 "4" => "lightblue",
                 default => "blue",
             };
-            $return[$diploVillage["tribeid"]] = $colour;
+            $tribeReturn[$diploVillage["tribeid"]] = $colour;
+            $tribeLegend[] = array(
+                "text" => $diploVillage["tribetag"],
+                "colour" => $colour,
+                "x" => $diploVillage["x"],
+                "y" => $diploVillage["y"],
+                "proportion" => $proportion[$diploVillage["tribeid"]] . " %"
+            );
         }
-        return $return;
+        return [$tribeReturn, $tribeLegend];
     }
 
     function topTenTribes(): array
@@ -51,7 +60,7 @@ class mapHelpers extends DB
         $proportion = $this->getTribeProportion();
         $tribeReturn = [];
         $tribeLegend = [];
-        $this->connectTo($this->world);
+        $this->connectTo($this->worldVersion);
         $query = $this->query("SELECT id,rang,tag,x,y FROM `tribes` where rang <= 10;");
         foreach ($query as $topTenVillage) {
             $rang = $topTenVillage["rang"];
@@ -68,15 +77,21 @@ class mapHelpers extends DB
                 default => "red",
             };
             $tribeReturn[$topTenVillage["id"]] = $colour;
-            $tribeLegend[] = array("text" => $topTenVillage["tag"], "colour" => $colour, "x" => $topTenVillage["x"], "y" => $topTenVillage["y"],"proportion"=>$proportion[$topTenVillage["id"]]." %");
+            $tribeLegend[] = array(
+                "text" => $topTenVillage["tag"],
+                "colour" => $colour,
+                "x" => $topTenVillage["x"],
+                "y" => $topTenVillage["y"],
+                "proportion" => $proportion[$topTenVillage["id"]] . " %"
+            );
         }
-        return [$tribeReturn,$tribeLegend];
+        return [$tribeReturn, $tribeLegend];
     }
 
     function getTribeProportion(): array
     {
         $return = [];
-        $this->connectTo($this->world);
+        $this->connectTo($this->worldName);
         $query = $this->query("SELECT tribe, ROUND((COUNT(*) / (SELECT COUNT(*) FROM `dorfdaten` WHERE spielerid > 0)) * 100,2) AS 'percentage' 
                                     FROM `dorfdaten`
                                     WHERE spielerid > 0 and tribe > 0
