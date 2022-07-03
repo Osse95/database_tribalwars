@@ -53,13 +53,11 @@ if(strlen($type)>0){
 
 $off = $_POST["off"]??"false";
 if($off == "true"){
-    $bindParams[] = 2;
-    $Query .= " AND predictedLabel >= ?";
+    $Query .= " AND predictedLabel >= 2";
 }
 
 $fake = $_POST["fake"]??"false";
 if($fake == "true"){
-    $bindParams[] = 1;
     $Query .= " AND predictedLabel = 1";
 }
 
