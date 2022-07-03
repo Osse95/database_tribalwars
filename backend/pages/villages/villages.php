@@ -33,11 +33,13 @@
                                 <th><img src="/assets/images/inno/report/unit_spear.png" title="Speerträger"></th>
                                 <th><img src="/assets/images/inno/report/unit_sword.png" title="Schwertkämpfer"></th>
                                 <th><img src="/assets/images/inno/report/unit_axe.png" title="Axtkämpfer"></th>
-                                <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen"></th>
+                                <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen">
+                                </th>
                                 <th><img src="/assets/images/inno/report/unit_spy.png" title="Späher"></th>
                                 <th><img src="/assets/images/inno/report/unit_light.png" title="Leichte Kavallerie">
                                 </th>
-                                <th class="archer"><img src="/assets/images/inno/report/unit_marcher.png" title="Beritten"></th>
+                                <th class="archer"><img src="/assets/images/inno/report/unit_marcher.png"
+                                                        title="Beritten"></th>
                                 <th><img src="/assets/images/inno/report/unit_heavy.png" title="Schwere Kavallerie">
                                 </th>
                                 <th><img src="/assets/images/inno/report/unit_ram.png" title="Rammbock"></th>
@@ -45,72 +47,7 @@
                                 <th><img src="/assets/images/inno/report/unit_snob.png" title="Adelsgeschlecht"></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td> Eigene</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td> im Dorf</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td> Auswärts</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td> Komplett</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td class="archer"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td> zuletzt eingelesen</td>
-                                <td></td>
-                                <td colspan="100%"></td>
-                            </tr>
+                            <tbody id="troopsAllInAllBody">
                             </tbody>
                         </table>
                     </div>
@@ -130,20 +67,23 @@
                                 <th><img src="/assets/images/inno/report/unit_spear.png" title="Speerträger"></th>
                                 <th><img src="/assets/images/inno/report/unit_sword.png" title="Schwertkämpfer"></th>
                                 <th><img src="/assets/images/inno/report/unit_axe.png" title="Axtkämpfer"></th>
-                                <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen"></th>
+                                <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen">
+                                </th>
                                 <th><img src="/assets/images/inno/report/unit_spy.png" title="Späher"></th>
                                 <th><img src="/assets/images/inno/report/unit_light.png" title="Leichte Kavallerie">
                                 </th>
-                                <th class="archer"><img src="/assets/images/inno/report/unit_marcher.png" title="Beritten"></th>
+                                <th class="archer"><img src="/assets/images/inno/report/unit_marcher.png"
+                                                        title="Beritten"></th>
                                 <th><img src="/assets/images/inno/report/unit_heavy.png" title="Schwere Kavallerie">
                                 </th>
                                 <th><img src="/assets/images/inno/report/unit_ram.png" title="Rammbock"></th>
                                 <th><img src="/assets/images/inno/report/unit_catapult.png" title="Katapult"></th>
-                                <th class="knight"><img src="/assets/images/inno/report/unit_knight.png" title="Pala"></th>
+                                <th class="knight"><img src="/assets/images/inno/report/unit_knight.png" title="Pala">
+                                </th>
                                 <th><img src="/assets/images/inno/report/unit_snob.png" title="Adelsgeschlecht"></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="troopsBody">
                             </tbody>
                         </table>
                     </div>
@@ -162,14 +102,16 @@
                         <table class="table table-dark table-hover table-striped">
                             <thead>
                             <tr>
-                                <th>Dorf ()</th>
+                                <th>Dorf</th>
                                 <th><img src='/assets/images/inno/report/main.png' title='Hauptgebäude'></th>
                                 <th><img src='/assets/images/inno/report/barracks.png' title='Kaserne'></th>
                                 <th><img src='/assets/images/inno/report/stable.png' title='Stall'></th>
                                 <th><img src='/assets/images/inno/report/garage.png' title='Werkstatt'></th>
                                 <th class="church"><img src='/assets/images/inno/report/church.png' title='Kirche'></th>
-                                <th class="church"><img src='/assets/images/inno/report/church.png' title='Erste Kirche'></th>
-                                <th class="watchtower"><img src='/assets/images/inno/report/watchtower.png' title='Wachturm'></th>
+                                <th class="church"><img src='/assets/images/inno/report/church.png'
+                                                        title='Erste Kirche'></th>
+                                <th class="watchtower"><img src='/assets/images/inno/report/watchtower.png'
+                                                            title='Wachturm'></th>
                                 <th><img src='/assets/images/inno/report/snob.png' title='Adelshof'></th>
                                 <th><img src='/assets/images/inno/report/smith.png' title='Schmiede'></th>
                                 <th><img src='/assets/images/inno/report/place.png' title='Versammlungsplatz'></th>
@@ -184,7 +126,7 @@
                                 <th><img src='/assets/images/inno/report/wall.png' title='Wall'></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="buildingsBody">
                             </tbody>
                         </table>
                     </div>
@@ -207,8 +149,8 @@
                         <font color="white"> Weiß(Eigener Account) </font>
                         <font color="darkblue">Blauer Kreis(Kirche)</font>
                         <p class="card-text text-center mt-2">
-                            <a href="/graphic/map/usermap.php" target="_blank">
-                                <img src="/ajax/graphic/diplomacyMap.php" loading="lazy" class="img-fluid Map">
+                            <a href="/ajax/graphic/userMap.php" target="_blank">
+                                <img src="/ajax/graphic/userMap.php" loading="lazy" class="img-fluid Map">
                             </a>
                         </p>
                     </div>
@@ -227,11 +169,11 @@
 <script>
 
     let buildings = false;
-    let map = false;
 
     $("#troops").css("display", "block");
     $("#buildings").css("display", "none");
     $("#map").css("display", "none");
+
 
     $("#troopsTab").on('click', function () {
         $("#troops").css("display", "block");
@@ -240,6 +182,9 @@
     });
 
     $("#buildingsTab").on('click', function () {
+        if (!buildings) {
+            loadBuildings();
+        }
         $("#troops").css("display", "none");
         $("#buildings").css("display", "block");
         $("#map").css("display", "none");
@@ -250,4 +195,110 @@
         $("#buildings").css("display", "none");
         $("#map").css("display", "block");
     })
+
+    let archer = true;
+    $.getJSON("/ajax/ownVillages/getOwnTroopsAllInAll.php", function (result) {
+        let tableRow = "<tr>";
+        tableRow += `<td> eigene </td>`;
+        tableRow += `<td></td>`;
+        result["own"].forEach(element => {
+            tableRow += `<td>${element}</td>`
+        });
+        tableRow += "</tr>";
+        tableRow += "<tr>";
+        tableRow += `<td> im Dorf </td>`;
+        tableRow += `<td></td>`;
+        result["inVillage"].forEach(element => {
+            tableRow += `<td>${element}</td>`
+        });
+        tableRow += "</tr>";
+        tableRow += "<tr>";
+        tableRow += `<td> auswärts </td>`;
+        tableRow += `<td></td>`;
+        result["outwards"].forEach(element => {
+            tableRow += `<td>${element}</td>`
+        });
+        tableRow += "</tr>";
+        tableRow += "<tr>";
+        tableRow += `<td> insgesamt </td>`;
+        tableRow += `<td></td>`;
+        result["all"].forEach(element => {
+            tableRow += `<td>${element}</td>`
+        });
+        tableRow += "</tr>";
+        tableRow += "<tr>";
+        tableRow += `<td> zuletzt Eingelesen </td>`;
+        tableRow += `<td></td>`;
+        tableRow += `<td> ${result["time"]} </td>`;
+        tableRow += `<td colspan="100%"></td>`;
+        $("#troopsAllInAllBody").append(tableRow)
+
+        $("#troopsAllInAllBody").find("tr").each(function () {
+            if ($(this).children().eq(5).text() < 0) {
+                $(this).children().eq(5).hide()
+                $(this).children().eq(8).hide()
+                archer = false;
+            }
+        })
+        if (!archer) {
+            $(".archer").hide()
+        }
+    })
+
+    $.getJSON("/ajax/ownVillages/getOwnTroops.php", function (result) {
+        for (let i = 0; i < result["village"].length; i++) {
+            let tableRow = "<tr>";
+            tableRow += `<td> ${result["village"][i]} </td>`;
+            tableRow += `<td> eigene </td>`;
+            result["own"][i].forEach(element => {
+                tableRow += `<td>${element}</td>`
+            });
+            tableRow += "</tr>";
+            tableRow += "<tr>";
+            tableRow += `<td> </td>`;
+            tableRow += `<td> im Dorf </td>`;
+            result["inVillage"][i].forEach(element => {
+                tableRow += `<td>${element}</td>`
+            });
+            tableRow += "</tr>";
+            tableRow += "<tr>";
+            tableRow += `<td> </td>`;
+            tableRow += `<td> auswärts </td>`;
+            result["outwards"][i].forEach(element => {
+                tableRow += `<td>${element}</td>`
+            });
+            tableRow += "</tr>";
+            tableRow += "<tr>";
+            tableRow += `<td> </td>`;
+            tableRow += `<td> insgesamt </td>`;
+            result["all"][i].forEach(element => {
+                tableRow += `<td>${element}</td>`
+            });
+            tableRow += "</tr>";
+            $("#troopsBody").append(tableRow)
+        }
+        $("#troopsBody").find("tr").each(function () {
+            if ($(this).children().eq(5).text() < 0) {
+                $(this).children().eq(5).hide()
+                $(this).children().eq(8).hide()
+                archer = false;
+            }
+        })
+        if (!archer) {
+            $(".archer").hide()
+        }
+    })
+
+    function loadBuildings() {
+        $.getJSON("/ajax/ownVillages/getOwnBuildings.php", function (result) {
+            for (let i = 0; i < result.length; i++) {
+                let tableRow = "<tr>";
+                result[i].forEach(element => {
+                    tableRow += `<td>${element}</td>`
+                });
+                tableRow += "</tr>";
+                $("#buildingsBody").append(tableRow)
+            }
+        })
+    }
 </script>
