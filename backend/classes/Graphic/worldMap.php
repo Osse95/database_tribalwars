@@ -14,6 +14,9 @@ class worldMap extends mapHelpers
     private array $legends = [];
     private array $customLegends = [];
 
+    private array $buildings = [];
+    private array $customBuildings = [];
+
     private $image;
     private array $newSize = ["max" => 0, "min" => 4000];
     private array $customSize = ["maxX" => 0, "minX" => 4000, "maxY" => 0, "minY" => 4000];
@@ -26,16 +29,21 @@ class worldMap extends mapHelpers
     private mixed $continentMap;
 
     private string $worldName;
+    private int $playerID;
 
-    function __construct($world)
+    function __construct($world, $playerID = 0)
     {
-        parent::__construct($world);
+        parent::__construct($world, $playerID);
         $this->worldName = $world;
+        $this->playerID = intval($playerID);
+
         $this->image = imagecreatetruecolor(4000, 4000);
         imagealphablending($this->image, true);
         imagesavealpha($this->image, true);
+
         $this->createColours();
         imagefill($this->image, 0, 0, $this->colours["green"]);
+
         $this->font = dirname(__DIR__, 3) . "/backend/fonts/SansBlack.ttf";
         $this->continentMap = imagecreatefrompng(dirname(__DIR__, 3) . "/backend/exampleGraphics/continent.png");
     }
@@ -97,7 +105,7 @@ class worldMap extends mapHelpers
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $this->worldName . ".png");
                 break;
             case("userMap"):
-                $this->villages = [3];
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/usermaps/" . $this->worldName . $this->playerID . ".png");
                 break;
             case("topTenMap"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $this->worldName . ".png");
@@ -116,7 +124,9 @@ class worldMap extends mapHelpers
                 $this->legends = $diplomacy[1];
                 break;
             case("userMap"):
-                $this->villages = [3];
+                $user = $this->getUserMap();
+                $this->players = $user[0];
+                $this->buildings = $user[1];
                 break;
             case("topTenMap"):
                 $topTen = $this->topTenTribes();
@@ -259,6 +269,15 @@ class worldMap extends mapHelpers
                 imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY - 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
                 imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
                 imagettftext($this->image, $textSize[3], 0, $villageX, $villageY + $textSize[1], $this->colours[$legend["white"]], $this->font, $legend["proportion"]);
+            }
+        }
+
+        if (count($this->buildings) > 0) {
+            foreach ($this->buildings["watchtowers"] as $watchtower) {
+                imagefilledarc($this->image, $watchtower["x"], $watchtower["y"], $watchtower["range"] * 8, $watchtower["range"] * 8, 0, 360, $this->colours[$watchtower["colour"]], IMG_ARC_EDGED);
+            }
+            foreach ($this->buildings["churches"] as $church) {
+                imagearc($this->image, $church["x"], $church["y"], $church["range"] * 8, $church["range"] * 8, 0, 360, $this->transparentColours[$church["colour"]]);
             }
         }
 
