@@ -126,8 +126,11 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/retimes">
                                 <font class="dropitem">Aktuelle Retimes </font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/heatmap">
-                                <font class="dropitem">Hitzekarte</font>
+                        <li><a class="dropdown-item bg-primary" href="/heatMap">
+                                <font class="dropitem">Heatmap</font>
+                            </a></li>
+                        <li><a class="dropdown-item bg-primary" href="/sourceMap">
+                                <font class="dropitem">Sourcemap</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/CreateattackPlan">
                                 <font class="dropitem">Neuer Angriffsplaner</font>
