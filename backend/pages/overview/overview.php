@@ -122,10 +122,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="row p-4">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-lg-5 col-md-10 mt-2">
+    <div class="row p-4 d-flex justify-content-center">
+        <div class="col-lg-5 col-md-10 col-xs-12 mt-2">
             <div class="card bg-secondary">
                 <div class="card-body">
                     <h5 class="card-title">Diplomatiekarte</h5>
@@ -137,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 col-md-10 mt-2">
+        <div class="col-lg-5 col-md-10 col-xs-12 mt-2 ">
             <div class="card bg-secondary">
                 <div class="card-body">
                     <h5 class="card-title">Heatmap</h5>
@@ -148,8 +146,6 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-1">
         </div>
     </div>
 </div>

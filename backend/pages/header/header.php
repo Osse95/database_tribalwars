@@ -135,7 +135,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/CreateattackPlan">
                                 <font class="dropitem">Neuer Angriffsplaner</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/dbtods">
+                        <li><a class="dropdown-item bg-primary" href="/getAttacks">
                                 <font class="dropitem">Angriffe übertragen</font>
                             </a></li>
                     </ul>

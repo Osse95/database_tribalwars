@@ -94,7 +94,7 @@ class Attacks extends DB
         return $return;
     }
 
-    function getEvaluation() :array
+    function getEvaluation(): array
     {
         $return = array(
             "identifiedFakes" => 0,
@@ -142,6 +142,27 @@ class Attacks extends DB
                     $return["offFakeInsteadOfOff"] += 1;
                 }
             }
+        }
+        return $return;
+    }
+
+    function getAllOffCoords(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT DISTINCT attackercoords FROM `sos` WHERE attack= 'attack' and predictedLabel = 2");
+        foreach ($query as $attack) {
+            $return[] = $attack["attackercoords"];
+        }
+        return $return;
+    }
+
+    function getAllFakeCoords(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT DISTINCT attackercoords FROM `sos` WHERE attack= 'attack' and predictedLabel = 1");
+        foreach ($query as $attack) {
+            $return[] = $attack["attackercoords"];
+
         }
         return $return;
     }

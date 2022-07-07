@@ -93,6 +93,9 @@ if (!isset($_SESSION["name"])) {
         case("sourceMap"):
             require __DIR__ . "/backend/pages/attacks/sourceMap.php";
             break;
+        case("getAttacks"):
+            require __DIR__ . "/backend/pages/attacks/getAttacks.php";
+            break;
         case("topTen"):
             require __DIR__ . "/backend/pages/graphics/topTen.php";
             break;
