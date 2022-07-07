@@ -17,24 +17,25 @@ body {
 .dropdown-item:hover {
     font-weight: bold;
 }
+
 .placeholder {
     width: 100%;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
-@media screen and (max-width:1400px) {
+@media screen and (max-width: 1400px) {
     .tablet {
         display: none;
     }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
     .handy {
         display: none;
     }
-    
 }
+
 /* End */
 
 
@@ -43,26 +44,26 @@ body {
     display: none;
 }
 
-a:hover+.preview,
+a:hover + .preview,
 .preview:hover {
     display: block;
     position: fixed;
     top: 20%;
     left: 55%;
 }
-.previewBox {
+
+previewBox {
     width: 250%;
     height: 660px;
 }
 
-@media screen and (max-width:1200px) {
-    a:hover + .preview,.preview:hover{
+@media screen and (max-width: 1200px) {
+    a:hover + .preview, .preview:hover {
         display: none;
     }
 }
+
 /* End */
-
-
 
 .infobox {
     display: none;
@@ -71,7 +72,7 @@ a:hover+.preview,
     min-height: 5%;
 }
 
-.info:hover+.infobox,
+.info:hover + .infobox,
 .infobox:hover {
     display: block;
     position: absolute;
@@ -103,7 +104,7 @@ a:hover+.preview,
     text-align: left;
 }
 
-.info4:hover+.infobox4,
+.info4:hover + .infobox4,
 .infobox4:hover {
     display: block;
     position: absolute;
@@ -114,7 +115,7 @@ a:hover+.preview,
 
 }
 
-.info:hover+.infobox3,
+.info:hover + .infobox3,
 .infobox3:hover {
     display: block;
     position: absolute;
@@ -123,7 +124,7 @@ a:hover+.preview,
 
 }
 
-.info2:hover+.infobox2,
+.info2:hover + .infobox2,
 .infobox2:hover {
     display: block;
     position: absolute;
@@ -147,7 +148,7 @@ a:hover+.preview,
     transform: translate(-50%, -50%);
 }
 
-.popupDorfInfo{
+.popupDorfInfo {
     padding: 10px;
     border-radius: 5px;
 }
