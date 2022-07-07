@@ -118,7 +118,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -126,9 +125,21 @@
     <div class="row p-4">
         <div class="col-sm-1">
         </div>
-        <div class="col-sm-10">
+        <div class="col-lg-5 col-md-10 mt-2">
             <div class="card bg-secondary">
-                <div class="card-body ">
+                <div class="card-body">
+                    <h5 class="card-title">Weltkarte</h5>
+                    <p class="card-text text-center">
+                        <a href="/ajax/graphic/diplomacyMap.php" target="_blank">
+                            <img src="/ajax/graphic/diplomacyMap.php" loading="lazy" class="img-fluid Map">
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-10 mt-2">
+            <div class="card bg-secondary">
+                <div class="card-body">
                     <h5 class="card-title">Weltkarte</h5>
                     <p class="card-text text-center">
                         <a href="/ajax/graphic/diplomacyMap.php" target="_blank">

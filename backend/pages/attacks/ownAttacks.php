@@ -111,7 +111,9 @@ $World = new World($_SESSION["world"]);
             "createdRow": function( row, data, dataIndex){
                 if( data[8] ==  `Fake`){
                     $(row).addClass('fake');
-                }else if( data[8] ==  `mögliche Off` || data[8] ==  `Off`){
+                }else if( data[8] ==  `mögliche Off`){
+                    $(row).addClass('moff');
+                }else if( data[8] ==  `Off`){
                     $(row).addClass('off');
                 }else if( data[8] ==  `AG`){
                     $(row).addClass('snob');
