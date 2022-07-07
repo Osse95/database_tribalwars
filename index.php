@@ -18,7 +18,7 @@ if(!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])){
 }
 
 if (!isset($_SESSION["name"])) {
-    require __DIR__ . "/backend/pages/login/login.php";
+    require __DIR__ . "/backend/pages/login/login.html";
 } else {
     $User = new User($_SESSION["name"]);
     if (!$User->exists) {
@@ -64,22 +64,22 @@ if (!isset($_SESSION["name"])) {
             require __DIR__ . "/backend/pages/reports/showSupportReports.php";
             break;
         case("showReport"):
-            require __DIR__ . "/backend/pages/previewReports/showReport.php";
+            require __DIR__ . "/backend/pages/previewReports/showReport.html";
             break;
         case("insert"):
-            require __DIR__ . "/backend/pages/insert/insert.php";
+            require __DIR__ . "/backend/pages/insert/insert.html";
             break;
         case("ranking"):
-            require __DIR__ . "/backend/pages/ranking/ranking.php";
+            require __DIR__ . "/backend/pages/ranking/ranking.html";
             break;
         case("dbRanking"):
-            require __DIR__ . "/backend/pages/ranking/dbRanking.php";
+            require __DIR__ . "/backend/pages/ranking/dbRanking.html";
             break;
         case("evaluation"):
-            require __DIR__ . "/backend/pages/ranking/evaluation.php";
+            require __DIR__ . "/backend/pages/ranking/evaluation.html";
             break;
         case("villages"):
-            require __DIR__ . "/backend/pages/villages/villages.php";
+            require __DIR__ . "/backend/pages/villages/villages.html";
             break;
         case("allAttacks"):
             require __DIR__ . "/backend/pages/attacks/allAttacks.php";
@@ -88,22 +88,22 @@ if (!isset($_SESSION["name"])) {
             require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
             break;
         case("retimes"):
-            require __DIR__ . "/backend/pages/attacks/retimes.php";
+            require __DIR__ . "/backend/pages/attacks/retimes.html";
             break;
         case("heatMap"):
-            require __DIR__ . "/backend/pages/attacks/heatMap.php";
+            require __DIR__ . "/backend/pages/attacks/heatMap.html";
             break;
         case("sourceMap"):
-            require __DIR__ . "/backend/pages/attacks/sourceMap.php";
+            require __DIR__ . "/backend/pages/attacks/sourceMap.html";
             break;
         case("getAttacks"):
             require __DIR__ . "/backend/pages/attacks/getAttacks.php";
             break;
         case("topTen"):
-            require __DIR__ . "/backend/pages/graphics/topTen.php";
+            require __DIR__ . "/backend/pages/graphics/topTen.html";
             break;
         default:
-            require __DIR__ . "/backend/pages/overview/overview.php";
+            require __DIR__ . "/backend/pages/overview/overview.html";
     }
 
 }
