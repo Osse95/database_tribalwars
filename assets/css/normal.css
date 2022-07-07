@@ -111,15 +111,19 @@ a {
 .moff td{
     background-color: rgba(255, 151, 46, 0.18) !important;
 }
+
 .off td{
     background-color: rgba(255, 0, 0, 0.10) !important;
 }
+
 .snob td{
     background-color: rgba(255, 251, 0, 0.144) !important;
 }
+
 .fake td{
     background-color: rgba(47, 0, 255, 0.05) !important;
 }
+
 .middle td{
     background-color: rgba(25, 182, 25, 0.1) !important;
 }

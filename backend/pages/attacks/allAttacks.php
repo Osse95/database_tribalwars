@@ -118,7 +118,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             "createdRow": function( row, data, dataIndex){
                 if( data[8] ==  `Fake`){
                     $(row).addClass('fake');
-                }else if( data[8] ==  `mögliche Off`){
+                }else if( data[8] ==  `Mögliche Off` || data[8] ==  `mögliche Off`){
                     $(row).addClass('moff');
                 }else if( data[8] ==  `Off`){
                     $(row).addClass('off');
