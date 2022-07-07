@@ -11,7 +11,6 @@
                         <textarea class="form-control" name="sos" aria-label="With textarea"
                                   placeholder="Ankommende Angriffe->SoS Anfrage erstellen"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -25,7 +24,6 @@
                         <textarea name="reports" class="form-control" aria-label="With textarea"
                                   placeholder="Berichte->Alle markieren->Veröffentlichen->Maximal 500!!"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -39,7 +37,6 @@
                         <textarea class="form-control" name="troops" aria-label="With textarea"
                                   placeholder="Übersicht->Truppen"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -53,7 +50,6 @@
                         <textarea class="form-control" name="buildings" aria-label="With textarea"
                                   placeholder="Übersichten->Gebäude"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -65,9 +61,8 @@
                     <div class="input-group">
                         <span class="input-group-text">Unterstützung</span>
                         <textarea class="form-control " name="support" aria-label="With textarea"
-                                  placeholder="Übersichten->Truppen->Unterstützung"></textarea></textarea>
+                                  placeholder="Übersichten->Truppen->Unterstützung"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -81,7 +76,6 @@
                         <textarea class="form-control" name="defense" aria-label="With textarea"
                                   placeholder="Übersichten->Truppen->Verteidigung"></textarea>
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -95,7 +89,6 @@
                         <input type="number" name="snobLimit" class="form-control" placeholder="0"
                                aria-label="With textarea">
                     </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -103,13 +96,13 @@
 </div>
 
 <div class="placeholder">
-    <br></br>
+    <br/>
 </div>
 
 <script>
     $("#sendInputs :INPUT").on("change", function () {
         $("#msg").append(`<div class="m-2 spinner-border" role="status"></div>`)
-        $("#msg").append(`<br>Daten werden verarbeitet.<br></br>`)
+        $("#msg").append(`<br>Daten werden verarbeitet.<br/>`)
         let post = {};
         $("#sendInputs :INPUT").each(function () {
             if ($(this).val() !== "") {
@@ -118,4 +111,9 @@
             }
         })
     })
+    let maxWidth = Math.max.apply(null, $(".input-group-text").map(function ()
+    {
+        return $(this).width();
+    }).get());
+    $(".input-group-text").width(maxWidth)
 </script>
