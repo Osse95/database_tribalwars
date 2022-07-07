@@ -207,27 +207,57 @@ class worldMap extends mapHelpers
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$playerID]]);
             }
         }
-
+        $tryNoOverlay = [];
         foreach ($this->legends as $legend) {
-            $villageX = round(4 * $legend["x"]);
+            $villageX = round(4 * $legend["x"]) - 50;
             $villageY = round(4 * $legend["y"]);
+
             if (count($this->villages) < 10000) {
                 $textSize = [15, 14, 14, 13];
+                $overlaySize = [30, 50];
             } elseif (count($this->villages) < 20000) {
                 $textSize = [22, 17, 21, 16];
+                $overlaySize = [50, 70];
             } elseif (count($this->villages) < 30000) {
                 $textSize = [27, 17, 26, 16];
+                $overlaySize = [70, 90];
             } else {
-                $textSize = [35, 25, 34, 24];
+                $textSize = [45, 25, 44, 24];
+                $overlaySize = [80, 100];
             }
 
-            imagettftext($this->image, $textSize[0], 0, $villageX + 1, $villageY + 1, $this->colours["black"], $this->font, $legend["text"]);
-            imagettftext($this->image, $textSize[0], 0, $villageX - 1, $villageY - 1, $this->colours["black"], $this->font, $legend["text"]);
+            for ($i = 0; $i < count($tryNoOverlay); $i++) {
+                $x = $tryNoOverlay[$i]["X"];
+                $y = $tryNoOverlay[$i]["Y"];
+                if ($y + $overlaySize[0] >= $villageY and $y - $overlaySize[0] <= $villageY and $x + $overlaySize[0] >= $villageX and $x - $overlaySize[0] <= $villageX) {
+                    $villageY = $villageY + $overlaySize[1];
+                }
+            }
+
+            $tryNoOverlay[count($tryNoOverlay)] = array(
+                "X" => $villageX,
+                "Y" => $villageY
+            );
+
+            imagettftext($this->image, $textSize[0], 0, $villageX, $villageY + 2, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX + 2, $villageY + 2, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX + 2, $villageY + 2, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX + 2, $villageY, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX, $villageY, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX - 2, $villageY - 2, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX - 2, $villageY - 2, $this->colours["black"], $this->font, $legend["text"]);
+            imagettftext($this->image, $textSize[0], 0, $villageX - 2, $villageY, $this->colours["black"], $this->font, $legend["text"]);
             imagettftext($this->image, $textSize[2], 0, $villageX, $villageY, $this->colours[$legend["colour"]], $this->font, $legend["text"]);
 
             if (isset($legend["proportion"])) {
-                imagettftext($this->image, $textSize[1], 0, $villageX + 1, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
-                imagettftext($this->image, $textSize[1], 0, $villageX - 1, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX, $villageY + 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX + 2, $villageY + 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX + 2, $villageY + 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX + 2, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY - 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY - 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
                 imagettftext($this->image, $textSize[3], 0, $villageX, $villageY + $textSize[1], $this->colours[$legend["colour"]], $this->font, $legend["proportion"]);
             }
         }
