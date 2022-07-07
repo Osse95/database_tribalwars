@@ -9,20 +9,16 @@ class Player extends DB
     function __construct($world, $player)
     {
         parent::__construct($world);
-        $stmt = $this->conn->prepare("SELECT * FROM `{$this->world}`.`spielerdaten` WHERE UPPER(spielername) = UPPER(?) or spielerid = ?");
-        $stmt->bind_param("ss", $player, $player);
-        $stmt->execute();
-        $stmt->bind_result($id, $name, $tribeID, $villages, $points, $rang, $x, $y);
-        while ($stmt->fetch()) {
+        $stmt = $this->conn->prepare("SELECT * FROM `userstats` WHERE UPPER(username) = UPPER(?) or userid = ?");
+        $stmt->execute([$player,$player]);
+        foreach ($stmt->get_result() as $row) {
             $this->playerArray = array(
-                "ID" => $id,
-                "Name" => $name,
-                "TribeID" => $tribeID,
-                "Villages" => $villages,
-                "Points" => $points,
-                "Rang" => $rang,
-                "X" => $x,
-                "Y" => $y
+                "ID" => $row["userid"],
+                "Name" => $row["username"],
+                "TribeID" => $row["Tribeid"],
+                "Villages" => $row["Dorfanzahl"],
+                "Points" => $row["Punkte"],
+                "Rang" => $row["Rang"]
             );
             $this->exists = true;
         }
