@@ -10,22 +10,17 @@ class Tribe extends DB
     function __construct($world, $tribe)
     {
         parent::__construct($world);
-        $stmt = $this->conn->prepare("SELECT * FROM `tribes` WHERE UPPER(tag) = UPPER(?) or UPPER(name) = UPPER(?) or id = ?");
-        $stmt->bind_param("sss", $tribe, $tribe, $tribe);
-        $stmt->execute();
-        $stmt->bind_result($id, $name, $tag, $members, $villages, $points, $allPoints, $rang, $x, $y);
-        while ($stmt->fetch()) {
+        $stmt = $this->conn->prepare("SELECT * FROM `tribestats` WHERE UPPER(Tribetag) = UPPER(?) or UPPER(Tribename) = UPPER(?) or Tribeid = ?");
+        $stmt->execute([$tribe,$tribe,$tribe]);
+        foreach ($stmt->get_result() as $row) {
             $this->tribeArray = array(
-                "ID" => $id,
-                "Name" => $name,
-                "Tag" => $tag,
-                "Members" => $members,
-                "Villages" => $villages,
-                "Points" => $points,
-                "AllPoints" => $allPoints,
-                "Rang" => $rang,
-                "X" => $x,
-                "Y" => $y
+                "ID" => $row["Tribeid"],
+                "Name" => $row["Tribename"],
+                "Tag" => $row["Tribetag"],
+                "Members" => $row["Members"],
+                "Villages" => $row["Dorfanzahl"],
+                "Points" => $row["Punkte"],
+                "Rang" => $row["Rang"]
             );
             $this->exists = true;
         }
