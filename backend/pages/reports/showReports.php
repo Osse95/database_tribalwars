@@ -54,7 +54,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             </div>
             <div class="col-3">
             </div>
-            <div class="col-2 me-2">
+            <div class="col-lg-2 col-md-2 col-xs-12 me-2 d-flex justify-content-center">
                 <div class="form-check">
                     <input class="form-check-input"
                            name="watchtower" type="checkbox">
@@ -63,7 +63,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
                     </label>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-xs-12 d-flex justify-content-center">
                 <div class="form-check">
                     <input class="form-check-input"
                            name="church" type="checkbox">
@@ -72,8 +72,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
                     </label>
                 </div>
             </div>
-            <div class="col-2">
-
+            <div class="col-lg-2 col-md-2 col-xs-12 d-flex justify-content-center">
                 <div class="form-check">
                     <input class="form-check-input"
                            name="academy" type="checkbox">
