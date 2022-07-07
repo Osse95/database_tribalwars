@@ -178,4 +178,29 @@ class mapHelpers extends DB
 
         return [$tribeReturn, $returnAttacks];
     }
+
+    function getSources(): array
+    {
+        $this->connectTo($this->worldVersion);
+
+        $tribeReturn = [];
+        $query = $this->query("SELECT * FROM `tribes_map` where diplo = 1;");
+        foreach ($query as $OwnTribe) {
+            $tribeReturn[$OwnTribe["tribeid"]] = "blue";
+        }
+
+        $returnAttacks = [];
+        $query = $this->query("Select attackerdorfid,predictedLabel FROM `sos`");
+        foreach ($query as $attack) {
+            $colour = match ($attack["predictedLabel"]) {
+                "1" => "white",
+                "2" => "red",
+                "3", "4" => "darkred",
+                default => "black",
+            };
+            $returnAttacks[$attack["attackerdorfid"]] = $colour;
+        }
+
+        return [$tribeReturn, $returnAttacks];
+    }
 }

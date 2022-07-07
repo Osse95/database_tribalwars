@@ -108,6 +108,9 @@ class worldMap extends mapHelpers
             case("heatMap"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/heatmaps/" . $this->worldName . ".png");
                 break;
+            case("sourceMap"):
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/sourceMaps/" . $this->worldName . ".png");
+                break;
             case("diplomacy"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $this->worldName . ".png");
                 break;
@@ -127,6 +130,11 @@ class worldMap extends mapHelpers
                 $heat = $this->getAttacks();
                 $this->tribes = $heat[0];
                 $this->villages = $heat[1];
+                break;
+            case("sourceMap"):
+                $source = $this->getSources();
+                $this->tribes = $source[0];
+                $this->villages = $source[1];
                 break;
             case("diplomacy"):
                 $diplomacy = $this->getDiploTribes();

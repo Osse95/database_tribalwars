@@ -55,6 +55,19 @@ class graphicControl
         return true;
     }
 
+    static function checkSourceMap($world): bool
+    {
+        //check if map exist or is older then 3hours
+        $file = dirname(__DIR__, 3) . "/graphic/sourceMaps/" . $world . ".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600 * 3) {
+            return false;
+        }
+        return true;
+    }
+
     static function getTopTenMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
@@ -79,6 +92,13 @@ class graphicControl
     static function getHeatMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/heatmaps/" . $world . ".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
+    static function getSourceMap($world): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/sourceMaps/" . $world . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
