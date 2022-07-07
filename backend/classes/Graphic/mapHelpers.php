@@ -1,15 +1,18 @@
 <?php
 require_once dirname(__DIR__) . "/DB.php";
+require_once dirname(__DIR__) . "/Inno.php";
 
 class mapHelpers extends DB
 {
     private string $worldName;
     private string $worldVersion;
+    private int $playerID;
 
-    function __construct($world)
+    function __construct($world, $playerID = 0)
     {
         parent::__construct($world);
         $this->worldVersion = $world;
+        $this->playerID = intval($playerID);
         preg_match("/(?<world>\w+\d+)/", $world, $match);
         $this->worldName = $match["world"];
     }
@@ -101,5 +104,53 @@ class mapHelpers extends DB
             $return[$Proportion["tribe"]] = $Proportion["percentage"];
         }
         return $return;
+    }
+
+    function getUserMap()
+    {
+        $playerReturn = [];
+        $this->connectTo($this->worldName);
+        $playerID = $this->playerID;
+        $query = $this->query("SELECT * FROM `spielerdaten` WHERE spielerid = '$playerID'");
+        foreach ($query as $player) {
+            $playerReturn[$playerID] = "white";
+        }
+
+        $buildingsReturn = array(
+            "watchtowers" => [],
+            "churches" => []
+        );
+        $this->connectTo($this->worldVersion);
+        $query = $this->query("Select wachturm,kirche,erstekirche,dorfcoords FROM `buildings` WHERE playerid = '$playerID'");
+        foreach ($query as $buildings) {
+            $split = explode("|", substr($buildings["dorfcoords"], 1, -1));
+            $x = $split[0];
+            $y = $split[1];
+            if ($buildings["wachturm"] > 0) {
+                $buildingsReturn["watchtowers"][] = array(
+                    "range" => Inno::getWatchtowerRange($buildings["wachturm"]),
+                    "colour" => "darkyellow",
+                    "x" => $x,
+                    "y" => $y
+                );
+            }
+            if ($buildings["kirche"] > 0) {
+                $buildingsReturn["churches"][] = array(
+                    "range" => Inno::getChurchRange($buildings["kirche"]),
+                    "colour" => "darkblue",
+                    "x" => $x,
+                    "y" => $y
+                );
+            }
+            if ($buildings["erstekirche"] > 0) {
+                $buildingsReturn["churches"][] = array(
+                    "range" => Inno::getChurchRange(2),
+                    "colour" => "darkblue",
+                    "x" => $x,
+                    "y" => $y
+                );
+            }
+        }
+    return [$playerReturn,$buildingsReturn];
     }
 }

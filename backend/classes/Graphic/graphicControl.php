@@ -29,6 +29,19 @@ class graphicControl
         return true;
     }
 
+    static function checkUserMap($world,$playerID): bool
+    {
+        //check if map exist or is older then 12hours
+        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world. $playerID .".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600*12) {
+            return false;
+        }
+        return true;
+    }
+
     static function getTopTenMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world.".png";
@@ -39,6 +52,13 @@ class graphicControl
     static function getDiplomacyMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $world.".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
+    static function getUserMap($world,$playerID): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world. $playerID .".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
