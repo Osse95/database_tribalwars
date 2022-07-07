@@ -62,7 +62,7 @@
 </div>
 <div id="attackContainer" class="container handy">
     <div class="row p-4 justify-content-md-center">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-lg-8 col-md-10 col-xs-12">
             <div class="card bg-secondary">
                 <div class="card-body">
                     <h5 class="card-title">Aktuelle Angriffe</h5>
@@ -131,7 +131,7 @@
                 <div class="card-body ">
                     <h5 class="card-title">Weltkarte</h5>
                     <p class="card-text text-center">
-                        <a href="/graphic/map/heatmap.php" target="_blank">
+                        <a href="/ajax/graphic/diplomacyMap.php" target="_blank">
                             <img src="/ajax/graphic/diplomacyMap.php" class="img-fluid Map">
                         </a>
                     </p>
@@ -147,11 +147,13 @@
 </div>
 
 <script>
-
-    createAttackDiagram()
-    setInterval(function () {
+    let mobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!mobile) {
         createAttackDiagram()
-    }, 30000)
+        setInterval(function () {
+            createAttackDiagram()
+        }, 30000)
+    }
     let ChartID = [];
 
     function createAttackDiagram() {
@@ -167,6 +169,8 @@
             }
             if (playerNames.length > 0) {
                 $("#attackContainer").show();
+                $("#attackContainer").removeClass("handy");
+                $("#attackContainer").addClass("handy");
                 if (ChartID.length > 0) {
                     ChartID[0].destroy();
                     ChartID = []
@@ -278,6 +282,7 @@
     function createDiagram(id, labelText, label, data, color, bgColor) {
         new Chart(document.getElementById(id).getContext('2d'), {
             type: 'line',
+            responsive: true,
             data: {
                 labels: label,
                 datasets: [{

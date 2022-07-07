@@ -258,7 +258,7 @@ class worldMap extends mapHelpers
                 imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY - 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
                 imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY - 2 + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
                 imagettftext($this->image, $textSize[1], 0, $villageX - 2, $villageY + $textSize[1], $this->colours["black"], $this->font, $legend["proportion"]);
-                imagettftext($this->image, $textSize[3], 0, $villageX, $villageY + $textSize[1], $this->colours[$legend["colour"]], $this->font, $legend["proportion"]);
+                imagettftext($this->image, $textSize[3], 0, $villageX, $villageY + $textSize[1], $this->colours[$legend["white"]], $this->font, $legend["proportion"]);
             }
         }
 
