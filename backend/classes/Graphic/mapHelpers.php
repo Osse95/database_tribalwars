@@ -106,7 +106,7 @@ class mapHelpers extends DB
         return $return;
     }
 
-    function getUserMap()
+    function getUserMap(): array
     {
         $playerReturn = [];
         $this->connectTo($this->worldName);
@@ -151,6 +151,31 @@ class mapHelpers extends DB
                 );
             }
         }
-    return [$playerReturn,$buildingsReturn];
+        return [$playerReturn, $buildingsReturn];
+    }
+
+    function getAttacks(): array
+    {
+        $this->connectTo($this->worldVersion);
+
+        $tribeReturn = [];
+        $query = $this->query("SELECT * FROM `tribes_map` where diplo = 1;");
+        foreach ($query as $OwnTribe) {
+            $tribeReturn[$OwnTribe["tribeid"]] = "blue";
+        }
+
+        $returnAttacks = [];
+        $query = $this->query("Select defenderdorfid,predictedLabel FROM `sos`");
+        foreach ($query as $attack) {
+            $colour = match ($attack["predictedLabel"]) {
+                "1" => "white",
+                "2" => "red",
+                "3", "4" => "darkred",
+                default => "black",
+            };
+            $returnAttacks[$attack["defenderdorfid"]] = $colour;
+        }
+
+        return [$tribeReturn, $returnAttacks];
     }
 }

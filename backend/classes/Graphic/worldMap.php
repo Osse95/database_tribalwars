@@ -3,7 +3,9 @@ require_once "mapHelpers.php";
 
 class worldMap extends mapHelpers
 {
+
     private array $villages = [];
+    private array $customVillages = [];
 
     private array $tribes = [];
     private array $customTribes = [];
@@ -103,7 +105,8 @@ class worldMap extends mapHelpers
     function safeImage($type)
     {
         switch ($type) {
-            case("heatmap"):
+            case("heatMap"):
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/heatmaps/" . $this->worldName . ".png");
                 break;
             case("diplomacy"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $this->worldName . ".png");
@@ -120,7 +123,10 @@ class worldMap extends mapHelpers
     function selectMapType($type, $playerID = "")
     {
         switch ($type) {
-            case("heatmap"):
+            case("heatMap"):
+                $heat = $this->getAttacks();
+                $this->tribes = $heat[0];
+                $this->villages = $heat[1];
                 break;
             case("diplomacy"):
                 $diplomacy = $this->getDiploTribes();
@@ -142,13 +148,14 @@ class worldMap extends mapHelpers
 
     function createMap()
     {
-        $this->villages = $this->getVillages();
+        $villages = $this->getVillages();
 
-        foreach ($this->villages as $village) {
+        foreach ($villages as $village) {
 
             $playerID = $village["spielerid"];
             $tribeID = $village["tribe"];
 
+            $villageID = $village["dorfid"];
             $villageCoords = explode("|", substr($village["dorfcoords"], 1, -1));
             $villageX = round(4 * $villageCoords[0]);
             $villageY = round(4 * $villageCoords[1]);
@@ -181,6 +188,12 @@ class worldMap extends mapHelpers
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$playerID]]);
                 imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->transparentColours[$this->players[$playerID]]);
             }
+            if (isset($this->villages[$villageID])) {
+                $customSize = true;
+                imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->colours["green"]);
+                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->villages[$villageID]]);
+                imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->transparentColours[$this->villages[$villageID]]);
+            }
 
             if ($customSize) {
                 if ($this->customSize["minX"] > $villageX) {
@@ -200,11 +213,12 @@ class worldMap extends mapHelpers
 
         imagecopy($this->image, $this->continentMap, 0, 0, 0, 0, 4000, 4000);
 
-        foreach ($this->villages as $village) {
+        foreach ($villages as $village) {
 
             $playerID = $village["spielerid"];
             $tribeID = $village["tribe"];
 
+            $villageID = $village["dorfid"];
             $villageCoords = explode("|", substr($village["dorfcoords"], 1, -1));
             $villageX = round(4 * $villageCoords[0]);
             $villageY = round(4 * $villageCoords[1]);
@@ -220,19 +234,22 @@ class worldMap extends mapHelpers
             if (isset($this->players[$playerID])) {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$playerID]]);
             }
+            if (isset($this->villages[$villageID])) {
+                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->villages[$villageID]]);
+            }
         }
         $tryNoOverlay = [];
         foreach ($this->legends as $legend) {
             $villageX = round(4 * $legend["x"]) - 50;
             $villageY = round(4 * $legend["y"]);
 
-            if (count($this->villages) < 10000) {
+            if (count($villages) < 10000) {
                 $textSize = [15, 14, 14, 13];
                 $overlaySize = [30, 50];
-            } elseif (count($this->villages) < 20000) {
+            } elseif (count($villages) < 20000) {
                 $textSize = [22, 17, 21, 16];
                 $overlaySize = [50, 70];
-            } elseif (count($this->villages) < 30000) {
+            } elseif (count($villages) < 30000) {
                 $textSize = [27, 17, 26, 16];
                 $overlaySize = [70, 90];
             } else {

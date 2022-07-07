@@ -142,8 +142,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Heatmap</h5>
                     <p class="card-text text-center">
-                        <a href="/ajax/graphic/diplomacyMap.php" target="_blank">
-                            <img src="/ajax/graphic/diplomacyMap.php" loading="lazy" class="img-fluid Map">
+                        <a href="/ajax/graphic/heatMap.php" target="_blank">
+                            <img src="/ajax/graphic/heatMap.php" loading="lazy" class="img-fluid Map">
                         </a>
                     </p>
                 </div>

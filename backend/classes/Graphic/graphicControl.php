@@ -6,11 +6,11 @@ class graphicControl
     static function checkTopTenMap($world): bool
     {
         //check if map exist or is older then 4hours
-        $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world.".png";
+        $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
         if (!file_exists($file)) {
             return false;
         }
-        if (filemtime($file) < time() - 3600*4) {
+        if (filemtime($file) < time() - 3600 * 4) {
             return false;
         }
         return true;
@@ -19,24 +19,37 @@ class graphicControl
     static function checkDiplomacyMap($world): bool
     {
         //check if map exist or is older then 4hours
-        $file = dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $world.".png";
+        $file = dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $world . ".png";
         if (!file_exists($file)) {
             return false;
         }
-        if (filemtime($file) < time() - 3600*4) {
+        if (filemtime($file) < time() - 3600 * 4) {
             return false;
         }
         return true;
     }
 
-    static function checkUserMap($world,$playerID): bool
+    static function checkUserMap($world, $playerID): bool
     {
         //check if map exist or is older then 12hours
-        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world. $playerID .".png";
+        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world . $playerID . ".png";
         if (!file_exists($file)) {
             return false;
         }
-        if (filemtime($file) < time() - 3600*12) {
+        if (filemtime($file) < time() - 3600 * 12) {
+            return false;
+        }
+        return true;
+    }
+
+    static function checkHeatMap($world): bool
+    {
+        //check if map exist or is older then 3hours
+        $file = dirname(__DIR__, 3) . "/graphic/heatmaps/" . $world . ".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600 * 3) {
             return false;
         }
         return true;
@@ -44,21 +57,28 @@ class graphicControl
 
     static function getTopTenMap($world): bool
     {
-        $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world.".png";
+        $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
 
     static function getDiplomacyMap($world): bool
     {
-        $file = dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $world.".png";
+        $file = dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $world . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
 
-    static function getUserMap($world,$playerID): bool
+    static function getUserMap($world, $playerID): bool
     {
-        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world. $playerID .".png";
+        $file = dirname(__DIR__, 3) . "/graphic/usermaps/" . $world . $playerID . ".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
+    static function getHeatMap($world): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/heatmaps/" . $world . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
