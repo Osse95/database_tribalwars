@@ -55,8 +55,10 @@ class worldMap extends mapHelpers
             "brown" => imagecolorallocatealpha($this->image, 7, 45, 8, 100),
             "grey" => imagecolorallocatealpha($this->image, 184, 184, 184, 119),
             "white" => imagecolorallocatealpha($this->image, 255, 255, 255, 90),
+            "darkyellow" => imagecolorallocatealpha($this->image, 175, 184, 22, 100),
             "yellow" => imagecolorallocatealpha($this->image, 225, 235, 52, 110),
             "blue" => imagecolorallocatealpha($this->image, 0, 0, 200, 110),
+            "darkblue" => imagecolorallocatealpha($this->image, 41, 39, 138, 110),
             "lightblue" => imagecolorallocatealpha($this->image, 125, 122, 255, 110),
             "red" => imagecolorallocatealpha($this->image, 252, 3, 3, 100),
             "darkred" => imagecolorallocatealpha($this->image, 161, 0, 0, 110),
@@ -72,8 +74,10 @@ class worldMap extends mapHelpers
             "brown" => imagecolorallocate($this->image, 7, 45, 8),
             "grey" => imagecolorallocate($this->image, 184, 184, 184),
             "white" => imagecolorallocate($this->image, 255, 255, 255),
+            "darkyellow" => imagecolorallocate($this->image, 175, 184, 22),
             "yellow" => imagecolorallocate($this->image, 225, 235, 52),
             "blue" => imagecolorallocate($this->image, 0, 0, 200),
+            "darkblue" => imagecolorallocate($this->image, 41, 39, 138),
             "lightblue" => imagecolorallocate($this->image, 125, 122, 255),
             "red" => imagecolorallocate($this->image, 252, 3, 3),
             "darkred" => imagecolorallocate($this->image, 161, 0, 0),
@@ -272,12 +276,15 @@ class worldMap extends mapHelpers
             }
         }
 
-        if (count($this->buildings) > 0) {
+        if (isset($this->buildings["watchtowers"])) {
             foreach ($this->buildings["watchtowers"] as $watchtower) {
-                imagefilledarc($this->image, $watchtower["x"], $watchtower["y"], $watchtower["range"] * 8, $watchtower["range"] * 8, 0, 360, $this->colours[$watchtower["colour"]], IMG_ARC_EDGED);
+                imagefilledarc($this->image, $watchtower["x"] * 4, $watchtower["y"] * 4, intval($watchtower["range"] * 8), intval($watchtower["range"] * 8), 0, 360, $this->transparentColours[$watchtower["colour"]], IMG_ARC_EDGED);
+                imagearc($this->image, $watchtower["x"] * 4, $watchtower["y"] * 4, intval($watchtower["range"] * 8), intval($watchtower["range"] * 8), 0, 360, $this->colours[$watchtower["colour"]]);
             }
+        }
+        if (isset($this->buildings["churches"])) {
             foreach ($this->buildings["churches"] as $church) {
-                imagearc($this->image, $church["x"], $church["y"], $church["range"] * 8, $church["range"] * 8, 0, 360, $this->transparentColours[$church["colour"]]);
+                imagearc($this->image, $church["x"] * 4, $church["y"] * 4, $church["range"] * 8, $church["range"] * 8, 0, 360, $this->colours[$church["colour"]]);
             }
         }
 
