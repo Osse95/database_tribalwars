@@ -87,6 +87,9 @@ if (!isset($_SESSION["name"])) {
         case("ownAttacks"):
             require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
             break;
+        case("retimes"):
+            require __DIR__ . "/backend/pages/attacks/retimes.php";
+            break;
         case("heatMap"):
             require __DIR__ . "/backend/pages/attacks/heatMap.php";
             break;

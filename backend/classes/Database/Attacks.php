@@ -3,12 +3,15 @@
 require_once dirname(__DIR__, 3) . "/backend/classes/DB.php";
 require_once dirname(__DIR__, 3) . "/backend/classes/Players.php";
 require_once dirname(__DIR__, 3) . "/backend/classes/Database/Reports.php";
+require_once dirname(__DIR__, 3) . "/backend/classes/Database/DatabaseGeneral.php";
+require_once dirname(__DIR__, 3) . "/backend/classes/Inno.php";
 
 class Attacks extends DB
 {
     private string $worldName;
     private Players $playersClass;
     private Reports $reportsClass;
+    private DatabaseGeneral $databaseGeneral;
     private array $userNames;
 
     function __construct($world = "Allgemein")
@@ -18,6 +21,7 @@ class Attacks extends DB
         preg_match("/(?<world>\w+\d+)/", $world, $match);
         $this->worldName = $match["world"];
         $this->playersClass = new Players($this->worldName);
+        $this->databaseGeneral = new DatabaseGeneral($world);
     }
 
     function getPlayerNames()
@@ -163,6 +167,26 @@ class Attacks extends DB
         foreach ($query as $attack) {
             $return[] = $attack["attackercoords"];
 
+        }
+        return $return;
+    }
+
+    function getRetimesAjax(): array
+    {
+        $return["data"]= [];
+        $databasePlayerIDs = $this->databaseGeneral->getDatabasePlayerIDs();
+        $query = $this->query("SELECT * FROM `villages_return` ORDER BY timeunix ASC");
+        foreach ($query as $retime){
+            if(!isset($databasePlayerIDs[$retime["playerid"]])){
+                $playerURL = "<a href='/playerInfo?ID={$retime["playerid"]}' target='_blank'> {$retime["playername"]} </a>";
+                $villageURL = "<a href='/villageInfo?ID={$retime["coords_id"]}' target='_blank'> {$retime["coords"]} </a>";
+                $retimeTime = date("d.m.y h:i:s",$retime["timeunix"]).":000";
+                $return["data"][] = [
+                    $playerURL,
+                    $villageURL,
+                    $retimeTime
+                ];
+            }
         }
         return $return;
     }
