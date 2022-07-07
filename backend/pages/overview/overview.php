@@ -128,7 +128,7 @@
         <div class="col-lg-5 col-md-10 mt-2">
             <div class="card bg-secondary">
                 <div class="card-body">
-                    <h5 class="card-title">Weltkarte</h5>
+                    <h5 class="card-title">Diplomatiekarte</h5>
                     <p class="card-text text-center">
                         <a href="/ajax/graphic/diplomacyMap.php" target="_blank">
                             <img src="/ajax/graphic/diplomacyMap.php" loading="lazy" class="img-fluid Map">
@@ -140,7 +140,7 @@
         <div class="col-lg-5 col-md-10 mt-2">
             <div class="card bg-secondary">
                 <div class="card-body">
-                    <h5 class="card-title">Weltkarte</h5>
+                    <h5 class="card-title">Heatmap</h5>
                     <p class="card-text text-center">
                         <a href="/ajax/graphic/diplomacyMap.php" target="_blank">
                             <img src="/ajax/graphic/diplomacyMap.php" loading="lazy" class="img-fluid Map">
