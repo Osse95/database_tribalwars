@@ -32,7 +32,7 @@ class Inno
     static function getServerUrl($world): bool|string
     {
         preg_match("/(?<world>\w+\d+)/", $world, $match);
-        $world = $match["world"]??"";
+        $world = $match["world"] ?? "";
         if (str_contains($world, "de")) {
             return "https://$world.die-staemme.de/";
         } elseif (str_contains($world, "ch")) {
@@ -40,5 +40,40 @@ class Inno
         } else {
             return false;
         }
+    }
+
+    static function getWatchtowerRange($level): float|int
+    {
+        return match (intval($level)) {
+            2 => 1.3,
+            3 => 1.5,
+            4 => 1.7,
+            5 => 2,
+            6 => 2.3,
+            7 => 2.6,
+            8 => 3,
+            9 => 3.4,
+            10 => 3.9,
+            11 => 4.4,
+            12 => 5.1,
+            13 => 5.8,
+            14 => 6.7,
+            15 => 7.6,
+            16 => 8.7,
+            17 => 10,
+            18 => 11.5,
+            19 => 13.1,
+            20 => 15,
+            default => 1.1,
+        };
+    }
+
+    static function getChurchRange($level): int
+    {
+        return match (intval($level)) {
+            2 => 6,
+            3 => 8,
+            default => 4,
+        };
     }
 }
