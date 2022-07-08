@@ -102,6 +102,9 @@ if (!isset($_SESSION["name"])) {
         case("topTen"):
             require __DIR__ . "/backend/pages/graphics/topTen.html";
             break;
+        case("playerInfo"):
+            require __DIR__ . "/backend/pages/search/playerInfo.html";
+            break;
         default:
             require __DIR__ . "/backend/pages/overview/overview.html";
     }
