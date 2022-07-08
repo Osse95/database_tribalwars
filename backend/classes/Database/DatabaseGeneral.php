@@ -27,4 +27,20 @@ class DatabaseGeneral extends DB
         }
         return $return;
     }
+
+    function checkDatabasePlayerPresent($playerID = 0): bool
+    {
+        $return = [];
+        $this->connectTo("Allgemein");
+        $stmt = $this->conn->prepare("SELECT * FROM `userrollen` where world = '{$this->worldName}' and level > 0 and Version = '{$this->worldVersion}' and playerid = ?");
+        $stmt->execute([$playerID]);
+        foreach ($stmt->get_result() as $row) {
+            $true = 1;
+        }
+        if (isset($true)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
