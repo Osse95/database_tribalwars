@@ -27,6 +27,10 @@ class Tribe extends DB
         $stmt->close();
     }
 
+    function getTribeID(){
+        return $this->tribeArray["ID"];
+    }
+
     function getPoints($days): bool|array
     {
         return array_reverse($this->query("SELECT allepunkte as punkte,date FROM `tribeshistory` where id = '{$this->tribeArray["ID"]}' ORDER by date desc LIMIT $days;"));
