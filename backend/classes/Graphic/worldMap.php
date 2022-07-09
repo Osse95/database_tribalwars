@@ -120,6 +120,10 @@ class worldMap extends mapHelpers
             case("topTenMap"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $this->worldName . ".png");
                 break;
+            case("playerMap"):
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/playerMaps/" . $this->worldName . $this->playerID . ".png");
+                break;
+
         }
     }
 
@@ -150,6 +154,11 @@ class worldMap extends mapHelpers
                 $topTen = $this->topTenTribes();
                 $this->tribes = $topTen[0];
                 $this->legends = $topTen[1];
+                break;
+            case("playerMap"):
+                $playerMap = $this->playerMap();
+                $this->tribes = $playerMap[0];
+                $this->players = $playerMap[1];
                 break;
         }
     }
