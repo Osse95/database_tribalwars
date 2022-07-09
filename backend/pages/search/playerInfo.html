@@ -4,18 +4,18 @@
 
 
 <div class="container p-4 playerAvailable">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-6 mt-4 col-xs-12">
             <div class="card bg-secondary" ID="testServer">
                 <div class="card-body d-flex justify-content-center">
-                    <div id="Icon" class="card-title">
-                        <img src="/assets/images/logo/crone.png">
-                        <div class="centered IconYes">
+                    <div class="crone">
+                        <img id="UserIcon" src="/assets/images/logo/crone.png">
+                        <div class="centered IconYes"><a style="color:black;" href='/playerInfo?ID=' target='_blank'>Placeholder</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-center table-responsive">
-                    <table>
+                    <table id="normalPlayerData">
                         <tr id="NoIcon">
                             <th> Name</th>
                             <td></td>
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mt-4 col-xs-12">
+        <div class="col-md-6 mt-4 col-xs-12 database">
             <div class="card bg-secondary">
                 <div class="card-body d-flex justify-content-center">
                     <h5 class="card-title">
@@ -77,7 +77,7 @@
                     </h5>
                 </div>
                 <div class="card-footer d-flex justify-content-center table-responsive">
-                    <table>
+                    <table id="databasePlayerData">
                         <tr>
                             <th> Berichte</th>
                             <td></td>
@@ -142,9 +142,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 database lastSendTimes">
         </div>
-        <div class="col-10 mt-3">
+        <div class="col-10 mt-3 database lastSendTimes">
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
@@ -156,13 +156,13 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                          data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body text-center">
+                        <div id="lastSendTimes" class="accordion-body text-center">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 database lastSendTimes">
         </div>
     </div>
 </div>
@@ -172,7 +172,7 @@
         <div class="col-1">
         </div>
         <div class="col-md-10 col-xs-12 d-flex justify-content-center table-responsive">
-            <table>
+            <table id="bashis">
                 <thead style="border-bottom: 1px solid;">
                 <tr>
                     <th> Art</th>
@@ -184,7 +184,14 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Besiegte Gegner</td>
+                    <td> Rang </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <tr>
+                <tr>
+                    <td> Besiegte Gegner </td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -192,54 +199,6 @@
                 <tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-1">
-        </div>
-        <div class="col-1">
-        </div>
-        <div class="col-md-10 col-xs-12 mt-5 mb-5">
-            <div class="accordion accordion-flush" id="accordionFlushExample2">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                aria-controls="flush-collapseTwo">
-                            Verlauf
-                        </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                         data-bs-parent="#accordionFlushExample2">
-                        <div class="accordion-body table-responsive">
-                            <table class="table table-dark  table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Datum</th>
-                                    <th>Rang</th>
-                                    <th>Punkte</th>
-                                    <th>Dorfanzahl</th>
-                                    <th>Alle</th>
-                                    <th>Angreifer</th>
-                                    <th>Verteidiger</th>
-                                    <th>Unterstützer</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="col-1">
         </div>
@@ -305,7 +264,7 @@
         <div class="col-1">
         </div>
         <div class="col-md-10 col-xs-12 mt-5 d-flex justify-content-center">
-            <img src="/ajax/graphic/playerInfo.php" class="img-fluid">
+            <img id="userMap" src="/ajax/graphic/playerInfo.php" loading="lazy" class="img-fluid">
         </div>
         <div class="col-1">
         </div>
@@ -314,6 +273,7 @@
 <div class="placeholder">
     <br/>
 </div>
+<script type="text/javascript" src="/assets/js/mathHelpers.js"></script>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -369,18 +329,97 @@
                 createDiagram("villageDia", result["villagesDates"], "Dörfer", result["villages"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
             }
         });
-
         $.ajax({
-            url: "/ajax/inno/guestPage.php",
+            url: "/ajax/player/getNormalPlayerData.php",
             data: post,
             type: 'post',
             success: function (data) {
-                if ($("img", $(".vis", $(data)).eq(3)).length > 0) {
-                    let src = $("img", $(".vis", $(data)).eq(3)).attr("src");
-                    $("#Icon").find("img").attr("src", src);
-                }
+                let result = JSON.parse(data);
+                $('table#normalPlayerData tr :eq(1)').text(result["name"])
+                $('table#normalPlayerData tr :eq(3)').text(result["rank"])
+                $('table#normalPlayerData tr :eq(5)').text(result["tribeTag"])
+                $('table#normalPlayerData tr :eq(7)').text(formatNumber(result["points"]))
+                $('table#normalPlayerData tr :eq(9)').text(formatNumber(result["villages"]))
+                $('table#normalPlayerData tr :eq(11)').text(formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"]))
+                $('table#normalPlayerData tr :eq(13)').text(result["tribeChanges"])
+                $('table#normalPlayerData tr :eq(15)').text(formatNumber(result["conquersInternal"]))
+                $('table#normalPlayerData tr :eq(17)').text(formatNumber(result["conquersBarbarian"]))
+                $('table#normalPlayerData tr :eq(19)').text(result["maxVillages"] + " (" + result["maxVillagesDate"] + ")")
+                $('table#normalPlayerData tr :eq(21)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
+                $('table#normalPlayerData tr :eq(23)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
+                $("table#bashis tr :eq(6)").text(result["allRank"])
+                $("table#bashis tr :eq(7)").text(result["attRank"])
+                $("table#bashis tr :eq(8)").text(result["defRank"])
+                $("table#bashis tr :eq(9)").text(result["supRank"])
+                $("table#bashis tr :eq(11)").text(formatNumber(result["allBashis"]))
+                $("table#bashis tr :eq(12)").text(formatNumber(result["attBashis"]))
+                $("table#bashis tr :eq(13)").text(formatNumber(result["defBashis"]))
+                $("table#bashis tr :eq(14)").text(formatNumber(result["supBashis"]))
+                loadPicture(result["name"])
+                let UserMap = "/ajax/graphic/playerInfo.php?id=" + result["ID"];
+                $("#userMap").attr("src", UserMap);
+                loadDatabaseData();
             }
         });
+
+        function loadPicture(name) {
+            $.ajax({
+                url: "/ajax/inno/guestPage.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    if ($("img", $(".vis", $(data)).eq(3)).length > 0) {
+                        let src = $("img", $(".vis", $(data)).eq(3)).attr("src");
+                        $("#UserIcon").attr("src", src);
+                        $(".centered.IconYes").hide();
+                    } else {
+                        $(".centered.IconYes a").text(name)
+                        $(".centered.IconYes a").attr("href", "/playerInfo?ID=" + name)
+                        $("#NoIcon").hide();
+                    }
+                }
+            });
+        }
+
+        function loadDatabaseData() {
+            $.ajax({
+                url: "/ajax/player/getPlayerDatabaseData.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if(!result){
+                        $(".database").hide()
+                    }else{
+                        $('table#databasePlayerData tr :eq(1)').text(formatNumber(result["PlayerData"]["quantityReports"]))
+                        $('table#databasePlayerData tr :eq(3)').text(formatNumber(result["PlayerData"]["quantitySupReports"]))
+                        $('table#databasePlayerData tr :eq(5)').text(formatNumber(result["PlayerData"]["offensiveVillages"]))
+                        $('table#databasePlayerData tr :eq(7)').text(formatNumber(result["possibleOffensiveVillages"]))
+                        $('table#databasePlayerData tr :eq(9)').text(formatNumber(result["PlayerData"]["defensiveVillages"]))
+                        $('table#databasePlayerData tr :eq(11)').text(result["PlayerData"]["watchtowers"])
+                        $('table#databasePlayerData tr :eq(13)').text(result["PlayerData"]["churches"])
+                        $('table#databasePlayerData tr :eq(15)').text(result["PlayerData"]["averageOff"])
+                        $('table#databasePlayerData tr :eq(17)').text(result["PlayerData"]["averageFake"])
+                        $('table#databasePlayerData tr :eq(19)').text(result["PlayerData"]["averageDef"])
+                        $('table#databasePlayerData tr :eq(21)').text(result["PlayerData"]["averageTab"])
+                        $('table#databasePlayerData tr :eq(23)').text(formatNumber(result["attackSizes"]["large"]+result["attackSizes"]["middle"]+result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
+                        $('table#databasePlayerData tr :eq(25)').text(formatNumber(result["attackSizes"]["large"]))
+                        $('table#databasePlayerData tr :eq(27)').text(formatNumber(result["attackSizes"]["middle"]))
+                        $('table#databasePlayerData tr :eq(29)').text(formatNumber(result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
+                        $(".card").eq(1).css("height",$(".card").eq(0).height())
+                        if(result["lastSendTimes"].length){
+                            result["lastSendTimes"].forEach(element => {
+                                let row = `${element[0]} Uhr ${element[1]} <br>`;
+                                $("#lastSendTimes").append(row);
+                            })
+                        }else{
+                            $(".lastSendTimes").hide();
+                        }
+                    }
+                }
+            });
+        }
+
     }
 </script>
 
