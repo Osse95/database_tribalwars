@@ -14,19 +14,45 @@ class Player extends DB
         foreach ($stmt->get_result() as $row) {
             $this->playerArray = array(
                 "ID" => $row["userid"],
-                "Name" => $row["username"],
-                "TribeID" => $row["Tribeid"],
-                "TribeTag" => $row["Tribetag"],
-                "Villages" => $row["Dorfanzahl"],
-                "Points" => $row["Punkte"],
-                "Rang" => $row["Rang"]
+                "name" => $row["username"],
+                "tribeID" => $row["Tribeid"],
+                "tribeTag" => $row["Tribetag"],
+                "villages" => $row["Dorfanzahl"],
+                "points" => $row["Punkte"],
+                "rank" => $row["Rang"],
+                "conquersWin" => $row["erobert"],
+                "conquersLoss" => $row["verloren"],
+                "conquersSelf" => $row["selbstadelung"],
+                "conquersInternal" => $row["Intern_Adelungen"],
+                "conquersBarbarian" => $row["Baba_Adelungen"],
+                "maxVillages" => $row["MaxDoerfer"],
+                "maxVillagesDate" => $row["DatumDoerfer"],
+                "maxPoints" => $row["MaxPunkte"],
+                "maxPointsDate" => $row["DatumPunkte"],
+                "maxRank" => $row["BestRang"],
+                "maxRankDate" => $row["DatumRang"],
+                "tribeChanges" => $row["Stammeswechsel"],
+                "allBashis" => $row["all_kills"],
+                "allRank" => $row["all_rang"],
+                "attBashis" => $row["att_kills"],
+                "attRank" => $row["att_rang"],
+                "defBashis" => $row["deff_kills"],
+                "defRank" => $row["deff_rang"],
+                "supBashis" => $row["sup_kills"],
+                "supRank" => $row["sup_rang"],
             );
             $this->exists = true;
         }
         $stmt->close();
     }
 
-    function getPlayerID(){
+    function loadPlayerData()
+    {
+
+    }
+
+    function getPlayerID()
+    {
         return $this->playerArray["ID"];
     }
 
