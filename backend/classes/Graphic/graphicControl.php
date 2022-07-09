@@ -68,6 +68,19 @@ class graphicControl
         return true;
     }
 
+    static function checkPlayerMap($world, $playerID): bool
+    {
+        //check if map exist or is older then 6hours
+        $file = dirname(__DIR__, 3) . "/graphic/playerMaps/" . $world . $playerID . ".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600 * 6) {
+            return false;
+        }
+        return true;
+    }
+
     static function getTopTenMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
@@ -102,4 +115,12 @@ class graphicControl
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }
+    
+    static function getPlayerMap($world, $playerID): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/playerMaps/" . $world . $playerID . ".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
 }
