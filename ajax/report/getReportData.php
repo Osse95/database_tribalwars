@@ -3,9 +3,6 @@ session_start();
 
 if (!isset($_SESSION["name"]) or !isset($_POST)) return;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-
 require dirname(__DIR__, 2) . "/backend/classes/World_User.php";
 require dirname(__DIR__, 2) . "/backend/classes/World.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
