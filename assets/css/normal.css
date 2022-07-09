@@ -1,4 +1,4 @@
-/* Start general CSS informations */
+/* Start general CSS information's */
 .nav-link,
 .dropdown-item,
 .navbar-brand,
@@ -104,7 +104,7 @@ a {
 	background-color: rgb(41, 49, 51);
 }
 
-.centered a:link{
+.centered a{
     color: black !important;
 }
 
