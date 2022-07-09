@@ -52,7 +52,7 @@ a:hover + .preview,
     left: 55%;
 }
 
-previewBox {
+.previewBox {
     width: 250%;
     height: 660px;
 }
@@ -146,6 +146,7 @@ previewBox {
     top: 84%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: black;
 }
 
 .popupDorfInfo {
