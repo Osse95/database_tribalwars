@@ -101,6 +101,9 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
     </table>
 </div>
 
+<script type="text/javascript" src="/assets/js/loadParams.js"></script>
+<script type="text/javascript" src="/assets/js/fillCoords.js"></script>
+
 <script>
     $.getJSON("/ajax/attacks/getNames.php", function (result) {
         result.forEach(element => {
@@ -115,21 +118,24 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             "info": true,
             processing: true,
             serverSide: true,
-            "createdRow": function( row, data, dataIndex){
-                if( data[8] ==  `Fake`){
+            "createdRow": function (row, data, dataIndex) {
+                if (data[8] == `Fake`) {
                     $(row).addClass('fake');
-                }else if( data[8] ==  `Mögliche Off` || data[8] ==  `mögliche Off`){
+                } else if (data[8] == `Mögliche Off` || data[8] == `mögliche Off`) {
                     $(row).addClass('moff');
-                }else if( data[8] ==  `Off`){
+                } else if (data[8] == `Off`) {
                     $(row).addClass('off');
-                }else if( data[8] ==  `AG`){
+                } else if (data[8] == `AG`) {
                     $(row).addClass('snob');
-                }else if( data[8] ==  `mittlerer Angriff`){
+                } else if (data[8] == `mittlerer Angriff`) {
                     $(row).addClass('middle');
                 }
             },
             stateSave: true,
             order: [[9, 'asc']],
+            "initComplete": function(settings, json) {
+                loadParams();
+            },
             ajax: {
                 url: '/ajax/attacks/getAllAttackTable.php',
                 type: 'POST',
@@ -186,5 +192,6 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
         <?php
         }
         ?>
+
     });
 </script>

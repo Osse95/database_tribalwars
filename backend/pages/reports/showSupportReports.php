@@ -117,7 +117,8 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
         </tbody>
     </table>
 </div>
-
+<script type="text/javascript" src="/assets/js/loadParams.js"></script>
+<script type="text/javascript" src="/assets/js/fillCoords.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -132,6 +133,9 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
                 "orderable": false
             }],
             order: [[3, 'desc']],
+            "initComplete": function(settings, json) {
+                loadParams();
+            },
             ajax: {
                 url: '/ajax/reports/getSupportTable.php',
                 type: 'POST',
@@ -162,20 +166,6 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
         result.forEach(element => {
             $("#tribeNames").append(`<option>${element}</option>`)
         })
-    });
-
-    $("#coordX").on('input', function () {
-        let Koords = $("#coordX").val();
-        let match = Koords.match(/(\d{3})\|(\d{3})/);
-        if (match !== null) {
-            $("#coordX").val(match[1]);
-            $("#coordY").val(match[2]);
-        } else if ($("#coordX").val().length == 3) {
-            $("#coordY").focus();
-            setTimeout(function () {
-                $("#coordY").focus()
-            }, 5);
-        }
     });
 
     <?php

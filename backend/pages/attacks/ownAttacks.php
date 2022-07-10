@@ -89,6 +89,8 @@ $World = new World($_SESSION["world"]);
     </table>
 </div>
 
+<script type="text/javascript" src="/assets/js/loadParams.js"></script>
+<script type="text/javascript" src="/assets/js/fillCoords.js"></script>
 <script>
     $.getJSON("/ajax/attacks/getNames.php", function (result) {
         result.forEach(element => {
@@ -122,6 +124,9 @@ $World = new World($_SESSION["world"]);
                 }
             },
             stateSave: true,
+            "initComplete": function(settings, json) {
+                loadParams();
+            },
             ajax: {
                 url: '/ajax/attacks/getOwnAttackTable.php',
                 type: 'POST',
