@@ -96,7 +96,7 @@ class Reports extends DB
         foreach ($query as $attacks) {
             if (isset($this->userNames[$attacks["defender_id"]])) {
                 $return["large"][] = array("quantity" => $attacks["quantity"],
-                    "id" => $attacks["attacker_id"],
+                    "id" => $attacks["defender_id"],
                     "name" => $this->userNames[$attacks["defender_id"]]["playerName"]);
             }
         }
@@ -112,7 +112,7 @@ class Reports extends DB
         foreach ($query as $attacks) {
             if (isset($this->userNames[$attacks["defender_id"]])) {
                 $return["small"][] = array("quantity" => $attacks["quantity"],
-                    "id" => $attacks["attacker_id"],
+                    "id" => $attacks["defender_id"],
                     "name" => $this->userNames[$attacks["defender_id"]]["playerName"]);
             }
         }
