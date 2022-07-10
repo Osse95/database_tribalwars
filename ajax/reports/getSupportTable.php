@@ -49,7 +49,7 @@ $coord = "($coordX|$coordY)";
 if (strlen($coord) == 9) {
     $bindParams[] = $coord;
     $bindParams[] = $coord;
-    $Query .= " AND (attacker_coords = ? OR defender_coords = ?)";
+    $Query .= " AND (supporter_koords = ? OR defender_koords = ?)";
 }
 
 $supporterName = $_POST["supporterName"] ?? "";
