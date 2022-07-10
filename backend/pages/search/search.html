@@ -1,0 +1,105 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-12 text-center" id="msg"></div>
+        <div class="col-md-4 col-xs-6">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Accountname</span>
+                <input name="playerName" list="playerNames"
+                       placeholder="Account" class="form-control">
+                <datalist id="playerNames">
+                </datalist>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Stamm</span>
+                <input name="tribeName" list="tribeNames"
+                       placeholder="Stamm" class=" form-control">
+                <datalist id="tribeNames">
+                </datalist>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Koords</span>
+                <input type="text"
+                       id="coordX" name="coordX" placeholder="500" class="form-control">
+                <input type="text"
+                       id="coordY" maxlength="3" name="coordY" placeholder="500" class="form-control">
+            </div>
+        </div>
+        <div class="col-4 ">
+        </div>
+        <div class="col-md-4 col-xs-12 d-flex justify-content-center">
+            <button id="search" class="mt-2 btn btn-primary">Suchen</button>
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-md-4 col-xs-12 text-center mt-5">
+
+            Sonstiges: <br>
+            <a href="/conquers"> Alle Adelungen </a> <br>
+            <a href="/worldstats"> Weltstatistik </a> <br>
+            <a href="/villageFilter"> Dorffilter </a> <br>
+            <a href="/compare"> Vergleich </a> <br>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/js/fillCoords.js"></script>
+<script>
+
+    $("#search").on("click", function () {
+        if ($("input[name=playerName]").val() !== "") {
+            let playerID = $("input[name=playerName]").val();
+            let post = {
+                id: playerID
+            }
+            $.ajax({
+                url: "/ajax/general/playerAvailable.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (result) {
+                        window.open(`/playerInfo?ID=${playerID}`,"_self")
+                    } else {
+                        $("#msg").text("Spieler nicht gefunden.")
+                    }
+                }
+            });
+        } else if ($("input[name=tribeName]").val() !== "") {
+            let tribeID = $("input[name=tribeName]").val();
+            let post = {
+                id: tribeID
+            }
+            $.ajax({
+                url: "/ajax/general/tribeAvailable.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (result) {
+                        window.open(`/tribeInfo?ID=${tribeID}`,"_self")
+                    } else {
+                        $("#msg").text("Stamm nicht gefunden.")
+                    }
+                }
+            });
+        }
+    })
+
+    $.getJSON("/ajax/general/getNames.php", function (result) {
+        result["userNames"].forEach(element => {
+            $("#playerNames").append(`<option>${element}</option>`)
+        })
+    })
+    $.getJSON("/ajax/general/getTribeNames.php", function (result) {
+        result["tribeNames"].forEach(element => {
+            $("#tribeNames").append(`<option>${element}</option>`)
+        })
+    });
+</script>
