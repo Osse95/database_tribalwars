@@ -26,7 +26,7 @@
                         <thead>
                         <tr>
                             <th> Rang</th>
-                            <th> Spieler</th>
+                            <th> Stamm</th>
                             <th> Member</th>
                             <th> Punkte</th>
                         </tr>
@@ -402,7 +402,7 @@
         result["tribeRanking"].forEach(element => {
             let row = `<tr>
                            <td> ${element["rank"]} </td>
-                           <td> <a href="/tribeInfo?ID=${element["tribeName"]}" target="_blank">${element["tribeName"]}</a> </td>
+                           <td> <a class='previewTribeinfo' href="/tribeInfo?ID=${element["tribeName"]}" target="_blank">${element["tribeName"]}</a> </td>
                            <td> ${element["tribeMembers"]} </td>
                            <td> ${formatNumber(element["points"])}</td>
                        </tr>`
@@ -435,12 +435,12 @@
                 });
                 result["dailyTribes"].forEach(element => {
                     let row = `<tr>
-                           <td> <a href="/tribeInfo?ID=${element["attID"]}" target="_blank">${element["attTag"]}</a> </td>
+                           <td> <a class='previewTribeinfo' href="/tribeInfo?ID=${element["attID"]}" target="_blank">${element["attTag"]}</a> </td>
                            <td> ${formatNumber(element["attDiff"])}</td>
                        </tr>`
                     $("#dailyTribeAtt > tbody").append(row)
                     row = `<tr>
-                       <td> <a href="/tribeInfo?ID=${element["defID"]}" target="_blank">${element["defTag"]}</a> </td>
+                       <td> <a class='previewTribeinfo' href="/tribeInfo?ID=${element["defID"]}" target="_blank">${element["defTag"]}</a> </td>
                        <td> ${formatNumber(element["defDiff"])}</td>
                     </tr>`
                     $("#dailyTribeDef > tbody").append(row)
@@ -449,7 +449,7 @@
                 playerBashis.forEach(e => {
                     result["bashisPlayers"][e].forEach(element => {
                         let row = `<tr>
-                       <td> <a href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                       <td> <a class='previewTribeinfo' href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
                        <td> ${formatNumber(element["kills"])}</td>
                     </tr>`
                         $(`#bashisPlayers${e} > tbody`).append(row)
@@ -459,7 +459,7 @@
                 tribeBashis.forEach(e => {
                     result["bashisTribes"][e].forEach(element => {
                         let row = `<tr>
-                       <td> <a href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                       <td> <a class='previewTribeinfo' href="/tribeInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
                        <td> ${formatNumber(element["kills"])}</td>
                     </tr>`
                         $(`#bashisTribes${e} > tbody`).append(row)
@@ -500,13 +500,14 @@
         if(!showDailys){
             showDailys = true;
             $.ajax({
-                url: "https://testdb.de/ajax/inno/HallOfFame.php",
+                url: "/ajax/inno/HallOfFame.php",
                 type: 'post',
                 success: function (data) {
                     $("#dailys").append($(".bordered-box-content",$(data)).eq(5).html());
                     $("#dailys a").each(function () {
                         let url = $(this).attr("href").replace("/guest.php?screen=info_player&id=", "/playerInfo?ID=");
                         $(this).attr("href", url)
+                        $(this).addClass("previewPlayerinfo")
                     })
                 }
             });
