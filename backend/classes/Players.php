@@ -19,6 +19,26 @@ class Players extends DB
                 "points" => $Player["punkte"],
                 "rank" => $Player["rang"]);
         }
+        $return[0] = array("playerName" => "Barbaren",
+            "playerID" => 0,
+            "villages" => 0,
+            "points" => 0,
+            "rank" => 0);
+        return $return;
+    }
+
+    function getAllHistoryPlayerNamesSortByID(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT DISTINCT spielername,spielerid FROM `spielerdatenhistory`");
+        foreach ($query as $Player) {
+            $return[$Player["spielerid"]] = array("playerName" => $Player["spielername"],
+                "playerID" => $Player["spielerid"],
+            );
+        }
+        $return[0] = array("playerName" => "Barbaren",
+            "playerID" => 0,
+        );
         return $return;
     }
 
