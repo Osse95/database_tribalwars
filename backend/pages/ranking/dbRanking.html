@@ -202,7 +202,7 @@
         result["attacks"].forEach(element => {
             let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
             $("#attacks > tbody").append(row);
@@ -229,7 +229,7 @@
                 result["large"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#largeAttacks > tbody").append(row);
@@ -239,7 +239,7 @@
                 result["medium"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#mediumAttacks > tbody").append(row);
@@ -249,7 +249,7 @@
                 result["small"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#smallAttacks > tbody").append(row);
@@ -268,7 +268,7 @@
                 result["large"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#largeDefense > tbody").append(row);
@@ -278,7 +278,7 @@
                 result["medium"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#mediumDefense > tbody").append(row);
@@ -288,7 +288,7 @@
                 result["small"].forEach(element => {
                     let row = `<tr>
                         <td>${count}</td>
-                        <td><a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
+                        <td><a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a></td>
                         <td>${formatNumber(element["quantity"])}</td>
                      </tr>`
                     $("#smallDefense > tbody").append(row);

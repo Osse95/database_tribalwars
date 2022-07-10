@@ -394,7 +394,7 @@
         result["playerRanking"].forEach(element => {
             let row = `<tr>
                            <td> ${element["rank"]} </td>
-                           <td> <a href="/playerInfo?ID=${element["playerName"]}" target="_blank">${element["playerName"]}</a> </td>
+                           <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["playerName"]}" target="_blank">${element["playerName"]}</a> </td>
                            <td> ${formatNumber(element["points"])}</td>
                        </tr>`
             $("#playerRanking > tbody").append(row)
@@ -417,18 +417,18 @@
             $.getJSON("/ajax/ranking/dailys_bashis.php", function (result) {
                 result["dailyPlayers"].forEach(element => {
                     let row = `<tr>
-                           <td> <a href="/playerInfo?ID=${element["attID"]}" target="_blank">${element["attName"]}</a> </td>
+                           <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["attID"]}" target="_blank">${element["attName"]}</a> </td>
                            <td> ${formatNumber(element["attDiff"])}</td>
                        </tr>`
                     $("#dailyPlayerAtt > tbody").append(row)
 
                     row = `<tr>
-                       <td> <a href="/playerInfo?ID=${element["defID"]}" target="_blank">${element["defName"]}</a> </td>
+                       <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["defID"]}" target="_blank">${element["defName"]}</a> </td>
                        <td> ${formatNumber(element["defDiff"])}</td>
                     </tr>`
                     $("#dailyPlayerDef > tbody").append(row)
                     row = `<tr>
-                       <td> <a href="/playerInfo?ID=${element["supID"]}" target="_blank">${element["supName"]}</a> </td>
+                       <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["supID"]}" target="_blank">${element["supName"]}</a> </td>
                        <td> ${formatNumber(element["supDiff"])}</td>
                     </tr>`
                     $("#dailyPlayerSup > tbody").append(row)
@@ -475,7 +475,7 @@
             $.getJSON("/ajax/ranking/conquers.php", function (result) {
                 result["internalConquers"].forEach(element => {
                     let row = `<tr>
-                        <td> <a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                        <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
                         <td> ${element["maxVillages"]}</td>
                         <td> ${element["internalConquers"]}</td>
                         <td> ${element["percent"]} %</td>
@@ -484,7 +484,7 @@
                 })
                 result["barbarianConquers"].forEach(element => {
                     let row = `<tr>
-                        <td> <a href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
+                        <td> <a class='previewPlayerinfo' href="/playerInfo?ID=${element["id"]}" target="_blank">${element["name"]}</a> </td>
                         <td> ${element["maxVillages"]}</td>
                         <td> ${element["barbarianConquers"]}</td>
                         <td> ${element["percent"]} %</td>
@@ -512,9 +512,4 @@
             });
         }
     })
-
-
-    function formatNumber(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
 </script>

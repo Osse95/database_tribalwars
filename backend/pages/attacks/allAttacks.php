@@ -169,7 +169,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             }
         })
 
-        $(document).on("change", ".deleteAttack", function () {
+        $(document).on("click", ".deleteAttack", function () {
             deleteAttacks([$(this).attr("id")])
         })
 
