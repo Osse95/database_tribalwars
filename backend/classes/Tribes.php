@@ -15,15 +15,16 @@ class Tribes extends DB
         $query = $this->query("SELECT * FROM `tribes`");
         foreach ($query as $Tribe) {
             $return[$Tribe["id"]] = array("tribeName" => $Tribe["name"],
-                "points"=>$Tribe["allepunkte"],
+                "points" => $Tribe["allepunkte"],
                 "tribeTag" => $Tribe["tag"],
                 "tribeID" => $Tribe["id"],
                 "tribeMembers" => $Tribe["members"],
-                "villages"=>$Tribe["villages"],
-                "rank"=>$Tribe["rang"]);
+                "villages" => $Tribe["villages"],
+                "rank" => $Tribe["rang"]);
         }
         return $return;
     }
+
     function getTribeNames(): array
     {
         $return = [];
@@ -40,12 +41,12 @@ class Tribes extends DB
         $query = $this->query("SELECT id,name,tag,members,villages,allepunkte,rang FROM `tribes` ORDER BY rang ASC LIMIT $limit");
         foreach ($query as $Tribe) {
             $return[] = array("tribeName" => $Tribe["name"],
-                "points"=>$Tribe["allepunkte"],
+                "points" => $Tribe["allepunkte"],
                 "tribeTag" => $Tribe["tag"],
                 "tribeID" => $Tribe["id"],
                 "tribeMembers" => $Tribe["members"],
-                "villages"=>$Tribe["villages"],
-                "rank"=>$Tribe["rang"]);
+                "villages" => $Tribe["villages"],
+                "rank" => $Tribe["rang"]);
         }
         return $return;
     }
@@ -55,16 +56,16 @@ class Tribes extends DB
         $return = [];
         $query = $this->query("SELECT * FROM `dailytribe` ORDER BY rang ASC LIMIT $limit");
         foreach ($query as $Tribe) {
-            $return[] = array("rank"=>$Tribe["rang"],
-                "allID"=>$Tribe["all_tribeid"],
-                "allTag"=>$Tribe["all_tribetag"],
-                "allDiff"=>$Tribe["all_diff"],
-                "defID"=>$Tribe["deff_tribeid"],
-                "defTag"=>$Tribe["deff_tribetag"],
-                "defDiff"=>$Tribe["deff_diff"],
-                "attID"=>$Tribe["att_tribeid"],
-                "attTag"=>$Tribe["att_tribetag"],
-                "attDiff"=>$Tribe["att_diff"]);
+            $return[] = array("rank" => $Tribe["rang"],
+                "allID" => $Tribe["all_tribeid"],
+                "allTag" => $Tribe["all_tribetag"],
+                "allDiff" => $Tribe["all_diff"],
+                "defID" => $Tribe["deff_tribeid"],
+                "defTag" => $Tribe["deff_tribetag"],
+                "defDiff" => $Tribe["deff_diff"],
+                "attID" => $Tribe["att_tribeid"],
+                "attTag" => $Tribe["att_tribetag"],
+                "attDiff" => $Tribe["att_diff"]);
         }
         return $return;
     }
