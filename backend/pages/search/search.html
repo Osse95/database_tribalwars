@@ -38,7 +38,6 @@
         <div class="col-4">
         </div>
         <div class="col-md-4 col-xs-12 text-center mt-5">
-
             Sonstiges: <br>
             <a href="/conquers"> Alle Adelungen </a> <br>
             <a href="/worldstats"> Weltstatistik </a> <br>
@@ -53,6 +52,12 @@
 <script>
 
     $("#search").on("click", function () {
+        checkSearch()
+    })
+    $("input").on("change",function (){
+        checkSearch()
+    })
+    function checkSearch(){
         if ($("input[name=playerName]").val() !== "") {
             let playerID = $("input[name=playerName]").val();
             let post = {
@@ -90,7 +95,7 @@
                 }
             });
         }
-    })
+    }
 
     $.getJSON("/ajax/general/getNames.php", function (result) {
         result["userNames"].forEach(element => {
