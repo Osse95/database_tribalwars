@@ -1,42 +1,25 @@
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-    "date-eu-pre": function ( date ) {
-        date = date.replace(" ", "");
+    "date-euro-pre": function ( a ) {
+        let x;
 
-        if ( ! date ) {
-            return 0;
-        }
-
-        var year;
-        var eu_date = date.split(/[\.\-\/]/);
-
-        /*year (optional)*/
-        if ( eu_date[2] ) {
-            year = eu_date[2];
+        if ( a.trim() !== '' ) {
+            let frDatea = a.trim().split(' ');
+            let frTimea = (undefined != frDatea[1]) ? frDatea[1].split(':') : [00,00,00];
+            let frDatea2 = frDatea[0].split('.');
+            x = (frDatea2[2] + frDatea2[1] + frDatea2[0] + frTimea[0] + frTimea[1] + ((undefined != frTimea[2]) ? frTimea[2] : 0)) * 1;
         }
         else {
-            year = 0;
+            x = Infinity;
         }
 
-        /*month*/
-        var month = eu_date[1];
-        if ( month.length == 1 ) {
-            month = 0+month;
-        }
-
-        /*day*/
-        var day = eu_date[0];
-        if ( day.length == 1 ) {
-            day = 0+day;
-        }
-
-        return (year + month + day) * 1;
+        return x;
     },
 
-    "date-eu-asc": function ( a, b ) {
-        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    "date-euro-asc": function ( a, b ) {
+        return a - b;
     },
 
-    "date-eu-desc": function ( a, b ) {
-        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    "date-euro-desc": function ( a, b ) {
+        return b - a;
     }
 } );
