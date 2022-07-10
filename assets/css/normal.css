@@ -85,23 +85,13 @@ a {
 .form-control::placeholder {
     color: rgba(255, 255, 255, 0.4) !important;
 }
-/* Start general CSS informations */
 
-
-.infobox{
-	background-color: rgba(41, 49, 51,0.8);
-
+.popover{
+    background-color: rgba(41, 49, 51,0.95) !important;
+    border-color: black !important;
 }
-.infobox2{
-	background-color: rgb(41, 49, 51);
-
-}
-.infobox3{
-	background-color: rgb(41, 49, 51);
-}
-
-.infobox4{
-	background-color: rgb(41, 49, 51);
+.popover-body{
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .centered a{
