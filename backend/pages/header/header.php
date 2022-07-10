@@ -137,10 +137,10 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/sourceMap">
                                 <font class="dropitem">Sourcemap</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/CreateattackPlan">
+                        <li><a class="dropdown-item bg-primary" href="/createAttackplan">
                                 <font class="dropitem">Neuer Angriffsplaner</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/getAttacks">
+                        <li><a class="dropdown-item bg-primary" href="/transferAttacks">
                                 <font class="dropitem">Angriffe übertragen</font>
                             </a></li>
                     </ul>
@@ -151,7 +151,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                            aria-expanded="false"><i class="fa-solid fa-pen-to-square tablet"></i> Offplanung </a>
                         <ul class="dropdown-menu bg-primary" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item bg-primary" href="/offplanung">
+                            <li><a class="dropdown-item bg-primary" href="/offensiveCalculator">
                                     <font class="dropitem">Offplanung</font>
                                 </a></li>
                             <li><a class="dropdown-item bg-primary" href="/attackPlan.php">
@@ -178,10 +178,10 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/conquers">
                                 <font class="dropitem">Alle Adelungen</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/statistik">
+                        <li><a class="dropdown-item bg-primary" href="/worldStats">
                                 <font class="dropitem">Weltstatistik</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/dorffilter">
+                        <li><a class="dropdown-item bg-primary" href="/villageFilter">
                                 <font class="dropitem">Dorffilter</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/compare">
@@ -241,18 +241,18 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/logout">
                                 <font class="dropitem">Logout</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/münzen">
+                        <li><a class="dropdown-item bg-primary" href="/coinsCalculator">
                                 <font class="dropitem">Münzenrechner</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/raubzug">
+                        <li><a class="dropdown-item bg-primary" href="/scavengerCalculator">
                                 <font class="dropitem">Raubzug</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/change">
+                        <li><a class="dropdown-item bg-primary" href="/changeAttackplan">
                                 <font class="dropitem">Angriffsplan in UV Plan</font>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item bg-primary" href="/truppenrechner">
+                            <a class="dropdown-item bg-primary" href="/troopCalculator">
                                 <font class="dropitem">Truppenrechner</font>
                             </a>
                         </li>
@@ -262,7 +262,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item bg-primary" href="/wtrechner">
+                            <a class="dropdown-item bg-primary" href="/watchtowerCalculator">
                                 <font class="dropitem">Wachturmrechner</font>
                             </a>
                         </li>
