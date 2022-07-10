@@ -42,7 +42,7 @@ $coord = "($coordX|$coordY)";
 if (strlen($coord) == 9) {
     $bindParams[] = $coord;
     $bindParams[] = $coord;
-    $Query .= " AND (attacker_coords = ? OR defender_coords = ?)";
+    $Query .= " AND (attackercoords = ? OR defendercoords = ?)";
 }
 
 $type = $_POST["type"]??"";

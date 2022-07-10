@@ -2,8 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["name"]) or !isset($_POST)) return;
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+
 require dirname(__DIR__, 2) . "/backend/classes/DB.php";
 require dirname(__DIR__, 2) . "/backend/classes/World_User.php";
 require dirname(__DIR__, 2) . "/backend/classes/World.php";
@@ -53,7 +52,7 @@ $coord = "($coordX|$coordY)";
 if (strlen($coord) == 9) {
     $bindParams[] = $coord;
     $bindParams[] = $coord;
-    $Query .= " AND (attacker_coords = ? OR defender_coords = ?)";
+    $Query .= " AND (attackercoords = ? OR defendercoords = ?)";
 }
 
 $type = $_POST["type"] ?? "";
