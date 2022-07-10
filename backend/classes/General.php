@@ -11,6 +11,7 @@ class General{
 
     static function imageHeader(){
         header("Content-type: image/png");
+        header('Content-Disposition: filename="map.png"');
     }
 
     static function destroySession(){
