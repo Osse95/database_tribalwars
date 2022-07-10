@@ -40,13 +40,13 @@
 <script>
     $.getJSON("/ajax/ranking/getEvaluation.php", function (result) {
         for (const [key, value] of Object.entries(result)) {
-            $("#"+key).text(value);
+            $("#"+key).text(formatNumber(value));
         }
-        let percentageFake = Number($("#correctFakes").text()/$("#readInReportsFakes").text()*100);
+        let percentageFake = Number($("#correctFakes").text().replaceAll(".","")/$("#readInReportsFakes").text().replaceAll(".","")*100);
         percentageFake = percentageFake.toFixed(2);
         $("#percentageFakes").text(percentageFake+" %");
 
-        let percentageOff = Number($("#correctOffs").text()/$("#readInReportsOffs").text()*100);
+        let percentageOff = Number($("#correctOffs").text().replaceAll(".","")/$("#readInReportsOffs").text().replaceAll(".","")*100);
         percentageOff = percentageOff.toFixed(2);
         $("#percentageOff").text(percentageOff+" %");
     })
