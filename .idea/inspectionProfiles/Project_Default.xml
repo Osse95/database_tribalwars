@@ -7,5 +7,6 @@
         <language minSize="1665" name="PHP" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="PhpAutovivificationOnFalseValuesInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
   </profile>
 </component>

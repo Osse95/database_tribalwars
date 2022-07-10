@@ -81,6 +81,19 @@ class graphicControl
         return true;
     }
 
+    static function checkTribeMap($world, $tribeID): bool
+    {
+        //check if map exist or is older then 6hours
+        $file = dirname(__DIR__, 3) . "/graphic/tribeMaps/" . $world . $tribeID . ".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600 * 6) {
+            return false;
+        }
+        return true;
+    }
+
     static function getTopTenMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
@@ -119,6 +132,13 @@ class graphicControl
     static function getPlayerMap($world, $playerID): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/playerMaps/" . $world . $playerID . ".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
+    static function getTribeMap($world, $tribeID): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/tribeMaps/" . $world . $tribeID . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }

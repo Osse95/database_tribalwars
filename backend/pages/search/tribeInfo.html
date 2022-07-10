@@ -1,0 +1,368 @@
+<div class="container p-4 tribeNotAvailable text-center">
+    <h2> Spieler nicht gefunden.</h2>
+</div>
+
+
+<div class="container p-4 tribeAvailable">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 mt-4 col-xs-12">
+            <div class="card bg-secondary" ID="testServer">
+                <div class="card-body d-flex justify-content-center">
+                    <div class="crone">
+                        <img id="tribeIconInfo" src="/assets/images/logo/crone.png">
+                        <div class="centered IconYes"><a style="color:black;" href='/tribeInfo?ID=' target='_blank'>Placeholder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center table-responsive">
+                    <table id="normalTribeData">
+                        <tr id="NoIcon">
+                            <th> Name</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Rang</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Punkte</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Dörfer</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Eroberungen</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Stammeswechsel</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Intern</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Babaadelungen</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Max Dörfer</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th> Max Punkte</th>
+                            <td>
+                        </tr>
+                        <tr>
+                            <th> Bester Rang</th>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container p-4 tribeAvailable">
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-md-10 col-xs-12 d-flex justify-content-center table-responsive">
+            <table id="bashis">
+                <thead style="border-bottom: 1px solid;">
+                <tr>
+                    <th> Art</th>
+                    <th> Alle</th>
+                    <th> Angreifer</th>
+                    <th> Verteidiger</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td> Rang </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <tr>
+                <tr>
+                    <td> Besiegte Gegner </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-3">
+        </div>
+        <div class="col-md-6 col-xs-12 mt-4 d-flex justify-content-center">
+            <div class="input-group input-group-sm mb-3 me-3">
+                <label class="input-group-text" for="statsGeneral">Einträge pro Seite</label>
+                <select id="statsGeneral" class="form-select">
+                    <option value="points">Punkte</option>
+                    <option value="rank">Rang</option>
+                    <option value="village">Dörfer</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <label class="input-group-text" for="statsBash">Einträge pro Seite</label>
+                <select id="statsBash" class="form-select">
+                    <option value="gesBash">Besiegte Gegner Insgesamt</option>
+                    <option value="offBash">Besiegte Gegner als Angreifer</option>
+                    <option value="defBash">Besiegte Gegner als Verteidiger</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3">
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-lg-5 mt-4 col-md-12">
+            <div id="points">
+                Punkte
+                <canvas id="pointDia"></canvas>
+            </div>
+            <div id="rank">
+                Rang
+                <canvas id="rankDia"></canvas>
+            </div>
+            <div id="village">
+                Dörfer
+                <canvas id="villageDia"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-5 mt-4 col-md-12">
+            <div id="gesBash">
+                Bashis Alle
+                <canvas id="allBashDia"></canvas>
+            </div>
+            <div id="offBash">
+                Bashis Angreifer
+                <canvas id="attBashDia"></canvas>
+            </div>
+            <div id="defBash">
+                Bashis Verteidiger
+                <canvas id="defBashDia"></canvas>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-md-10 col-xs-12 mt-5 d-flex justify-content-center">
+            <img id="tribeMap" src="/ajax/graphic/tribeInfo.php" loading="lazy" class="img-fluid">
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br/>
+</div>
+<script type="text/javascript" src="/assets/js/mathHelpers.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const tribeID = urlParams.get('ID');
+    if (tribeID) {
+        $(".tribeNotAvailable").hide();
+    } else {
+        $(".tribeAvailable").hide();
+    }
+</script>
+
+<script>
+
+    //is Tribe available?
+    if (tribeID) {
+        let post = {
+            id: tribeID
+        }
+        $.ajax({
+            url: "/ajax/general/tribeAvailable.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                let result = JSON.parse(data);
+                if (!result) {
+                    $(".tribeAvailable").hide();
+                    $(".tribeNotAvailable").show();
+                } else {
+                    loadBasicTribeData()
+                }
+            }
+        });
+    }
+
+    //Loading all Basic PlayerInfos
+    function loadBasicTribeData() {
+        let post = {
+            id: tribeID
+        }
+
+        $.ajax({
+            url: "/ajax/tribe/getDiagramData.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                let result = JSON.parse(data);
+                createDiagram("allBashDia", result["allBashisDates"], "Insgesamt Bashis", result["allBashis"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+                createDiagram("attBashDia", result["attBashisDates"], "Angreifer Bashis", result["attBashis"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+                createDiagram("defBashDia", result["defBashisDates"], "Verteidiger Bashis", result["defBashis"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+                createDiagram("pointDia", result["pointsDates"], "Punkte", result["points"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+                createDiagramReverse("rankDia", result["rankDates"], "Rang", result["rank"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+                createDiagram("villageDia", result["villagesDates"], "Dörfer", result["villages"], "rgba(0,0,0,1)", "rgba(0,0,0,0.2)");
+            }
+        });
+        $.ajax({
+            url: "/ajax/tribe/getNormalTribeData.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                let result = JSON.parse(data);
+                $('table#normalTribeData tr :eq(1)').text(result["name"])
+                $('table#normalTribeData tr :eq(3)').text(result["rank"])
+                $('table#normalTribeData tr :eq(5)').text(formatNumber(result["points"]))
+                $('table#normalTribeData tr :eq(7)').text(formatNumber(result["villages"]))
+                $('table#normalTribeData tr :eq(9)').text(formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"]))
+                $('table#normalTribeData tr :eq(11)').text(result["tribeChanges"])
+                $('table#normalTribeData tr :eq(13)').text(formatNumber(result["conquersInternal"]))
+                $('table#normalTribeData tr :eq(15)').text(formatNumber(result["conquersBarbarian"]))
+                $('table#normalTribeData tr :eq(17)').text(result["maxVillages"] + " (" + result["maxVillagesDate"] + ")")
+                $('table#normalTribeData tr :eq(19)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
+                $('table#normalTribeData tr :eq(21)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
+                $("table#bashis tr :eq(5)").text(result["allRank"])
+                $("table#bashis tr :eq(6)").text(result["attRank"])
+                $("table#bashis tr :eq(7)").text(result["defRank"])
+                $("table#bashis tr :eq(9)").text(formatNumber(result["allBashis"]))
+                $("table#bashis tr :eq(10)").text(formatNumber(result["attBashis"]))
+                $("table#bashis tr :eq(11)").text(formatNumber(result["defBashis"]))
+                loadPicture(result["name"])
+                let tribeMap = "/ajax/graphic/tribeInfo.php?id=" + result["ID"];
+                $("#tribeMap").attr("src", tribeMap);
+            }
+        });
+
+        function loadPicture(name) {
+            $.ajax({
+                url: "/ajax/inno/guestTribePage.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    if ($("img", $(".vis", $(data)).eq(3)).length > 0) {
+                        let src = $("img", $(".vis", $(data)).eq(3)).attr("src");
+                        $("#tribeIconInfo").attr("src", src);
+                        $(".centered.IconYes").hide();
+                    } else {
+                        $(".centered.IconYes a").text(name)
+                        $(".centered.IconYes a").attr("href", "/tribeInfo?ID=" + name)
+                        $("#NoIcon").hide();
+                    }
+                }
+            });
+        }
+
+    }
+</script>
+
+
+<script>
+    //Diagram stuff
+    $(document).ready(function () {
+        $("#points").css('display', 'visible');
+        $("#rank").css('display', 'none');
+        $("#village").css('display', 'none');
+        $("#gesBash").css('display', 'block');
+        $("#offBash").css('display', 'none');
+        $("#defBash").css('display', 'none');
+    });
+
+    $("#statsGeneral").change(function () {
+        let option1 = $("#statsGeneral").val();
+        if (option1 === 'points') {
+            $("#points").css('display', 'block');
+            $("#rank").css('display', 'none');
+            $("#village").css('display', 'none');
+        }
+        if (option1 === 'rank') {
+            $("#points").css('display', 'none');
+            $("#rank").css('display', 'block');
+            $("#village").css('display', 'none');
+        }
+        if (option1 === 'village') {
+            $("#points").css('display', 'none');
+            $("#rank").css('display', 'none');
+            $("#village").css('display', 'block');
+        }
+    });
+
+    $("#statsBash").change(function () {
+        let option1 = $("#statsBash").val();
+        if (option1 === 'gesBash') {
+            $("#gesBash").css('display', 'block');
+            $("#offBash").css('display', 'none');
+            $("#defBash").css('display', 'none');
+            $("#supBash").css('display', 'none');
+        }
+        if (option1 === 'offBash') {
+            $("#gesBash").css('display', 'none');
+            $("#offBash").css('display', 'block');
+            $("#defBash").css('display', 'none');
+            $("#supBash").css('display', 'none');
+        }
+        if (option1 === 'defBash') {
+            $("#gesBash").css('display', 'none');
+            $("#offBash").css('display', 'none');
+            $("#defBash").css('display', 'block');
+            $("#supBash").css('display', 'none');
+        }
+    });
+
+    function createDiagram(id, labels, label, data, color, bgColor) {
+        new Chart(document.getElementById(id).getContext('2d'), {
+            type: 'line',
+            responsive: true,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: label,
+                    fill: true,
+                    borderColor: color,
+                    data: data,
+                    backgroundColor: bgColor
+                }]
+            }
+        });
+    }
+
+    function createDiagramReverse(id, labels, label, data, color, bgColor) {
+        new Chart(document.getElementById(id).getContext('2d'), {
+            type: 'line',
+            responsive: true,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: label,
+                    fill: true,
+                    borderColor: color,
+                    data: data,
+                    backgroundColor: bgColor
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        reverse: true
+                    }
+                }
+            }
+        });
+    }
+</script>

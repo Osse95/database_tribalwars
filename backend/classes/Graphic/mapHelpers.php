@@ -76,6 +76,24 @@ class mapHelpers extends DB
         $playerReturn[$this->playerID] = "white";
         return [$diploReturn, $playerReturn];
     }
+    function tribeMap(): array
+    {
+        $diploReturn = [];
+        $tribeLegend = [];
+        $this->connectTo($this->worldVersion);
+        $query = $this->query("SELECT * FROM `tribes_map` where diplo != 2");
+        foreach ($query as $diploVillage) {
+            $diplo = $diploVillage["diplo"];
+            $colour = match ($diplo) {
+                "2" => "red",
+                "4" => "lightblue",
+                default => "blue",
+            };
+            $diploReturn[$diploVillage["tribeid"]] = $colour;
+        }
+        $diploReturn[$this->playerID] = "white";
+        return [$diploReturn];
+    }
 
     function topTenTribes(): array
     {

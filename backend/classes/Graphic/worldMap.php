@@ -31,13 +31,13 @@ class worldMap extends mapHelpers
     private mixed $continentMap;
 
     private string $worldName;
-    private int $playerID;
+    private int $ID;
 
-    function __construct($world, $playerID = 0)
+    function __construct($world, $ID = 0)
     {
-        parent::__construct($world, $playerID);
+        parent::__construct($world, $ID);
         $this->worldName = $world;
-        $this->playerID = intval($playerID);
+        $this->ID = intval($ID);
 
         $this->image = imagecreatetruecolor(4000, 4000);
         imagealphablending($this->image, true);
@@ -115,19 +115,22 @@ class worldMap extends mapHelpers
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/diplomacyMap/" . $this->worldName . ".png");
                 break;
             case("userMap"):
-                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/usermaps/" . $this->worldName . $this->playerID . ".png");
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/usermaps/" . $this->worldName . $this->ID . ".png");
                 break;
             case("topTenMap"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $this->worldName . ".png");
                 break;
             case("playerMap"):
-                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/playerMaps/" . $this->worldName . $this->playerID . ".png");
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/playerMaps/" . $this->worldName . $this->ID . ".png");
+                break;
+            case("tribeMap"):
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/tribeMaps/" . $this->worldName . $this->ID . ".png");
                 break;
 
         }
     }
 
-    function selectMapType($type, $playerID = "")
+    function selectMapType($type, $ID = "")
     {
         switch ($type) {
             case("heatMap"):
@@ -160,6 +163,10 @@ class worldMap extends mapHelpers
                 $this->tribes = $playerMap[0];
                 $this->players = $playerMap[1];
                 break;
+            case("tribeMap"):
+                $tribeMap = $this->tribeMap();
+                $this->tribes = $tribeMap[0];
+                break;
         }
     }
 
@@ -169,7 +176,7 @@ class worldMap extends mapHelpers
 
         foreach ($villages as $village) {
 
-            $playerID = $village["spielerid"];
+            $ID = $village["spielerid"];
             $tribeID = $village["tribe"];
 
             $villageID = $village["dorfid"];
@@ -187,7 +194,7 @@ class worldMap extends mapHelpers
                 $this->newSize["max"] = $max;
             }
 
-            if ($playerID >= 0) {
+            if ($ID >= 0) {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours["brown"]);
             } else {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours["grey"]);
@@ -199,11 +206,11 @@ class worldMap extends mapHelpers
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->tribes[$tribeID]]);
                 imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->transparentColours[$this->tribes[$tribeID]]);
             }
-            if (isset($this->players[$playerID])) {
+            if (isset($this->players[$ID])) {
                 $customSize = true;
                 imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->colours["green"]);
-                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$playerID]]);
-                imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->transparentColours[$this->players[$playerID]]);
+                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$ID]]);
+                imagefilledrectangle($this->image, $villageX - 6, $villageY - 6, $villageX + 6, $villageY + 6, $this->transparentColours[$this->players[$ID]]);
             }
             if (isset($this->villages[$villageID])) {
                 $customSize = true;
@@ -232,7 +239,7 @@ class worldMap extends mapHelpers
 
         foreach ($villages as $village) {
 
-            $playerID = $village["spielerid"];
+            $ID = $village["spielerid"];
             $tribeID = $village["tribe"];
 
             $villageID = $village["dorfid"];
@@ -240,7 +247,7 @@ class worldMap extends mapHelpers
             $villageX = round(4 * $villageCoords[0]);
             $villageY = round(4 * $villageCoords[1]);
 
-            if ($playerID >= 0) {
+            if ($ID >= 0) {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->transparentColours["brown"]);
             } else {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->transparentColours["grey"]);
@@ -248,8 +255,8 @@ class worldMap extends mapHelpers
             if (isset($this->tribes[$tribeID])) {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->tribes[$tribeID]]);
             }
-            if (isset($this->players[$playerID])) {
-                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$playerID]]);
+            if (isset($this->players[$ID])) {
+                imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->players[$ID]]);
             }
             if (isset($this->villages[$villageID])) {
                 imagefilledrectangle($this->image, $villageX - 1, $villageY - 1, $villageX + 1, $villageY + 1, $this->colours[$this->villages[$villageID]]);
