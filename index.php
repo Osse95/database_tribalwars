@@ -7,11 +7,11 @@ require_once __DIR__ . "/backend/classes/General.php";
 require_once __DIR__ . "/backend/classes/Players.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-if(!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])){
+if (!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])) {
     $World_User = new World_User();
     $Cookie = $World_User->loadCookie($_COOKIE["cookie"]);
 
-    if($Cookie){
+    if ($Cookie) {
         $_SESSION["name"] = $Cookie["name"];
         $_SESSION["world"] = $Cookie["world"];
     }
@@ -47,13 +47,13 @@ if (!isset($_SESSION["name"])) {
     $side = explode("?", $side);
     $side = $side[0];
 
-    if($side == "logout"){
-            General::destroySession();
-            General::redirectHeader();
+    if ($side == "logout") {
+        General::destroySession();
+        General::redirectHeader();
     }
-    if(!str_contains($_SERVER['REQUEST_URI'],"preview")){
+    if (!str_contains($_SERVER['REQUEST_URI'], "preview")) {
         require "./backend/pages/header/header.php";
-    }else{
+    } else {
         require "./backend/pages/header/headerPreview.php";
     }
     switch ($side) {
@@ -102,14 +102,17 @@ if (!isset($_SESSION["name"])) {
         case("search"):
             require __DIR__ . "/backend/pages/search/search.html";
             break;
-        case("topTen"):
-            require __DIR__ . "/backend/pages/graphics/topTen.html";
-            break;
         case("playerInfo"):
             require __DIR__ . "/backend/pages/search/playerInfo.html";
             break;
         case("tribeInfo"):
             require __DIR__ . "/backend/pages/search/tribeInfo.html";
+            break;
+        case("villageInfo"):
+            require __DIR__ . "/backend/pages/search/villageInfo.html";
+            break;
+        case("topTen"):
+            require __DIR__ . "/backend/pages/graphics/topTen.html";
             break;
         default:
             require __DIR__ . "/backend/pages/overview/overview.html";

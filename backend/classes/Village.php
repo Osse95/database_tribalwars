@@ -3,6 +3,7 @@
 require_once "DB.php";
 require_once "Player.php";
 require_once "Tribe.php";
+require_once "Players.php";
 
 class Village extends DB
 {
@@ -48,22 +49,70 @@ class Village extends DB
         return intval($conquer[0]["quantity"]);
     }
 
-    function getOwner(){
-        $Player = new Player($this->world,$this->villageArray["playerID"]);
-        if($Player->exists){
+    function getOwner()
+    {
+        $Player = new Player($this->world, $this->villageArray["playerID"]);
+        if ($Player->exists) {
             return $Player->playerArray["name"];
-        }else{
+        } else {
             return "Barbaren";
         }
     }
 
-    function getTribe(){
-        $Tribe = new Tribe($this->world,$this->villageArray["tribeID"]);
-        if($Tribe->exists){
+    function getTribe()
+    {
+        $Tribe = new Tribe($this->world, $this->villageArray["tribeID"]);
+        if ($Tribe->exists) {
             return $Tribe->tribeArray["name"];
-        }else{
+        } else {
             return "Stammeslos";
         }
+    }
+
+    function getConquers(): array
+    {
+        $return = [];
+        $Players = new Players($this->world);
+        $playerNames = $Players->getAllHistoryPlayerNamesSortByID();
+        $villageID = $this->villageArray["ID"];
+        $query = $this->query("SELECT timestamp,new_owner,old_owner,points FROM `conquer` WHERE villageid = '$villageID' AND new_owner != old_owner ORDER BY timestamp DESC");
+        foreach ($query as $conquer) {
+            $newOwner = $playerNames[$conquer["new_owner"]]["playerName"] ?? "gelöschter Spieler";
+            $oldOwner = $playerNames[$conquer["old_owner"]]["playerName"] ?? "gelöschter Spieler";
+            $points = $conquer["points"];
+            $date = date("H:i d.m.Y", $conquer["timestamp"]);
+            $return[] = array(
+                "newOwner" => $newOwner,
+                "oldOwner" => $oldOwner,
+                "points" => $points,
+                "date" => $date
+            );
+        }
+        return $return;
+    }
+
+    function getPointsHistoryAjax(): array
+    {
+        $return["data"] = [];
+        $Players = new Players($this->world);
+        $playerNames = $Players->getAllHistoryPlayerNamesSortByID();
+
+        $villageID = $this->villageArray["ID"];
+        $query = $this->query("SELECT dorfpunkte,time,spielerid FROM `dorfdatenhistory2` WHERE dorfid = '$villageID' ORDER BY time ASC");
+        $oldPoints = 0;
+        foreach ($query as $change) {
+            $date = date("d.m.Y H:i:s", $change["time"]);
+            $ownerName = $playerNames[$change["spielerid"]]["playerName"] ?? "gelöschter Spieler";
+            $ownerUrl = "/playerInfo?ID={$change["spielerid"]}";
+            $ownerUrl = "<a class='previewPlayerinfo' href='$ownerUrl' target='_blank'> $ownerName </a>";
+            $points = $change["dorfpunkte"];
+            $pointsChange = $points-$oldPoints;
+            if($pointsChange == 0) continue;
+            $oldPoints = $points;
+            $expansion = "<span class='showExpansion'>Ausbaumöglichkeiten";
+            $return["data"][] = [$date, $ownerUrl, $points, $pointsChange, $expansion];
+        }
+        return $return;
     }
 
 }

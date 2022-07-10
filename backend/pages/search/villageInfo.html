@@ -1,0 +1,218 @@
+<div class='container p-4 villageNotAvailable text-center'>
+    <h2> Dorf nicht gefunden </h2>
+</div>
+
+<div class='container p-4 villageAvailable'>
+    <div class="row">
+        <div class="col-6">
+            <table id="villageData">
+                <tr>
+                    <th>Dorfname</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Punkte</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Besitzer</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Stamm</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Koordinaten</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Eroberungen</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Letzte Eroberungen</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Berichte</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>UT Berichte</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Dorftyp</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class='container p-4'>
+    <div class="row">
+        <div class="col-8 table-responsive">
+            <table id="villageChanges" class="table table-dark  table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Zeit</th>
+                    <th>Besitzer</th>
+                    <th>Punkte</th>
+                    <th>Änderung</th>
+                    <th>Ausbaumöglichkeiten</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const villageID = urlParams.get('ID');
+    if (villageID) {
+        $(".villageNotAvailable").hide();
+    } else {
+        $(".villageAvailable").hide();
+    }
+</script>
+<script type="text/javascript" src="/assets/js/date-eu.js"></script>
+<script>
+
+    //is village available?
+    if (villageID) {
+        let post = {
+            id: villageID
+        }
+        $.ajax({
+            url: "/ajax/general/coordAvailable.php",
+            data: post,
+            type: 'post',
+            success: function (data) {
+                let result = JSON.parse(data);
+                if (!result) {
+                    $(".villageAvailable").hide();
+                    $(".villageNotAvailable").show();
+                } else {
+                    loadBasicVillageData();
+                }
+            }
+        });
+
+        function loadBasicVillageData() {
+            let post = {
+                id: villageID
+            }
+            $.ajax({
+                url: "/ajax/village/getNormalVillageData.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    $("th", $('table#villageData')).eq(2).text(result["villageInfo"]["name"]);
+                    $("th", $('table#villageData')).eq(5).text(formatNumber(result["villageInfo"]["points"]));
+
+                    let playerURL = `<a class='previewPlayerinfo' href="/playerInfo?ID=${result["villageOwner"]}" target="_blank">${result["villageOwner"]}</a>`;
+                    $("th", $('table#villageData')).eq(8).html(playerURL);
+
+                    let tribeURL = `<a class='previewTribeinfo' href="/tribeInfo?ID=${result["villageTribe"]}" target="_blank">${result["villageTribe"]}</a>`;
+                    $("th", $('table#villageData')).eq(11).html(tribeURL);
+
+                    $("th", $('table#villageData')).eq(14).html(result["villageInfo"]["coords"]);
+                    $("th", $('table#villageData')).eq(17).html("<span id='lastConquers'>" + result["conquerQuantity"] + "</span>");
+                    $("th", $('table#villageData')).eq(20).html(result["lastConquer"]);
+
+                }
+            });
+
+            $.ajax({
+                url: "/ajax/village/getDatabaseVillageData.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (typeof result === "object") {
+                        let reportURL = `<a href="/showReports?coordX=${result["coordX"]}&coordY=${result["coordY"]}" target="_blank">${formatNumber(result["quantityReports"]["reports"])}</a>`;
+                        $("th", $('table#villageData')).eq(23).html(reportURL);
+                        let supReportURL = `<a href="/showUTReports?coordX=${result["coordX"]}&coordY=${result["coordY"]}" target="_blank">${formatNumber(result["quantityReports"]["supReports"])}</a>`;
+                        $("th", $('table#villageData')).eq(26).html(supReportURL);
+                        $("th", $('table#villageData')).eq(29).html(result["type"]);
+                    } else {
+                        $("th", $('table#villageData')).eq(23).html("-");
+                        $("th", $('table#villageData')).eq(26).html("-");
+                        $("th", $('table#villageData')).eq(29).html("-");
+                    }
+                }
+            })
+
+            $(document).on("mouseover", "#lastConquers", function () {
+                let villageElement = this;
+                $.ajax({
+                    url: "/ajax/village/getConquers.php",
+                    data: {id: villageID},
+                    type: 'post',
+                    success: function (data) {
+                        let result = JSON.parse(data);
+                        console.log(result)
+                        $(villageElement).attr("data-toggle", "popover");
+                        $(villageElement).attr("data-placement", "bottom");
+                        let content = "";
+                        if (result.length) {
+                            result.forEach(element => {
+                                let row = "Alt: " + element["oldOwner"];
+                                row += " Neu: " + element["newOwner"];
+                                row += " Zeit: " + element["date"];
+                                row += " Punkte: " + element["points"] + "</br></br>"
+                                content += row;
+                            });
+                        } else {
+                            content = "Das Dorf wurde noch nie geadelt"
+                        }
+                        $(villageElement).popover({
+                            content: content,
+                            trigger: "hover",
+                            html: true
+                        });
+                        $(villageElement).popover("show")
+                        onlyOne = true;
+                    }
+                });
+            })
+        }
+
+        $(document).ready(function () {
+            let DataTable = $('#villageChanges').DataTable({
+                "paging": true,
+                "searching": true,
+                columnDefs: [{ 'targets': 0, type: 'date-euro' }],
+                order: [0, 'desc'],
+                stateSave: true,
+                ajax: {
+                    url: '/ajax/village/getExpansions.php',
+                    type: 'POST',
+                    async: true,
+                    // dataSrc: ,
+                    data: function (d) {
+                        d["id"] = villageID;
+                    }
+                }
+            });
+        });
+    }
+</script>
