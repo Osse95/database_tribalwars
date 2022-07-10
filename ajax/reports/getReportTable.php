@@ -188,10 +188,10 @@ $rows["data"] = [];
 
 foreach ($stmt->get_result() as $row) {
     $attackerUrl = "/playerInfo?ID={$row["attacker_id"]}";
-    $attackerUrl = "<a href='$attackerUrl' target='_blank'> {$row["attacker_nick"]} </a>";
+    $attackerUrl = "<a class='previewPlayerinfo' href='$attackerUrl' target='_blank'> {$row["attacker_nick"]} </a>";
 
     $defenderUrl = "/playerInfo?ID={$row["defender_id"]}";
-    $defenderUrl = "<a href='$defenderUrl' target='_blank'> {$row["defender_nick"]} </a>";
+    $defenderUrl = "<a class='previewPlayerinfo' href='$defenderUrl' target='_blank'> {$row["defender_nick"]} </a>";
 
     $reportUrl = "/showReport?ID={$row["id"]}";
     $reportUrl = "<a href='$reportUrl' target='_blank'> {$row["bericht"]} </a>

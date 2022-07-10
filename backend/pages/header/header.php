@@ -29,6 +29,11 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
     <!-- Chart JS -->
     <script type="text/javascript" src="/assets/js/chart.min.js"></script>
 
+
+    <!-- Some general Functions -->
+    <script type="text/javascript" src="/assets/js/mathHelpers.js"></script>
+    <script type="text/javascript" src="/assets/js/playerPreview.js"></script>
+
     <!-- Matomo -->
     <script>
         let _paq = window._paq = window._paq || [];

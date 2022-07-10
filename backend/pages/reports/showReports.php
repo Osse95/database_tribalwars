@@ -216,7 +216,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             }],
             stateSave: true,
             order: [[3, 'desc']],
-            "initComplete": function(settings, json) {
+            "initComplete": function (settings, json) {
                 loadParams();
             },
             ajax: {
@@ -268,7 +268,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
         }
     })
 
-    $(document).on("change", ".deleteReport", function () {
+    $(document).on("click", ".deleteReport", function () {
         deleteReports([$(this).attr("id")])
     })
 
@@ -292,4 +292,3 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
     }
     ?>
 </script>
-
