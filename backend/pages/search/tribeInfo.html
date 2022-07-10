@@ -165,7 +165,6 @@
 <div class="placeholder">
     <br/>
 </div>
-<script type="text/javascript" src="/assets/js/mathHelpers.js"></script>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -234,7 +233,7 @@
                 $('table#normalTribeData tr :eq(11)').text(result["tribeChanges"])
                 $('table#normalTribeData tr :eq(13)').text(formatNumber(result["conquersInternal"]))
                 $('table#normalTribeData tr :eq(15)').text(formatNumber(result["conquersBarbarian"]))
-                $('table#normalTribeData tr :eq(17)').text(result["maxVillages"] + " (" + result["maxVillagesDate"] + ")")
+                $('table#normalTribeData tr :eq(17)').text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
                 $('table#normalTribeData tr :eq(19)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
                 $('table#normalTribeData tr :eq(21)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
                 $("table#bashis tr :eq(5)").text(result["allRank"])

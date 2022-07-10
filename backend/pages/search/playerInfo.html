@@ -345,7 +345,7 @@
                 $('table#normalPlayerData tr :eq(14)').text(result["tribeChanges"])
                 $('table#normalPlayerData tr :eq(16)').text(formatNumber(result["conquersInternal"]))
                 $('table#normalPlayerData tr :eq(18)').text(formatNumber(result["conquersBarbarian"]))
-                $('table#normalPlayerData tr :eq(20)').text(result["maxVillages"] + " (" + result["maxVillagesDate"] + ")")
+                $('table#normalPlayerData tr :eq(20)').text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
                 $('table#normalPlayerData tr :eq(22)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
                 $('table#normalPlayerData tr :eq(24)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
                 $("table#bashis tr :eq(6)").text(result["allRank"])
