@@ -4,6 +4,7 @@ let playerPreviewID, playerPreviewElement;
 $(document).bind('DOMSubtreeModified', function () {
     setTimeout(function () {
         $(".previewPlayerinfo").mouseover(function () {
+            $('[data-toggle="popover"]').popover('hide');
             if (!mouseOvers.includes(this)) {
                 mouseOvers.push(this)
                 playerPreviewElement = this;
@@ -18,7 +19,7 @@ $(document).bind('DOMSubtreeModified', function () {
                             $(playerPreviewElement).attr("data-toggle", "popover");
                             $(playerPreviewElement).attr("data-placement", "bottom");
                             let content;
-                            if (result) {
+                            if (typeof result === "object") {
                                 content = "Rang: " + result["rank"] + "<br>"
                                 content += "Punkte: " + formatNumber(result["points"]) + "<br>";
                                 content += "Dörfer: " + result["villages"] + "<br>";
