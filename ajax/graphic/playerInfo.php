@@ -15,7 +15,7 @@ if (!$World_User->isActivated()) {
 
 General::imageHeader();
 
-$playerID = $_GET["id"]??"";
+$playerID = $_GET["id"]??"-1";
 if (!graphicControl::checkPlayerMap($World_User->getWorldVersion(),$playerID)) {
     $worldMap = new worldMap($World_User->getWorldVersion(),$playerID);
     $worldMap->selectMapType("playerMap");
