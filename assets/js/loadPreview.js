@@ -4,6 +4,7 @@ let playerPreviewID, playerPreviewElement,tribePreviewID, tribePreviewElement;
 $(document).bind('DOMSubtreeModified', function () {
     setTimeout(function () {
         $(".previewPlayerinfo").mouseover(function () {
+            $('[data-toggle="popover"]').popover('hide');
             if (!mouseOverPlayers.includes(this)) {
                 mouseOverPlayers.push(this)
                 playerPreviewElement = this;
@@ -50,6 +51,7 @@ $(document).bind('DOMSubtreeModified', function () {
             $('[data-toggle="popover"]').popover('hide');
         })
         $(".previewTribeinfo").mouseover(function () {
+            $('[data-toggle="popover"]').popover('hide');
             if (!mouseOverTribes.includes(this)) {
                 mouseOverTribes.push(this)
                 tribePreviewElement = this;
