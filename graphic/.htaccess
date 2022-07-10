@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^(.*)$ https://diestaemmedb.de/ [R=301,L]
+RewriteRule ^(.*)$ https://www.youtube.com/watch?v=EErY75MXYXI/ [R=301,L]
