@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(isset($_SESSION["world"])){
+    $_POST["world"] = $_SESSION["world"];
+}
 if(!isset($_POST["world"])){
     return;
 }
