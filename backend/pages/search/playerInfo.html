@@ -392,21 +392,33 @@
                     if(!result){
                         $(".database").hide()
                     }else{
-                        $('table#databasePlayerData tr :eq(1)').text(formatNumber(result["PlayerData"]["quantityReports"]))
-                        $('table#databasePlayerData tr :eq(3)').text(formatNumber(result["PlayerData"]["quantitySupReports"]))
-                        $('table#databasePlayerData tr :eq(5)').text(formatNumber(result["PlayerData"]["offensiveVillages"]))
-                        $('table#databasePlayerData tr :eq(7)').text(formatNumber(result["possibleOffensiveVillages"]))
-                        $('table#databasePlayerData tr :eq(9)').text(formatNumber(result["PlayerData"]["defensiveVillages"]))
-                        $('table#databasePlayerData tr :eq(11)').text(result["PlayerData"]["watchtowers"])
-                        $('table#databasePlayerData tr :eq(13)').text(result["PlayerData"]["churches"])
-                        $('table#databasePlayerData tr :eq(15)').text(result["PlayerData"]["averageOff"])
-                        $('table#databasePlayerData tr :eq(17)').text(result["PlayerData"]["averageFake"])
-                        $('table#databasePlayerData tr :eq(19)').text(result["PlayerData"]["averageDef"])
-                        $('table#databasePlayerData tr :eq(21)').text(result["PlayerData"]["averageTab"])
-                        $('table#databasePlayerData tr :eq(23)').text(formatNumber(result["attackSizes"]["large"]+result["attackSizes"]["middle"]+result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
-                        $('table#databasePlayerData tr :eq(25)').text(formatNumber(result["attackSizes"]["large"]))
-                        $('table#databasePlayerData tr :eq(27)').text(formatNumber(result["attackSizes"]["middle"]))
-                        $('table#databasePlayerData tr :eq(29)').text(formatNumber(result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
+                        let reportURL = `<a href='/showReports?playerName=${result["PlayerData"]["name"]}'>${formatNumber(result["PlayerData"]["quantityReports"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(0).html(reportURL);
+
+                        let supReportURL = `<a href='/showUTReports?playerName=${result["PlayerData"]["name"]}'>${formatNumber(result["PlayerData"]["quantitySupReports"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(1).html(supReportURL);
+
+                        let offensiveVillageURL = `<a href='/showReports?playerName=${result["PlayerData"]["name"]}&coordType=Off'>${formatNumber(result["PlayerData"]["offensiveVillages"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(2).html(offensiveVillageURL);
+
+                        $("td",$('table#databasePlayerData')).eq(3).text(formatNumber(result["possibleOffensiveVillages"]))
+
+                        let defensiveVillageURL = `<a href='/showReports?playerName=${result["PlayerData"]["name"]}&coordType=Def'>${formatNumber(result["PlayerData"]["defensiveVillages"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(4).html(defensiveVillageURL);
+
+                        let watchtowerURL = `<a href='/showReports?playerName=${result["PlayerData"]["name"]}&watchtower=ON'>${formatNumber(result["PlayerData"]["watchtowers"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(5).html(watchtowerURL)
+
+                        let churchesURL = `<a href='/showReports?playerName=${result["PlayerData"]["name"]}&church=ON'>${formatNumber(result["PlayerData"]["churches"])}</a>`;
+                        $("td",$('table#databasePlayerData')).eq(6).html(churchesURL)
+                        $("td",$('table#databasePlayerData')).eq(7).text(result["PlayerData"]["averageOff"])
+                        $("td",$('table#databasePlayerData')).eq(8).text(result["PlayerData"]["averageFake"])
+                        $("td",$('table#databasePlayerData')).eq(9).text(result["PlayerData"]["averageDef"])
+                        $("td",$('table#databasePlayerData')).eq(10).text(result["PlayerData"]["averageTab"])
+                        $("td",$('table#databasePlayerData')).eq(11).text(formatNumber(result["attackSizes"]["large"]+result["attackSizes"]["middle"]+result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
+                        $("td",$('table#databasePlayerData')).eq(12).text(formatNumber(result["attackSizes"]["large"]))
+                        $("td",$('table#databasePlayerData')).eq(13).text(formatNumber(result["attackSizes"]["middle"]))
+                        $("td",$('table#databasePlayerData')).eq(14).text(formatNumber(result["attackSizes"]["small"]+result["attackSizes"]["fake"]))
                         $(".card").eq(1).css("height",$(".card").eq(0).height())
                         if(result["lastSendTimes"].length){
                             result["lastSendTimes"].forEach(element => {
