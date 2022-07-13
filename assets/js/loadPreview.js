@@ -1,5 +1,5 @@
-let mouseOverPlayers = [], previewPlayerInformations = [], mouseOverTribes = [], previewTribeInformations = [];
-let playerPreviewID, playerPreviewElement, tribePreviewID, tribePreviewElement;
+let mouseOverPlayers = [], previewPlayerInformations = [], mouseOverTribes = [], previewTribeInformations = [],mouseOverVillages = [], previewVillageInformations = [];
+let playerPreviewID, playerPreviewElement, tribePreviewID, tribePreviewElement,villagePreviewElement,villagePreviewID;
 
 $(document).on("mouseover", ".previewPlayerinfo", function () {
     $('[data-toggle="popover"]').popover('hide');
@@ -44,10 +44,6 @@ $(document).on("mouseover", ".previewPlayerinfo", function () {
             $(playerPreviewElement).popover("show")
         }
     }
-})
-
-$(document).on("mouseout", ".previewPlayerinfo", function () {
-    $('[data-toggle="popover"]').popover('hide');
 })
 
 $(document).on("mouseover", ".previewTribeinfo", function () {
@@ -95,6 +91,46 @@ $(document).on("mouseover", ".previewTribeinfo", function () {
     }
 })
 
-$(document).on("mouseout", ".previewTribeinfo", function () {
+$(document).on("mouseover", ".previewVillageinfo", function () {
     $('[data-toggle="popover"]').popover('hide');
+    if (!mouseOverVillages.includes(this)) {
+        mouseOverVillages.push(this)
+        villagePreviewElement = this;
+        villagePreviewID = $(this).attr("href").replace("/villageInfo?ID=", "");
+        if (!previewVillageInformations[villagePreviewID]) {
+            $.ajax({
+                url: "/ajax/village/getNormalVillageData.php",
+                data: {id: villagePreviewID},
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    $(villagePreviewElement).attr("data-toggle", "popover");
+                    $(villagePreviewElement).attr("data-placement", "bottom");
+                    let content;
+                    if (result["villageOwner"] !== undefined) {
+                        content = "Besitzer: " + result["villageOwner"] + "<br>";
+                        content += "Punkte: " + formatNumber(result["villageInfo"]["points"]) + "<br>";
+                    } else {
+                        content = "Dorf nicht gefunden."
+                    }
+                    previewVillageInformations[villagePreviewID] = content;
+                    $(villagePreviewElement).popover({
+                        content: content,
+                        trigger: "hover",
+                        html: true
+                    });
+                    $(villagePreviewElement).popover("show")
+                }
+            });
+        } else {
+            $(villagePreviewElement).attr("data-toggle", "popover");
+            $(villagePreviewElement).attr("data-placement", "bottom");
+            $(villagePreviewElement).popover({
+                content: previewVillageInformations[villagePreviewID],
+                trigger: "hover",
+                html: true
+            });
+            $(villagePreviewElement).popover("show")
+        }
+    }
 })

@@ -145,7 +145,7 @@ foreach ($stmt->get_result() as $row) {
     $attackerUrl = "<a class='previewPlayerinfo' href='$attackerUrl' target='_blank'> $attackerName </a>";
 
     $attackerCoordUrl = "/villageInfo?ID={$row["attackerdorfid"]}";
-    $attackerCoordUrl = "<a href='$attackerCoordUrl' target='_blank'> {$row["attackercoords"]} </a>";
+    $attackerCoordUrl = "<a class='previewVillageinfo' href='$attackerCoordUrl' target='_blank'> {$row["attackercoords"]} </a>";
 
     if(isset($villageInfos[$row["attackerdorfid"]])){
         $attackerVillagePoints = $villageInfos[$row["attackerdorfid"]]["points"];

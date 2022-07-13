@@ -154,14 +154,14 @@ foreach ($stmt->get_result() as $row) {
     $defenderUrl = "<a class='previewPlayerinfo' href='$defenderUrl' target='_blank'> $defenderName </a>";
 
     $defenderCoordUrl = "/villageInfo?ID={$row["defenderdorfid"]}";
-    $defenderCoordUrl = "<a href='$defenderCoordUrl' target='_blank'> {$row["defendercoords"]} </a>";
+    $defenderCoordUrl = "<a class='previewVillageinfo' href='$defenderCoordUrl' target='_blank'> {$row["defendercoords"]} </a>";
 
     $attackerUrl = "/playerInfo?ID={$row["attackerid"]}";
     $attackerName = $playerNames[$row["attackerid"]]["playerName"]??"Barbar";
     $attackerUrl = "<a class='previewPlayerinfo' href='$attackerUrl' target='_blank'> $attackerName </a>";
 
     $attackerCoordUrl = "/villageInfo?ID={$row["attackerdorfid"]}";
-    $attackerCoordUrl = "<a href='$attackerCoordUrl' target='_blank'> {$row["attackercoords"]} </a>";
+    $attackerCoordUrl = "<a class='previewVillageinfo' href='$attackerCoordUrl' target='_blank'> {$row["attackercoords"]} </a>";
 
     $reason = $row["reason"];
 
