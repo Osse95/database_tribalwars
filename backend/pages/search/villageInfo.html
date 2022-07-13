@@ -64,7 +64,7 @@
 
 <div class='container p-4'>
     <div class="row">
-        <div class="col-8 table-responsive">
+        <div class="col-10 table-responsive">
             <table id="villageChanges" class="table table-dark  table-hover table-striped">
                 <thead>
                 <tr>
@@ -215,4 +215,49 @@
             });
         });
     }
+
+    let villageChange = [],previewVillageChangeInfo = [],villageChangeElement;
+    $(document).on("mouseover", ".showExpansion", function () {
+        if (!villageChange.includes(this)) {
+            villageChange.push(this)
+            villageChangeElement = this;
+            let pointChanges = $(this).closest('td').prev('td').text();
+            if (!previewVillageChangeInfo[pointChanges]) {
+                $.ajax({
+                    url: "/ajax/village/getExpansion.php",
+                    data: {id: pointChanges},
+                    type: 'post',
+                    success: function (data) {
+                        let result = JSON.parse(data),content = "";
+                        $(villageChangeElement).attr("data-toggle", "popover");
+                        $(villageChangeElement).attr("data-placement", "bottom");
+                        if(result.length){
+                            result.forEach(element => {
+                                content += element[0] + " : " + element[1] + "</br>"
+                            });
+                        }else{
+                            content = "Keine Stufen bekannt."
+                        }
+
+                        previewVillageChangeInfo[pointChanges] = content;
+                        $(villageChangeElement).popover({
+                            content: content,
+                            trigger: "hover",
+                            html: true
+                        });
+                        $(villageChangeElement).popover("show")
+                    }
+                });
+            } else {
+                $(villageChangeElement).attr("data-toggle", "popover");
+                $(villageChangeElement).attr("data-placement", "bottom");
+                $(villageChangeElement).popover({
+                    content: previewVillageChangeInfo[pointChanges],
+                    trigger: "hover",
+                    html: true
+                });
+                $(villageChangeElement).popover("show")
+            }
+        }
+    })
 </script>
