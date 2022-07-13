@@ -10,11 +10,13 @@ class Village extends DB
     public bool $exists = false;
     public array $villageArray = [];
 
-    public function __construct($world, $village, $coords = "")
+    public function __construct($world, $village)
     {
         parent::__construct($world);
+        preg_match("/(?<coords>\d{3}\|\d{3})/",$village,$coords);
+        $village = $coords["coords"]??$village;
         $stmt = $this->conn->prepare("SELECT * FROM `dorfdaten` WHERE dorfid = ? OR dorfcoords = ?");
-        $stmt->execute([$village, $coords]);
+        $stmt->execute([$village, $village]);
         foreach ($stmt->get_result() as $row) {
             $this->exists = true;
             $this->villageArray = array(
