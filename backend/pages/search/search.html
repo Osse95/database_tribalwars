@@ -54,10 +54,11 @@
     $("#search").on("click", function () {
         checkSearch()
     })
-    $("input").on("change",function (){
+    $("input").on("change", function () {
         checkSearch()
     })
-    function checkSearch(){
+
+    function checkSearch() {
         if ($("input[name=playerName]").val() !== "") {
             let playerID = $("input[name=playerName]").val();
             let post = {
@@ -70,7 +71,7 @@
                 success: function (data) {
                     let result = JSON.parse(data);
                     if (result) {
-                        window.open(`/playerInfo?ID=${playerID}`,"_self")
+                        window.open(`/playerInfo?ID=${playerID}`, "_self")
                     } else {
                         $("#msg").text("Spieler nicht gefunden.")
                     }
@@ -88,9 +89,27 @@
                 success: function (data) {
                     let result = JSON.parse(data);
                     if (result) {
-                        window.open(`/tribeInfo?ID=${tribeID}`,"_self")
+                        window.open(`/tribeInfo?ID=${tribeID}`, "_self")
                     } else {
                         $("#msg").text("Stamm nicht gefunden.")
+                    }
+                }
+            });
+        } else if ($("input[name=coordX]").val() !== "" && $("input[name=coordY]") !== "") {
+            let Coords = $("input[name=coordX]").val()+"|"+$("input[name=coordY]").val();
+            let post = {
+                id: Coords
+            }
+            $.ajax({
+                url: "/ajax/general/coordAvailable.php",
+                data: post,
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (result) {
+                        window.open(`/villageInfo?ID=${Coords}`, "_self")
+                    } else {
+                        $("#msg").text("Dorf nicht gefunden.")
                     }
                 }
             });
