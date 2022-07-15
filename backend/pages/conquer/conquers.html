@@ -1,0 +1,150 @@
+<div class="container p-4">
+    <form id="ValuesTable">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Früherer Spieler</span>
+                    <input type="text" class="form-control" name="oldOwner"
+                           list="playerNames" placeholder="Früherer Account">
+                    <datalist id="playerNames">
+
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Neuer Spieler</span>
+                    <input type="text" class="form-control" name="newOwner"
+                           list="playerNames" placeholder="Neuer Account">
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Früherer Stamm</span>
+                    <input type="text" class="form-control" name="oldTribe" list="tribeNames"
+                           placeholder="Früherer Stamm">
+                    <datalist id="tribeNames">
+
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Neuer Stamm</span>
+                    <input type="text" class="form-control" name="newTribe" list="tribeNames" placeholder="Alter Stamm">
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Anfang:</span>
+                    <input type="date" class="form-control" name="dateAfter"
+                    >
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Ende:</span>
+                    <input type="date" class="form-control" name="dateBefore"
+                    >
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Koords</span>
+                    <input type="text"
+                           id="coordX" name="coordX" placeholder="500" class="form-control">
+                    <input type="text"
+                           id="coordY" maxlength="3" name="coordY" placeholder="500" class="form-control">
+                </div>
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container p-4 table-responsive">
+    <table class="table table-dark table-hover table-striped" ID="Conquers">
+        <thead>
+        <tr>
+            <th>Dorf</th>
+            <th>Punkte</th>
+            <th>Alter Besitzer
+            <th>Alter Stamm</th>
+            <th>Neuer Besitzer</th>
+            <th>Neuer Stamm</th>
+            <th>Uhrzeit</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="/assets/js/fillCoords.js"></script>
+<script type="text/javascript" src="/assets/js/loadParams.js"></script>
+<script>
+
+    $(document).ready(function () {
+        let DataTable = $('#Conquers').DataTable({
+            "paging": true,
+            "searching": false,
+            "info": true,
+            processing: true,
+            serverSide: true,
+            "columnDefs": [{
+                "targets": 1,
+                "orderable": false
+            }],
+            stateSave: true,
+            order: [[6, 'desc']],
+            "initComplete": function (settings, json) {
+                loadParams();
+            },
+            ajax: {
+                url: '/ajax/conquers/getConquerTable.php',
+                type: 'POST',
+                async: true,
+                // dataSrc: ,
+                data: function (d) {
+                    $("#ValuesTable :INPUT").each(function () {
+                        if ($(this).attr("type") == "checkbox") {
+                            d[$(this).attr("name")] = $(this).prop("checked");
+                        } else {
+                            d[$(this).attr("name")] = $(this).val();
+                        }
+                    })
+                }
+            }
+        });
+        $("#ValuesTable Input").on("change", function () {
+            DataTable.ajax.reload();
+        });
+    });
+
+    $.getJSON("/ajax/general/getAllNames.php", function (result) {
+        result["userNames"].forEach(element => {
+            $("#playerNames").append(`<option>${element}</option>`)
+        })
+    });
+    $.getJSON("/ajax/general/getAllTribeNames.php", function (result) {
+        result["tribeNames"].forEach(element => {
+            $("#tribeNames").append(`<option>${element}</option>`)
+        })
+    });
+
+</script>

@@ -64,6 +64,19 @@ class DataTables{
         };
     }
 
+    public static function sortConquerTable($column): string
+    {
+        return match ($column) {
+            "0" => "villageid",
+            "2" => "old_owner",
+            "3" => "old_tribe",
+            "4" => "new_owner",
+            "5" => "new_tribe",
+            "6" => "timestamp",
+            default => "attacker_nick"
+        };
+    }
+
     public static function sortBy($sort): string
     {
         if($sort == "asc"){

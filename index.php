@@ -102,6 +102,9 @@ if (!isset($_SESSION["name"])) {
         case("search"):
             require __DIR__ . "/backend/pages/search/search.html";
             break;
+        case("conquers"):
+            require __DIR__ . "/backend/pages/conquer/conquers.html";
+            break;
         case("playerInfo"):
             require __DIR__ . "/backend/pages/search/playerInfo.html";
             break;
