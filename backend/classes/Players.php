@@ -80,6 +80,26 @@ class Players extends DB
         return $return;
     }
 
+    function getAllPlayerNames(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT username FROM `userstats` ORDER by date DESC,Rang ASC;");
+        foreach ($query as $Player) {
+            $return[] = $Player["username"];
+        }
+        return $return;
+    }
+
+    function getAllPlayerNamesSortByID(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT username,userid FROM `userstats` ORDER by date DESC,Rang ASC;");
+        foreach ($query as $Player) {
+            $return[$Player["userid"]] = $Player["username"];
+        }
+        return $return;
+    }
+
     function getBashis($limit): array
     {
         $return["All"] = [];
