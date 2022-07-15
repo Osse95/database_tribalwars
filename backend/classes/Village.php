@@ -33,6 +33,11 @@ class Village extends DB
         }
     }
 
+    function getVillageID(): string
+    {
+        return $this->villageArray["ID"];
+    }
+
     function getLastConquer(): string
     {
         $villageID = $this->villageArray["ID"];
