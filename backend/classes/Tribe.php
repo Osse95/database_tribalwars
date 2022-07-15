@@ -22,7 +22,6 @@ class Tribe extends DB
                 "rank" => $row["Rang"],
                 "conquersWin" => $row["erobert"],
                 "conquersLoss" => $row["verloren"],
-                "conquersSelf" => $row["selbstadelung"],
                 "conquersInternal" => $row["Intern_Adelungen"],
                 "conquersBarbarian" => $row["Baba_Adelungen"],
                 "maxVillages" => $row["MaxDoerfer"],
