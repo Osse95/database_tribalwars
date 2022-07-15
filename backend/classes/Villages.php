@@ -44,4 +44,14 @@ class Villages extends DB
         }
         return $return;
     }
+
+    function getAllVillageCoordsSortByID(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT dorfcoords,dorfid FROM `dorfdaten`;");
+        foreach ($query as $village) {
+            $return[$village["dorfid"]] = $village["dorfcoords"];
+        }
+        return $return;
+    }
 }
