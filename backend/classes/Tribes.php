@@ -35,6 +35,26 @@ class Tribes extends DB
         return $return;
     }
 
+    function getAllTribeNames(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT Tribetag FROM `tribestats` ORDER by date desc,Rang asc;");
+        foreach ($query as $tag) {
+            $return[] = $tag["Tribetag"];
+        }
+        return $return;
+    }
+
+    function getAllTribeNamesSortByID(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT Tribetag,Tribeid FROM `tribestats` ORDER by date desc,Rang asc;");
+        foreach ($query as $tag) {
+            $return[$tag["Tribeid"]] = $tag["Tribetag"];
+        }
+        return $return;
+    }
+
     function getLimitTribeData($limit = 10): array
     {
         $return = [];
