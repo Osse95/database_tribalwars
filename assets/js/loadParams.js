@@ -1,6 +1,6 @@
 function loadParams() {
     let selectOptions = ["coordType"];
-    let checkboxOptions = ["watchtower", "church", "academy"]
+    let checkboxOptions = ["watchtower", "church", "academy","internal"]
     let getParams = window.location.search.substr(1);
     getParams = getParams.split("&");
     for (let i = 0; i < getParams.length; i++) {
