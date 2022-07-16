@@ -5,12 +5,33 @@
             </div>
             <div class="col-md-4 col-xs-6">
                 <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Spieler</span>
+                    <input type="text" class="form-control" name="playerName"
+                           list="playerNames" placeholder="Account">
+                    <datalist id="playerNames">
+                        <option>Barbaren</option>
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Stamm</span>
+                    <input type="text" class="form-control" name="tribeName"
+                           list="tribeNames" placeholder="Stamm">
+                    <datalist id="tribeNames">
+                        <option>Stammeslos</option>
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-md-4 col-xs-6">
+                <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Früherer Spieler</span>
                     <input type="text" class="form-control" name="oldOwner"
                            list="playerNames" placeholder="Früherer Account">
-                    <datalist id="playerNames">
-
-                    </datalist>
                 </div>
             </div>
             <div class="col-md-4 col-xs-6">
@@ -29,9 +50,6 @@
                     <span class="input-group-text">Früherer Stamm</span>
                     <input type="text" class="form-control" name="oldTribe" list="tribeNames"
                            placeholder="Früherer Stamm">
-                    <datalist id="tribeNames">
-
-                    </datalist>
                 </div>
             </div>
             <div class="col-md-4 col-xs-6">
@@ -47,15 +65,13 @@
             <div class="col-md-4 col-xs-6">
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Anfang:</span>
-                    <input type="date" class="form-control" name="dateAfter"
-                    >
+                    <input type="date" class="form-control" name="dateAfter">
                 </div>
             </div>
             <div class="col-md-4 col-xs-6">
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Ende:</span>
-                    <input type="date" class="form-control" name="dateBefore"
-                    >
+                    <input type="date" class="form-control" name="dateBefore">
                 </div>
             </div>
             <div class="col-2">
@@ -73,6 +89,17 @@
             </div>
             <div class="col-4">
             </div>
+            <div class="col-5"></div>
+            <div class="col-lg-2 col-md-2 col-xs-12 d-flex justify-content-center">
+                <div class="form-check">
+                    <input class="form-check-input"
+                           name="internal" type="checkbox">
+                    <label class="form-check-label">
+                        Internadelung
+                    </label>
+                </div>
+            </div>
+            <div class="col-5"></div>
         </div>
     </form>
 </div>
@@ -106,11 +133,6 @@
             "info": true,
             processing: true,
             serverSide: true,
-            "columnDefs": [{
-                "targets": 1,
-                "orderable": false
-            }],
-            stateSave: true,
             order: [[6, 'desc']],
             "initComplete": function (settings, json) {
                 loadParams();

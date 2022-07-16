@@ -26,39 +26,84 @@ $DB->connectTo($World_User->getWorld());
 $bindParams = [];
 $Query = "SELECT * FROM `conquer` WHERE 1 = 1";
 
+
+$playerName = $_POST["playerName"] ?? "";
+if (strlen($playerName) > 0) {
+    if ($playerName == "Barbaren") {
+        $Query .= " AND (old_owner = 0 OR new_owner = 0)";
+    } else {
+        $playerName = new Player($World_User->getWorld(), $playerName);
+        if ($playerName->exists) {
+            $bindParams[] = $playerName->getPlayerID();
+            $bindParams[] = $playerName->getPlayerID();
+            $Query .= " AND (old_owner = ? OR new_owner = ?)";
+        }
+    }
+}
+
 $oldOwner = $_POST["oldOwner"] ?? "";
 if (strlen($oldOwner) > 0) {
-    $oldOwner = new Player($World_User->getWorld(),$oldOwner);
-    if($oldOwner->exists){
-        $bindParams[] = $oldOwner->getPlayerID();
-        $Query .= " AND old_owner = ?";
+    if ($oldOwner == "Barbaren") {
+        $Query .= " AND old_owner = 0";
+    } else {
+        $oldOwner = new Player($World_User->getWorld(), $oldOwner);
+        if ($oldOwner->exists) {
+            $bindParams[] = $oldOwner->getPlayerID();
+            $Query .= " AND old_owner = ?";
+        }
     }
 }
 
 $newOwner = $_POST["newOwner"] ?? "";
 if (strlen($newOwner) > 0) {
-    $newOwner = new Player($World_User->getWorld(),$newOwner);
-    if($newOwner->exists){
-        $bindParams[] = $newOwner->getPlayerID();
-        $Query .= " AND new_owner = ?";
+    if ($newOwner == "Barbaren") {
+        $Query .= " AND new_owner = 0";
+    } else {
+        $newOwner = new Player($World_User->getWorld(), $newOwner);
+        if ($newOwner->exists) {
+            $bindParams[] = $newOwner->getPlayerID();
+            $Query .= " AND new_owner = ?";
+        }
+    }
+}
+
+$tribeName = $_POST["tribeName"];
+if (strlen($tribeName) > 0) {
+    if ($tribeName == "Stammeslos") {
+        $Query .= " AND (old_tribe = 0 OR new_tribe = 0)";
+    } else {
+        $tribeName = new Tribe($World_User->getWorld(), $tribeName);
+        if ($tribeName->exists) {
+            $bindParams[] = $tribeName->getTribeID();
+            $bindParams[] = $tribeName->getTribeID();
+            $Query .= " AND (old_tribe = ? OR new_tribe = ?)";
+        }
     }
 }
 
 $oldTribe = $_POST["oldTribe"];
 if (strlen($oldTribe) > 0) {
-    $oldTribe = new Tribe($World_User->getWorld(), $oldTribe);
-    if ($oldTribe->exists) {
-        $bindParams[] = $oldTribe->getTribeID();
-        $Query .= " AND old_tribe = ?";
+    if ($oldTribe == "Stammeslos") {
+        $Query .= " AND old_tribe = 0";
+    } else {
+        $oldTribe = new Tribe($World_User->getWorld(), $oldTribe);
+        if ($oldTribe->exists) {
+            $bindParams[] = $oldTribe->getTribeID();
+            $Query .= " AND old_tribe = ?";
+        }
     }
 }
 
 $newTribe = $_POST["newTribe"];
 if (strlen($newTribe) > 0) {
-    $newTribe = new Tribe($World_User->getWorld(), $newTribe);
-    if ($newTribe->exists) {
-        $bindParams[] = $newTribe->getTribeID();
-        $Query .= " AND new_tribe = ?";
+    if ($newTribe == "Stammeslos") {
+        $Query .= " AND new_tribe = 0";
+    } else {
+        $newTribe = new Tribe($World_User->getWorld(), $newTribe);
+        if ($newTribe->exists) {
+            $bindParams[] = $newTribe->getTribeID();
+            $Query .= " AND new_tribe = ?";
+        }
     }
 }
 
@@ -66,8 +111,8 @@ $coordX = $_POST["coordX"] ?? "";
 $coordY = $_POST["coordY"] ?? "";
 $coord = "($coordX|$coordY)";
 if (strlen($coord) == 9) {
-    $coord = new Village($World_User->getWorld(),$coord);
-    if($coord->exists){
+    $coord = new Village($World_User->getWorld(), $coord);
+    if ($coord->exists) {
         $bindParams[] = $coord->getVillageID();
         $Query .= " AND villageid = ?)";
     }
@@ -91,27 +136,32 @@ if (strlen($dateAfter) > 0) {
     }
 }
 
-$Query .= " ORDER BY ".DataTables::sortConquerTable($_POST["order"][0]["column"]);
+$internal = $_POST["internal"] ?? "false";
+if($internal == "true"){
+    $Query .= " AND old_tribe = new_tribe AND old_tribe > 0 and new_owner != old_owner";
+}
+
+$Query .= " ORDER BY " . DataTables::sortConquerTable($_POST["order"][0]["column"]);
 $Query .= DataTables::sortBy($_POST["order"][0]["dir"]);
 
 if (isset($_POST["order"][1]["column"])) {
-    $Query .= " ,".DataTables::sortConquerTable($_POST["order"][1]["column"]);
+    $Query .= " ," . DataTables::sortConquerTable($_POST["order"][1]["column"]);
     $Query .= DataTables::sortBy($_POST["order"][1]["dir"]);
 }
 if (isset($_POST["order"][2]["column"])) {
-    $Query .= " ,".DataTables::sortConquerTable($_POST["order"][2]["column"]);
+    $Query .= " ," . DataTables::sortConquerTable($_POST["order"][2]["column"]);
     $Query .= DataTables::sortBy($_POST["order"][2]["dir"]);
 }
 if (isset($_POST["order"][3]["column"])) {
-    $Query .= " ,".DataTables::sortConquerTable($_POST["order"][3]["column"]);
+    $Query .= " ," . DataTables::sortConquerTable($_POST["order"][3]["column"]);
     $Query .= DataTables::sortBy($_POST["order"][3]["dir"]);
 }
 if (isset($_POST["order"][4]["column"])) {
-    $Query .= " ,".DataTables::sortConquerTable($_POST["order"][2]["column"]);
+    $Query .= " ," . DataTables::sortConquerTable($_POST["order"][2]["column"]);
     $Query .= DataTables::sortBy($_POST["order"][4]["dir"]);
 }
 if (isset($_POST["order"][5]["column"])) {
-    $Query .= " ,".DataTables::sortConquerTable($_POST["order"][2]["column"]);
+    $Query .= " ," . DataTables::sortConquerTable($_POST["order"][2]["column"]);
     $Query .= DataTables::sortBy($_POST["order"][5]["dir"]);
 }
 
@@ -149,41 +199,39 @@ $villageCoords = $villageCoords->getAllVillageCoordsSortByID();
 foreach ($stmt->get_result() as $row) {
 
     $villageURL = "/villageInfo?ID={$row["villageid"]}";
-    $villageCoord = $villageCoords[$row["villageid"]]??"gelöschtes Dorf";
+    $villageCoord = $villageCoords[$row["villageid"]] ?? "gelöschtes Dorf";
     $villageURL = "<a class='previewVillageinfo' href='$villageURL' target='_blank'> $villageCoord </a>";
 
     $villagePoints = $row["points"];
 
     $oldOwnerUrl = "/playerInfo?ID={$row["old_owner"]}";
-    $oldOwnerName = $playerNames[$row["old_owner"]]??"Barbaren";
+    $oldOwnerName = $playerNames[$row["old_owner"]] ?? "Barbaren";
     $oldOwnerUrl = "<a class='previewPlayerinfo' href='$oldOwnerUrl' target='_blank'> $oldOwnerName </a>";
 
     $newOwnerUrl = "/playerInfo?ID={$row["new_owner"]}";
-    $newOwnerName = $playerNames[$row["new_owner"]]??"Barbaren";
+    $newOwnerName = $playerNames[$row["new_owner"]] ?? "Barbaren";
     $newOwnerUrl = "<a class='previewPlayerinfo' href='$newOwnerUrl' target='_blank'> $newOwnerName </a>";
 
-    if($row["old_tribe"] > 0){
+    if ($row["old_tribe"] > 0) {
         $oldTribeUrl = "/tribeInfo?ID={$row["old_tribe"]}";
-        $oldTribeName = $tribeNames[$row["old_tribe"]]??"gelöschter Stamm";
+        $oldTribeName = $tribeNames[$row["old_tribe"]] ?? "gelöschter Stamm";
         $oldTribeUrl = "<a class='previewTribeinfo' href='$oldTribeUrl' target='_blank'> $oldTribeName </a>";
-    }else{
+    } else {
         $oldTribeUrl = "";
     }
 
-    if($row["new_tribe"] > 0){
+    if ($row["new_tribe"] > 0) {
         $newTribeUrl = "/tribeInfo?ID={$row["new_tribe"]}";
-        $newTribeName = $tribeNames[$row["new_tribe"]]??"gelöschter Stamm";
+        $newTribeName = $tribeNames[$row["new_tribe"]] ?? "gelöschter Stamm";
         $newTribeUrl = "<a class='previewTribeinfo' href='$newTribeUrl' target='_blank'> $newTribeName </a>";
-    }else{
+    } else {
         $newTribeUrl = "";
     }
 
 
-
-
     $time = date("H:i:s d.m.Y", $row["timestamp"]);
 
-    $rows["data"][] = array($villageURL,$villagePoints,$oldOwnerUrl,$oldTribeUrl,$newOwnerUrl,$newTribeUrl,$time);
+    $rows["data"][] = array($villageURL, $villagePoints, $oldOwnerUrl, $oldTribeUrl, $newOwnerUrl, $newTribeUrl, $time);
 
 }
 
