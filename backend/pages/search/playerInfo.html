@@ -335,19 +335,23 @@
             type: 'post',
             success: function (data) {
                 let result = JSON.parse(data);
-                $('table#normalPlayerData tr :eq(1)').text(result["name"])
-                $('table#normalPlayerData tr :eq(3)').text(result["rank"])
+
+                $("td", $('table#normalPlayerData')).eq(0).text(result["name"])
+                $("td", $('table#normalPlayerData')).eq(1).text(result["rank"])
                 let tribeURL = "<a href='tribeInfo?ID="+result["tribeTag"]+"'>"+result["tribeTag"]+"</a>";
-                $('table#normalPlayerData tr :eq(5)').html(tribeURL)
-                $('table#normalPlayerData tr :eq(8)').text(formatNumber(result["points"]))
-                $('table#normalPlayerData tr :eq(10)').text(formatNumber(result["villages"]))
-                $('table#normalPlayerData tr :eq(12)').text(formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"]))
-                $('table#normalPlayerData tr :eq(14)').text(result["tribeChanges"])
-                $('table#normalPlayerData tr :eq(16)').text(formatNumber(result["conquersInternal"]))
-                $('table#normalPlayerData tr :eq(18)').text(formatNumber(result["conquersBarbarian"]))
-                $('table#normalPlayerData tr :eq(20)').text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
-                $('table#normalPlayerData tr :eq(22)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
-                $('table#normalPlayerData tr :eq(24)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
+                $("td", $('table#normalPlayerData')).eq(2).html(tribeURL)
+                $("td", $('table#normalPlayerData')).eq(3).text(formatNumber(result["points"]))
+                $("td", $('table#normalPlayerData')).eq(4).text(formatNumber(result["villages"]))
+                let conquerURL = "<a href='conquers?playerName="+result["name"]+"'>"+formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"])+"</a>";
+                $("td", $('table#normalPlayerData')).eq(5).html(conquerURL)
+                $("td", $('table#normalPlayerData')).eq(6).text(result["tribeChanges"])
+                let conquerInternalURL = "<a href='conquers?playerName="+result["name"]+"&internal=ON'>"+formatNumber(result["conquersInternal"])+"</a>";
+                $("td", $('table#normalPlayerData')).eq(7).html(conquerInternalURL)
+                let conquerBarbarianURL = "<a href='conquers?playerName="+result["name"]+"&oldOwner=Barbaren'>"+formatNumber(result["conquersBarbarian"])+"</a>";
+                $("td", $('table#normalPlayerData')).eq(8).html(formatNumber(conquerBarbarianURL))
+                $("td", $('table#normalPlayerData')).eq(9).text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
+                $("td", $('table#normalPlayerData')).eq(10).text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
+                $("td", $('table#normalPlayerData')).eq(11).text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
                 $("table#bashis tr :eq(6)").text(result["allRank"])
                 $("table#bashis tr :eq(7)").text(result["attRank"])
                 $("table#bashis tr :eq(8)").text(result["defRank"])

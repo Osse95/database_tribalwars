@@ -225,17 +225,20 @@
             type: 'post',
             success: function (data) {
                 let result = JSON.parse(data);
-                $('table#normalTribeData tr :eq(1)').text(result["name"])
-                $('table#normalTribeData tr :eq(3)').text(result["rank"])
-                $('table#normalTribeData tr :eq(5)').text(formatNumber(result["points"]))
-                $('table#normalTribeData tr :eq(7)').text(formatNumber(result["villages"]))
-                $('table#normalTribeData tr :eq(9)').text(formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"]))
-                $('table#normalTribeData tr :eq(11)').text(result["tribeChanges"])
-                $('table#normalTribeData tr :eq(13)').text(formatNumber(result["conquersInternal"]))
-                $('table#normalTribeData tr :eq(15)').text(formatNumber(result["conquersBarbarian"]))
-                $('table#normalTribeData tr :eq(17)').text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
-                $('table#normalTribeData tr :eq(19)').text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
-                $('table#normalTribeData tr :eq(21)').text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
+                $("td", $('table#normalTribeData')).eq(0).text(result["name"])
+                $("td", $('table#normalTribeData')).eq(1).text(result["rank"])
+                $("td", $('table#normalTribeData')).eq(2).text(formatNumber(result["points"]))
+                $("td", $('table#normalTribeData')).eq(3).text(formatNumber(result["villages"]))
+                let conquerURL = "<a href='conquers?tribeName="+result["tribeTag"]+"'>"+formatNumber(result["conquersWin"] + result["conquersLoss"])+"</a>";
+                $("td", $('table#normalTribeData')).eq(4).html(conquerURL)
+                $("td", $('table#normalTribeData')).eq(5).text(result["tribeChanges"])
+                let conquerInternalURL = "<a href='conquers?newTribe="+result["tribeTag"]+"&oldTribe="+result["tribeTag"]+"'>"+formatNumber(result["conquersInternal"])+"</a>";
+                $("td", $('table#normalTribeData')).eq(6).html(conquerInternalURL)
+                let conquerBarbarianURL = "<a href='conquers?newTribe="+result["tribeTag"]+"&oldOwner=Barbaren'>"+formatNumber(result["conquersBarbarian"])+"</a>";
+                $("td", $('table#normalTribeData')).eq(7).html(conquerBarbarianURL)
+                $("td", $('table#normalTribeData')).eq(8).text(formatNumber(result["maxVillages"]) + " (" + result["maxVillagesDate"] + ")")
+                $("td", $('table#normalTribeData')).eq(9).text(formatNumber(result["maxPoints"]) + " (" + result["maxPointsDate"] + ")")
+                $("td", $('table#normalTribeData')).eq(10).text(result["maxRank"] + " (" + result["maxRankDate"] + ")")
                 $("table#bashis tr :eq(5)").text(result["allRank"])
                 $("table#bashis tr :eq(6)").text(result["attRank"])
                 $("table#bashis tr :eq(7)").text(result["defRank"])
