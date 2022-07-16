@@ -126,6 +126,9 @@ class worldMap extends mapHelpers
             case("tribeMap"):
                 imagepng($this->image, dirname(__DIR__, 3) . "/graphic/tribeMaps/" . $this->worldName . $this->ID . ".png");
                 break;
+            case("interactiveMap"):
+                imagepng($this->image, dirname(__DIR__, 3) . "/graphic/interactiveMap/" . $this->worldName . ".png");
+                break;
 
         }
     }
@@ -166,6 +169,10 @@ class worldMap extends mapHelpers
             case("tribeMap"):
                 $tribeMap = $this->tribeMap();
                 $this->tribes = $tribeMap[0];
+                break;
+            case("interactiveMap"):
+                $interactive = $this->getInteractive();
+                $this->tribes = $interactive[0];
                 break;
         }
     }
@@ -339,8 +346,8 @@ class worldMap extends mapHelpers
             $image = imagecreatetruecolor($w, $h);
             imagecopy($image, $this->image, 0, 0, $this->customSize["minX"], $this->customSize["minY"], $w, $h);
         } else {
-            $this->newSize["max"] = $this->newSize["max"] + 50;
-            $this->newSize["min"] = $this->newSize["min"] - 50;
+            $this->newSize["max"] = $this->newSize["max"] + 20;
+            $this->newSize["min"] = $this->newSize["min"] - 20;
             $w = $this->newSize["max"] - $this->newSize["min"];
             $s = $this->newSize["min"];
             $image = imagecreatetruecolor($w, $w);
