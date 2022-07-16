@@ -17,8 +17,9 @@ $(document).on("mouseover", ".previewPlayerinfo", function () {
                     $(playerPreviewElement).attr("data-toggle", "popover");
                     $(playerPreviewElement).attr("data-placement", "bottom");
                     let content;
-                    if (typeof result === "object") {
+                    if (result["rank"] !== undefined) {
                         content = "Rang: " + result["rank"] + "<br>"
+                        content += "Stamm: " +result["tribeTag"] + "<br>";
                         content += "Punkte: " + formatNumber(result["points"]) + "<br>";
                         content += "Dörfer: " + formatNumber(result["villages"]) + "<br>";
                     } else {
@@ -62,7 +63,7 @@ $(document).on("mouseover", ".previewTribeinfo", function () {
                     $(tribePreviewElement).attr("data-toggle", "popover");
                     $(tribePreviewElement).attr("data-placement", "bottom");
                     let content;
-                    if (typeof result === "object") {
+                    if (result["rank"] !== undefined) {
                         content = "Rang: " + result["rank"] + "<br>"
                         content += "Punkte: " + formatNumber(result["points"]) + "<br>";
                         content += "Dörfer: " + formatNumber(result["villages"]) + "<br>";
