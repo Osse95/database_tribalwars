@@ -1,0 +1,42 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <input type="range" class="form-range" id="ReSizeMap" min="0.5" max="0.95" value="0.7" step="0.01">
+        </div>
+        <div class="col-4">
+        </div>
+        <div id="SizeMap" class="col-12 d-flex justify-content-center">
+            <img src="/graphic/map/deffmap_user.php" class="img-fluid">
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-8 text-center">
+            Bevölkerung <br>
+            0-2000 BH-Plätze Blau <br>
+            2000-10000 BH-Plätze Gelb <br>
+            10000-22000 BH-Plätze Rot <br>
+            22000-50000 BH-Plätze Türkis <br>
+            über 50000 BH-Plätze Schwarz <br>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br></br>
+</div>
+
+<script>
+    let MapSize = $("#SizeMap").width();
+    $("#SizeMap").width($("#ReSizeMap").val() * MapSize);
+    $("#SizeMap").css("margin-left", "auto");
+    $("#SizeMap").css("margin-right", "auto");
+
+    $("#ReSizeMap").on("change", function () {
+        $("#SizeMap").width($("#ReSizeMap").val() * MapSize);
+    });
+</script>

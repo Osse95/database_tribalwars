@@ -1,0 +1,85 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <input type="range" class="form-range" id="reSizeMap" min="0.5" max="0.95" value="0.8" step="0.01">
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <div class="row" ID="sizeMap">
+        <div class="col-12">
+            <div class="card bg-secondary">
+                <div class="card-body ">
+                    <h5 class="card-title">Weltkarte</h5>
+                    <p class="card-text text-center">
+                        <img src="/ajax/graphic/interactiveMap.php" class="img-fluid">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br></br>
+</div>
+<script>
+    let mapDimensions;
+    $.getJSON("/ajax/graphic/getNormalMapDimension.php", function (result) {
+        mapDimensions = [parseInt(result["min"])-5,parseInt(result["max"])+5];
+    });
+    $(document).ready(function () {
+        $('.img-fluid').on("click", function (e) {
+
+            $('#villagePopover').popover("hide")
+            $('#villagePopover').remove();
+
+            let offset = $(this).offset();
+            let xPerc = (e.pageX - offset.left) / this.width;
+            let yPerc = (e.pageY - offset.top) / this.width;
+            let KoordsDistance = mapDimensions[1] - mapDimensions[0];
+            let mapX = Math.round(mapDimensions[0] + KoordsDistance * xPerc)+1;
+            let mapY = Math.round(mapDimensions[0] + KoordsDistance * yPerc)+1;
+            $("body").append("<div id='villagePopover'></div>div>");
+            $('#villagePopover').css("position", "absolute");
+            $('#villagePopover').css("top", e.pageY + "px");
+            $('#villagePopover').css("left", e.pageX + "px");
+            $('#villagePopover').attr("data-toggle", "popover");
+            $('#villagePopover').attr("data-placement", "bottom");
+
+            $.ajax({
+                url: "/ajax/village/getNormalVillageData.php",
+                data: {id: mapX+"|"+mapY},
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    $(villagePreviewElement).attr("data-toggle", "popover");
+                    $(villagePreviewElement).attr("data-placement", "bottom");
+                    let content;
+                    if (result["villageOwner"] !== undefined) {
+                        content = "Koordinaten: " + result["villageInfo"]["coords"] + "<br>";
+                        content += "Besitzer: " + result["villageOwner"] + "<br>";
+                        content += "Punkte: " + formatNumber(result["villageInfo"]["points"]) + "<br>";
+                    } else {
+                        content = "Dorf nicht gefunden."
+                    }
+                    $('#villagePopover').popover({
+                        content: content,
+                        trigger: "hover",
+                        html: true
+                    });
+                    $('#villagePopover').popover("show")
+                }
+            });
+        });
+    });
+
+    let MapSize = $("#sizeMap").width();
+    $("#sizeMap").width($("#reSizeMap").val() * MapSize);
+    $("#sizeMap").css("margin-left", "auto");
+    $("#sizeMap").css("margin-right", "auto");
+    $("#reSizeMap").on("change", function () {
+        $("#sizeMap").width($("#reSizeMap").val() * MapSize);
+    });
+</script>

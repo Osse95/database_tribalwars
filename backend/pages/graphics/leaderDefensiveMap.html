@@ -1,0 +1,199 @@
+<div class="container p-4">
+    <form method="POST">
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Spieler</span>
+                    <input type="text" class="form-control" name="accountname" list="Member" placeholder="Account"
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <datalist id="Member">
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <button class="mt-2 btn btn-primary" type="submit">Einfügen</button>
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+                <input type="range" class="form-range" id="ReSizeMap" min="0.5" max="1" value="0.9" step="0.01">
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <img id="SizeMap" src="/graphic/map/deffmap.php" class="img-fluid">
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-8 text-center mt-4">
+            Bevölkerung <br>
+            0-2000 BH-Plätze Blau <br>
+            2000-10000 BH-Plätze Gelb <br>
+            10000-22000 BH-Plätze Rot <br>
+            22000-50000 BH-Plätze Türkis <br>
+            über 50000 BH-Plätze Schwarz <br>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                            0-2000
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                            2000-10000
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
+                            10000-22000
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                aria-controls="flush-collapseFour">
+                            22000-50000
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
+                            über 50000
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="placeholder">
+    <br></br>
+</div>
+<script>
+    window.onload = function () {
+        let MapSizeW = $("#SizeMap").width();
+        let MapSizeH = $("#SizeMap").height();
+        if (MapSizeW > MapSizeH) {
+            $("#SizeMap").width($("#ReSizeMap").val() * MapSizeW);
+        } else {
+            $('#ReSizeMap').attr('max', 1.5);
+            $("#SizeMap").height($("#ReSizeMap").val() * MapSizeH);
+        }
+        $("#SizeMap").css("margin-left", "auto");
+        $("#SizeMap").css("margin-right", "auto");
+
+        $("#ReSizeMap").on("change", function () {
+            if (MapSizeW > MapSizeH) {
+                $("#SizeMap").width($("#ReSizeMap").val() * MapSizeW + "px");
+            } else {
+                $("#SizeMap").height($("#ReSizeMap").val() * MapSizeH + "px");
+            }
+        });
+    };
+    $(document).ready(function () {
+        $('.img-fluid').on("click", function (e) {
+            var mapDimensions = [<?php
+            echo
+            $new_size["Min_X"] - 5;
+                ?
+        >
+        ,
+            <?php
+            echo
+            $new_size["Max_X"] + 5;
+                ?
+        >
+        ,
+            <?php
+            echo
+            $new_size["Min_Y"] - 5;
+                ?
+        >
+        ,
+            <?php
+            echo
+            $new_size["Max_Y"] + 5;
+                ?
+        >
+        ]
+            ;
+            var offset = $(this).offset();
+            var xPerc = (e.pageX - offset.left) / this.width;
+            var yPerc = (e.pageY - offset.top) / this.height;
+            var mapX = Math.round(mapDimensions[0] + (mapDimensions[1] - mapDimensions[0]) * xPerc);
+            var mapY = Math.round(mapDimensions[2] + (mapDimensions[3] - mapDimensions[2]) * yPerc);
+            $.ajax({
+                url: "/pages/ajax/sf_koord_infos.php?KOORD_X=" + mapX + "&KOORD_Y=" + mapY,
+                success: function (data) {
+                    let html = $.parseHTML(data);
+                    if (html[1] !== undefined) {
+                        $('#Dorf_Infos').remove();
+                        $("body").append(html[1]);
+                        $('#Dorf_Infos').css("position", "absolute");
+                        $('#Dorf_Infos').css("top", e.pageY + "px");
+                        $('#Dorf_Infos').css("left", e.pageX + "px");
+
+                    } else {
+                        $('#Dorf_Infos').remove();
+                    }
+                }
+            });
+
+        });
+    });
+</script>
+<?php } ?>
