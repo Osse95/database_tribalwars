@@ -138,7 +138,7 @@ foreach ($stmt->get_result() as $row) {
     }
 
     $defenderCoordUrl = "/villageInfo?ID={$row["defenderdorfid"]}";
-    $defenderCoordUrl = "<a href='$defenderCoordUrl' target='_blank'> {$row["defendercoords"]} </a>";
+    $defenderCoordUrl = "<a class='previewVillageinfo' href='$defenderCoordUrl' target='_blank'> {$row["defendercoords"]} </a>";
 
     $attackerUrl = "/playerInfo?ID={$row["attackerid"]}";
     $attackerName = $playerNames[$row["attackerid"]]["playerName"] ?? "Barbar";
