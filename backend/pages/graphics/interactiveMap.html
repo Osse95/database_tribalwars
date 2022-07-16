@@ -54,13 +54,24 @@
                 type: 'post',
                 success: function (data) {
                     let result = JSON.parse(data);
-                    $(villagePreviewElement).attr("data-toggle", "popover");
-                    $(villagePreviewElement).attr("data-placement", "bottom");
+
                     let content;
                     if (result["villageOwner"] !== undefined) {
+                        let villageID = result["villageInfo"]["ID"]
                         content = "Koordinaten: " + result["villageInfo"]["coords"] + "<br>";
                         content += "Besitzer: " + result["villageOwner"] + "<br>";
                         content += "Punkte: " + formatNumber(result["villageInfo"]["points"]) + "<br>";
+                        $.ajax({
+                            url: "/ajax/village/getDatabaseVillageData.php",
+                            data: {id: villageID},
+                            type: 'post',
+                            success: function (data) {
+                                let result = JSON.parse(data);
+                                if(result["type"] !== undefined){
+                                    content += "Typ: " + result["type"];
+                                }
+                            }
+                        })
                     } else {
                         content = "Dorf nicht gefunden."
                     }
