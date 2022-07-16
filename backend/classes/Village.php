@@ -14,7 +14,9 @@ class Village extends DB
     {
         parent::__construct($world);
         preg_match("/(?<coords>\d{3}\|\d{3})/",$village,$coords);
-        $village = $coords["coords"]??$village;
+        if($coords["coords"]){
+            $village = "(".$coords["coords"].")";
+        }
         $stmt = $this->conn->prepare("SELECT * FROM `dorfdaten` WHERE dorfid = ? OR dorfcoords = ?");
         $stmt->execute([$village, $village]);
         foreach ($stmt->get_result() as $row) {
