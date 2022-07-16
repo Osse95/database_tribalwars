@@ -68,6 +68,7 @@ class DataTables{
     {
         return match ($column) {
             "0" => "villageid",
+            "1" => "points",
             "2" => "old_owner",
             "3" => "old_tribe",
             "4" => "new_owner",
