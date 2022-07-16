@@ -94,6 +94,19 @@ class graphicControl
         return true;
     }
 
+    static function checkInteractiveMap($world): bool
+    {
+        //check if map exist or is older then 3hours
+        $file = dirname(__DIR__, 3) . "/graphic/interactiveMap/" . $world . ".png";
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (filemtime($file) < time() - 3600 * 3) {
+            return false;
+        }
+        return true;
+    }
+
     static function getTopTenMap($world): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/topTenMaps/" . $world . ".png";
@@ -139,6 +152,13 @@ class graphicControl
     static function getTribeMap($world, $tribeID): bool
     {
         $file = dirname(__DIR__, 3) . "/graphic/tribeMaps/" . $world . $tribeID . ".png";
+        $file = imagecreatefrompng($file);
+        return imagepng($file);
+    }
+
+    static function getInteractiveMap($world): bool
+    {
+        $file = dirname(__DIR__, 3) . "/graphic/interactiveMap/" . $world . ".png";
         $file = imagecreatefrompng($file);
         return imagepng($file);
     }

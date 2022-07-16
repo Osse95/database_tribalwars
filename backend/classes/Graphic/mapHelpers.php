@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\ArrayShape;
+
 require_once dirname(__DIR__) . "/DB.php";
 require_once dirname(__DIR__) . "/Inno.php";
 
@@ -15,6 +18,17 @@ class mapHelpers extends DB
         $this->playerID = intval($playerID);
         preg_match("/(?<world>\w+\d+)/", $world, $match);
         $this->worldName = $match["world"];
+    }
+
+    #[ArrayShape(["min" => "int|mixed", "max" => "int|mixed"])] function getNormalMapDimension(): array
+    {
+        $return = array("min"=>0,"max"=>0);
+        $this->connectTo($this->worldName);
+        $query = $this->query("SELECT MIN(dorfx) as minX,MIN(dorfy) as minY,MAX(dorfx) as maxX,MAX(dorfy) as maxY FROM `dorfdaten`");
+        $return["min"] = min($query[0]["minX"],$query[0]["minY"]);
+        $return["max"] = min($query[0]["maxX"],$query[0]["maxY"]);
+        return $return;
+
     }
 
     function getVillages(): bool|array
@@ -126,6 +140,24 @@ class mapHelpers extends DB
             );
         }
         return [$tribeReturn, $tribeLegend];
+    }
+
+    function getInteractive(): array
+    {
+        $tribeReturn = [];
+        $this->connectTo($this->worldVersion);
+        $query = $this->query("SELECT * FROM `tribes_map`");
+        foreach ($query as $diploVillage) {
+            $diplo = $diploVillage["diplo"];
+            $colour = match ($diplo) {
+                "2" => "red",
+                "3" => "purple",
+                "4" => "lightblue",
+                default => "blue",
+            };
+            $tribeReturn[$diploVillage["tribeid"]] = $colour;
+        }
+        return [$tribeReturn];
     }
 
     function getTribeProportion(): array
