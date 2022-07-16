@@ -134,6 +134,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             stateSave: true,
             order: [[9, 'asc']],
             "initComplete": function(settings, json) {
+
                 loadParams();
             },
             ajax: {
