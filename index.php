@@ -117,6 +117,9 @@ if (!isset($_SESSION["name"])) {
         case("topTen"):
             require __DIR__ . "/backend/pages/graphics/topTen.html";
             break;
+        case("interactiveMap"):
+            require __DIR__ . "/backend/pages/graphics/interactiveMap.html";
+            break;
         default:
             require __DIR__ . "/backend/pages/overview/overview.html";
     }
