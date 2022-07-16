@@ -137,6 +137,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
                 loadParams();
             },
+            "lengthMenu": [[500,200,100, 75, 50, 25,10], [500,200,100, 75, 50, 25,10]],
             ajax: {
                 url: '/ajax/attacks/getAllAttackTable.php',
                 type: 'POST',

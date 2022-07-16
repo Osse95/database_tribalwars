@@ -127,6 +127,7 @@ $World = new World($_SESSION["world"]);
             "initComplete": function(settings, json) {
                 loadParams();
             },
+            "lengthMenu": [[500,200,100, 75, 50, 25,10], [500,200,100, 75, 50, 25,10]],
             ajax: {
                 url: '/ajax/attacks/getOwnAttackTable.php',
                 type: 'POST',
