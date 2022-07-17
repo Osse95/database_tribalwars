@@ -219,7 +219,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             "initComplete": function (settings, json) {
                 loadParams();
             },
-            "lengthMenu": [[500,200,100, 75, 50, 25,10], [500,200,100, 75, 50, 25,10]],
+            "lengthMenu": [[10,20,50,75,100,200,500,1000], [10,20,50,75,100,200,500,1000]],
             ajax: {
                 url: '/ajax/reports/getReportTable.php',
                 type: 'POST',

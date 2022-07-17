@@ -136,6 +136,7 @@ $User = new World_User($_SESSION["name"], $_SESSION["world"]);
             "initComplete": function(settings, json) {
                 loadParams();
             },
+            "lengthMenu": [[10,20,50,75,100,200,500,1000], [10,20,50,75,100,200,500,1000]],
             ajax: {
                 url: '/ajax/reports/getSupportTable.php',
                 type: 'POST',
