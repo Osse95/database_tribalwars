@@ -275,6 +275,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
             </ul>
         </div>
         <span class="navbar-brand">
+            <?php echo $World_User->getWorld(); ?>
             <?php if ($World_User->uvModeActivated()) { ?>|<span class="text-danger">
                 UV-Modus </span><?php } ?>
         </span>
