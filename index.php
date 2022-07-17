@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$time = microtime(true);
 require_once __DIR__ . "/backend/classes/User.php";
 require_once __DIR__ . "/backend/classes/World_User.php";
 require_once __DIR__ . "/backend/classes/General.php";
@@ -137,5 +137,7 @@ if (!isset($_SESSION["name"])) {
                 require __DIR__ . "/backend/pages/overview/overview.html";
         }
     }
-
+    if (!str_contains($_SERVER['REQUEST_URI'], "preview")) {
+        require "./backend/pages/footer/footer.php";
+    }
 }
