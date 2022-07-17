@@ -56,75 +56,86 @@ if (!isset($_SESSION["name"])) {
     } else {
         require "./backend/pages/header/headerPreview.php";
     }
-    switch ($side) {
-        case("showReports"):
-            require __DIR__ . "/backend/pages/reports/showReports.php";
-            break;
-        case("showUTReports"):
-            require __DIR__ . "/backend/pages/reports/showSupportReports.php";
-            break;
-        case("showReport"):
-            require __DIR__ . "/backend/pages/previewReports/showReport.html";
-            break;
-        case("insert"):
-            require __DIR__ . "/backend/pages/insert/insert.html";
-            break;
-        case("ranking"):
-            require __DIR__ . "/backend/pages/ranking/ranking.html";
-            break;
-        case("dbRanking"):
-            require __DIR__ . "/backend/pages/ranking/dbRanking.html";
-            break;
-        case("evaluation"):
-            require __DIR__ . "/backend/pages/ranking/evaluation.html";
-            break;
-        case("villages"):
-            require __DIR__ . "/backend/pages/villages/villages.html";
-            break;
-        case("allAttacks"):
-            require __DIR__ . "/backend/pages/attacks/allAttacks.php";
-            break;
-        case("ownAttacks"):
-            require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
-            break;
-        case("retimes"):
-            require __DIR__ . "/backend/pages/attacks/retimes.html";
-            break;
-        case("heatMap"):
-            require __DIR__ . "/backend/pages/attacks/heatMap.html";
-            break;
-        case("sourceMap"):
-            require __DIR__ . "/backend/pages/attacks/sourceMap.html";
-            break;
-        case("transferAttacks"):
-            require __DIR__ . "/backend/pages/attacks/getAttacks.php";
-            break;
-        case("search"):
-            require __DIR__ . "/backend/pages/search/search.html";
-            break;
-        case("conquers"):
-            require __DIR__ . "/backend/pages/conquer/conquers.html";
-            break;
-        case("playerInfo"):
-            require __DIR__ . "/backend/pages/search/playerInfo.html";
-            break;
-        case("tribeInfo"):
-            require __DIR__ . "/backend/pages/search/tribeInfo.html";
-            break;
-        case("villageInfo"):
-            require __DIR__ . "/backend/pages/search/villageInfo.html";
-            break;
-        case("allVillages"):
-            require __DIR__ . "/backend/pages/search/villages.html";
-            break;
-        case("topTen"):
-            require __DIR__ . "/backend/pages/graphics/topTen.html";
-            break;
-        case("interactiveMap"):
-            require __DIR__ . "/backend/pages/graphics/interactiveMap.html";
-            break;
-        default:
-            require __DIR__ . "/backend/pages/overview/overview.html";
+
+    $sideHit = false;
+
+    if ($World_User->isAdmin()) {
+        if ($side == "admin") {
+            require __DIR__ . "/backend/pages/admin/admin.html";
+            $sideHit = true;
+        }
+    }
+    if (!$sideHit) {
+        switch ($side) {
+            case("showReports"):
+                require __DIR__ . "/backend/pages/reports/showReports.php";
+                break;
+            case("showUTReports"):
+                require __DIR__ . "/backend/pages/reports/showSupportReports.php";
+                break;
+            case("showReport"):
+                require __DIR__ . "/backend/pages/previewReports/showReport.html";
+                break;
+            case("insert"):
+                require __DIR__ . "/backend/pages/insert/insert.html";
+                break;
+            case("ranking"):
+                require __DIR__ . "/backend/pages/ranking/ranking.html";
+                break;
+            case("dbRanking"):
+                require __DIR__ . "/backend/pages/ranking/dbRanking.html";
+                break;
+            case("evaluation"):
+                require __DIR__ . "/backend/pages/ranking/evaluation.html";
+                break;
+            case("villages"):
+                require __DIR__ . "/backend/pages/villages/villages.html";
+                break;
+            case("allAttacks"):
+                require __DIR__ . "/backend/pages/attacks/allAttacks.php";
+                break;
+            case("ownAttacks"):
+                require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
+                break;
+            case("retimes"):
+                require __DIR__ . "/backend/pages/attacks/retimes.html";
+                break;
+            case("heatMap"):
+                require __DIR__ . "/backend/pages/attacks/heatMap.html";
+                break;
+            case("sourceMap"):
+                require __DIR__ . "/backend/pages/attacks/sourceMap.html";
+                break;
+            case("transferAttacks"):
+                require __DIR__ . "/backend/pages/attacks/getAttacks.php";
+                break;
+            case("search"):
+                require __DIR__ . "/backend/pages/search/search.html";
+                break;
+            case("conquers"):
+                require __DIR__ . "/backend/pages/conquer/conquers.html";
+                break;
+            case("playerInfo"):
+                require __DIR__ . "/backend/pages/search/playerInfo.html";
+                break;
+            case("tribeInfo"):
+                require __DIR__ . "/backend/pages/search/tribeInfo.html";
+                break;
+            case("villageInfo"):
+                require __DIR__ . "/backend/pages/search/villageInfo.html";
+                break;
+            case("allVillages"):
+                require __DIR__ . "/backend/pages/search/villages.html";
+                break;
+            case("topTen"):
+                require __DIR__ . "/backend/pages/graphics/topTen.html";
+                break;
+            case("interactiveMap"):
+                require __DIR__ . "/backend/pages/graphics/interactiveMap.html";
+                break;
+            default:
+                require __DIR__ . "/backend/pages/overview/overview.html";
+        }
     }
 
 }

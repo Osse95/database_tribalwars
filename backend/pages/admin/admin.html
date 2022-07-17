@@ -1,0 +1,132 @@
+<div class="container p-4">
+
+    <div class="row mb-3">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <button class="btn btn-primary me-3" id="users"> Benutzer
+                </button>
+                <button class="btn btn-primary me-3" id="userEdit"> Benutzer bearbeiten
+                </button>
+                <button class="btn btn-primary" id="worldVersions"> Weltenversionen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="usersPage">
+        <div class="d-flex justify-content-center">
+            <table id="admin">
+                <thead>
+                <tr>
+                    <th> Benutzername</th>
+                    <th> Registrierungsdatum</th>
+                    <th> Letzter Login</th>
+                    <th> Deaktivieren / Aktivieren</th>
+                    <th> Löschen</th>
+                </thead>
+                <body>
+                </body>
+            </table>
+        </div>
+    </div>
+    <div id="usersEditPage">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-auto">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Accountname</span>
+                    <input name="playerName" list="playerNames"
+                           placeholder="Account" class="form-control">
+                    <datalist id="playerNames">
+                    </datalist>
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <input type="text" name="newPasswort" placeholder="Passwort" class="form-control">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <button id="changePassword" class="btn btn-primary"> Passwort ändern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="worldVersionsPage">
+        <div class="row d-flex justify-content-center">
+            <div id="maxVersion" class="col-12 text-center">
+            </div>
+            <div class="col-xs-12 col-lg-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text">Version ändern</span>
+                    <input name="worldVersion" list="allWorldVersions"
+                           placeholder="Version" class="form-control">
+                    <datalist id="allWorldVersions">
+                    </datalist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/js/date-eu.js"></script>
+<script>
+    $(document).ready(function () {
+        let DataTable = $('#admin').DataTable({
+            "paging": true,
+            "searching": true,
+            "info": true,
+            processing: true,
+            "columnDefs": [{
+                "targets": 4,
+                "orderable": false
+            }],
+            "columns": [
+                { "type": "html"},
+                { "type": "date-euro"},
+                { "type": "date-euro"},
+                null,
+                null
+            ],
+            "lengthMenu": [[10, 20, 50, 75, 100, 200, 500, 1000], [10, 20, 50, 75, 100, 200, 500, 1000]],
+            ajax: {
+                url: '/ajax/admin/getUserTable.php',
+                type: 'POST',
+                async: true
+            }
+        });
+    });
+
+    $.getJSON("/ajax/admin/getAllUserNames.php", function (result) {
+        result.forEach(element => {
+            $("#playerNames").append(`<option>${element}</option>`)
+        })
+    });
+    $.getJSON("/ajax/admin/getMaxWorldVersion.php", function (result) {
+        $("#maxVersion").text("Max Version: "+result);
+    });
+    $.getJSON("/ajax/admin/getAllVersions.php", function (result) {
+        result.forEach(element => {
+            $("#allWorldVersions").append(`<option>${element}</option>`)
+        })
+    });
+</script>
+
+<script>
+
+    $("#usersEditPage").css("display", "none");
+    $("#worldVersionsPage").css("display", "none");
+
+    $("#users").on('click', function () {
+        $("#usersEditPage").css("display", "none");
+        $("#worldVersionsPage").css("display", "none");
+        $("#usersPage").css("display", "block");
+    })
+
+    $("#userEdit").on('click', function () {
+        $("#usersPage").css("display", "none");
+        $("#worldVersionsPage").css("display", "none");
+        $("#usersEditPage").css("display", "block");
+    })
+
+    $("#worldVersions").on('click', function () {
+        $("#usersEditPage").css("display", "none");
+        $("#usersPage").css("display", "none");
+        $("#worldVersionsPage").css("display", "block");
+    })
+</script>
