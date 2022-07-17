@@ -241,9 +241,12 @@
             $(".archer").hide()
         }
     })
+    let troopsArray;
+    let buildingsArray;
 
     $.getJSON("/ajax/ownVillages/getOwnTroops.php", function (result) {
-        for (let i = 0; i < result["village"].length; i++) {
+        troopsArray = result;
+        for (let i = 0; i < Math.min(troopsArray["all"].length, 10); i++) {
             let tableRow = "<tr>";
             tableRow += `<td> ${result["village"][i]} </td>`;
             tableRow += `<td> eigene </td>`;
@@ -274,6 +277,12 @@
             tableRow += "</tr>";
             $("#troopsBody").append(tableRow)
         }
+
+        troopsArray["all"] = troopsArray["all"].splice(Math.min(troopsArray["all"].length, 10));
+        troopsArray["inVillage"] = troopsArray["inVillage"].splice(Math.min(troopsArray["inVillage"].length, 10));
+        troopsArray["outwards"] = troopsArray["outwards"].splice(Math.min(troopsArray["outwards"].length, 10));
+        troopsArray["own"] = troopsArray["own"].splice(Math.min(troopsArray["own"].length, 10));
+        troopsArray["village"] = troopsArray["village"].splice(Math.min(troopsArray["village"].length, 10));
         $("#troopsBody").find("tr").each(function () {
             if ($(this).children().eq(5).text() < 0) {
                 $(this).children().eq(5).hide()
@@ -284,11 +293,13 @@
         if (!archer) {
             $(".archer").hide()
         }
+
     })
 
     function loadBuildings() {
         $.getJSON("/ajax/ownVillages/getOwnBuildings.php", function (result) {
-            for (let i = 0; i < result.length; i++) {
+            buildingsArray = result;
+            for (let i = 0; i < Math.min(result.length,30); i++) {
                 let tableRow = "<tr>";
                 result[i].forEach(element => {
                     tableRow += `<td>${element}</td>`
@@ -296,6 +307,105 @@
                 tableRow += "</tr>";
                 $("#buildingsBody").append(tableRow)
             }
+            let church = true,watchtower = true,hide = true;
+            $("#buildingsBody").find("tr").each(function () {
+                if ($(this).children().eq(5).text() < 0) {
+                    $(this).children().eq(5).hide()
+                    $(this).children().eq(6).hide()
+                    church = false;
+                }
+                if ($(this).children().eq(7).text() < 0) {
+                    $(this).children().eq(7).hide()
+                    watchtower = false;
+                }
+                if ($(this).children().eq(18).text() < 0) {
+                    $(this).children().eq(18).hide()
+                    hide = false;
+                }
+            })
+            if (!church) {
+                $(".church").hide()
+            }
+            if (!watchtower) {
+                $(".watchtower").hide()
+            }
+            if (!hide) {
+                $(".hide").hide()
+            }
+            buildingsArray = buildingsArray.splice(Math.min(buildingsArray.length,10))
         })
     }
+
+    $(window).scroll(function () {
+        if (1500 >= $(window).height() - $(window).scrollTop()) {
+            if ($("#troops").css("display") == "block") {
+                let result = troopsArray;
+                for (let i = 0; i < Math.min(troopsArray["all"].length, 10); i++) {
+                    let tableRow = "<tr>";
+                    tableRow += `<td> ${result["village"][i]} </td>`;
+                    tableRow += `<td> eigene </td>`;
+                    result["own"][i].forEach(element => {
+                        if (element > -1) {
+                            tableRow += `<td>${element}</td>`
+                        }
+                    });
+                    tableRow += "</tr>";
+                    tableRow += "<tr>";
+                    tableRow += `<td> </td>`;
+                    tableRow += `<td> im Dorf </td>`;
+                    result["inVillage"][i].forEach(element => {
+                        if (element > -1) {
+                            tableRow += `<td>${element}</td>`
+                        }
+                    });
+                    tableRow += "</tr>";
+                    tableRow += "<tr>";
+                    tableRow += `<td> </td>`;
+                    tableRow += `<td> auswärts </td>`;
+                    result["outwards"][i].forEach(element => {
+                        if (element > -1) {
+                            tableRow += `<td>${element}</td>`
+                        }
+                    });
+                    tableRow += "</tr>";
+                    tableRow += "<tr>";
+                    tableRow += `<td> </td>`;
+                    tableRow += `<td> insgesamt </td>`;
+                    result["all"][i].forEach(element => {
+                        if (element > -1) {
+                            tableRow += `<td>${element}</td>`
+                        }
+                    });
+                    tableRow += "</tr>";
+                    $("#troopsBody").append(tableRow)
+                }
+                troopsArray["all"] = troopsArray["all"].splice(Math.min(troopsArray["all"].length, 10));
+                troopsArray["inVillage"] = troopsArray["inVillage"].splice(Math.min(troopsArray["inVillage"].length, 10));
+                troopsArray["outwards"] = troopsArray["outwards"].splice(Math.min(troopsArray["outwards"].length, 10));
+                troopsArray["own"] = troopsArray["own"].splice(Math.min(troopsArray["own"].length, 10));
+                troopsArray["village"] = troopsArray["village"].splice(Math.min(troopsArray["village"].length, 10));
+            }
+            if (1100 >= $(window).height() - $(window).scrollTop()) {
+                if ($("#buildings").css("display") == "block") {
+                    let result = buildingsArray;
+                    for (let i = 0; i < Math.min(result.length, 10); i++) {
+
+                        let tableRow = "<tr>";
+                        result[i].forEach(element => {
+                            if(Number.isInteger(element)){
+                                if(element > -1){
+                                    tableRow += `<td>${element}</td>`
+                                }
+                            }else{
+                                tableRow += `<td>${element}</td>`
+                            }
+                        });
+                        tableRow += "</tr>";
+                        $("#buildingsBody").append(tableRow)
+                    }
+                    buildingsArray = buildingsArray.splice(Math.min(buildingsArray.length, 10))
+                }
+            }
+        }
+    })
 </script>
