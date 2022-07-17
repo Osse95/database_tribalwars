@@ -1,0 +1,42 @@
+<div class="container p-4 table-responsive text-center">
+    <table class="table table-dark table-hover table-striped" ID="villages">
+        <thead>
+        <tr>
+            <th>Dorfname</th>
+            <th>Spieler</th>
+            <th>Dorfpunkte</th>
+            <th>Bonusid</th>
+            <th>Letzte Eroberung</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        let DataTable = $('#villages').DataTable({
+            "paging": true,
+            "searching": false,
+            "info": true,
+            processing: true,
+            "lengthMenu": [[10,20,50,75,100,200,500,1000], [10,20,50,75,100,200,500,1000]],
+            ajax: {
+                url: '/ajax/villages/getAllVillageTable.php',
+                type: 'POST',
+                async: true,
+                // dataSrc: ,
+                data: function (d) {
+                    d["playerID"] = urlParams.get('playerID');
+                    d["tribeID"] = urlParams.get('tribeID');
+                }
+            }
+        });
+        $("#ValuesTable Input").on("change", function () {
+            DataTable.ajax.reload();
+        });
+    });
+</script>

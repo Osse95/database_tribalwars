@@ -114,6 +114,9 @@ if (!isset($_SESSION["name"])) {
         case("villageInfo"):
             require __DIR__ . "/backend/pages/search/villageInfo.html";
             break;
+        case("allVillages"):
+            require __DIR__ . "/backend/pages/search/villages.html";
+            break;
         case("topTen"):
             require __DIR__ . "/backend/pages/graphics/topTen.html";
             break;
