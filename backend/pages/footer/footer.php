@@ -1,4 +1,7 @@
-<nav id="navi" class="navbar fixed-bottom navbar-primary bg-primary">
+<div class="placeholder">
+    <br/>
+</div>
+<footer id="footer" class="fixed-bottom navbar navbar-primary bg-primary">
     <div class="col-12 px-0 text-center">
         <ul class="list-inline my-0 mt-2">
             <li class="list-inline-item mr-0">
@@ -48,4 +51,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</footer>

@@ -28,10 +28,6 @@
     </div>
 </div>
 
-<div class="placeholder">
-    <br></br>
-</div>
-
 <script>
     $("#copyFakes").on("click", function () {
         let copyText = document.getElementById("Fakes");
