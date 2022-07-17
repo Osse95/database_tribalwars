@@ -341,7 +341,8 @@
                 let tribeURL = "<a href='tribeInfo?ID="+result["tribeTag"]+"'>"+result["tribeTag"]+"</a>";
                 $("td", $('table#normalPlayerData')).eq(2).html(tribeURL)
                 $("td", $('table#normalPlayerData')).eq(3).text(formatNumber(result["points"]))
-                $("td", $('table#normalPlayerData')).eq(4).text(formatNumber(result["villages"]))
+                let villageURL = "<a href='allVillages?playerID="+result["name"]+"'>"+formatNumber(result["villages"])+"</a>";
+                $("td", $('table#normalPlayerData')).eq(4).html(villageURL)
                 let conquerURL = "<a href='conquers?playerName="+result["name"]+"'>"+formatNumber(result["conquersWin"] + result["conquersLoss"] + result["conquersSelf"])+"</a>";
                 $("td", $('table#normalPlayerData')).eq(5).html(conquerURL)
                 $("td", $('table#normalPlayerData')).eq(6).text(result["tribeChanges"])
