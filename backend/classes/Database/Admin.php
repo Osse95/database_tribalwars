@@ -82,8 +82,17 @@ class Admin extends DB
     }
 
     function changeVersion($userName,$world,$version){
-        var_dump($version,$userName,$world);
         $stmt = $this->conn->prepare("UPDATE `userrollen` SET `Version` = ? WHERE `userrollen`.`name` = ? AND `userrollen`.`world` = ?;");
         $stmt->execute([$version,$userName,$world]);
+    }
+
+    function getImprovements(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT * FROM `vorschlag`");
+        foreach ($query as $improvement){
+            $return[] = [$improvement["user"],$improvement["vorschlag"],$improvement["answer"]];
+        }
+        return $return;
     }
 }
