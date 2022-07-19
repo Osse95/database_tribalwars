@@ -15,7 +15,7 @@
 
     <div id="usersPage">
         <div class="d-flex justify-content-center table-responsive">
-            <table id="admin">
+            <table id="admin" class="table table-dark table-hover table-striped">
                 <thead>
                 <tr>
                     <th> Benutzername</th>
@@ -32,6 +32,7 @@
     <div id="usersEditPage">
         <div class="row d-flex justify-content-center">
             <div class="col-md-auto">
+                <div class="col-12 text-center" id="changePasswordMsg"></div>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Accountname</span>
                     <input name="playerName" list="playerNames"
@@ -40,7 +41,7 @@
                     </datalist>
                 </div>
                 <div class="input-group input-group-sm mb-3">
-                    <input type="text" name="newPasswort" placeholder="Passwort" class="form-control">
+                    <input type="text" name="newPassword" placeholder="Passwort" class="form-control">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                     <button id="changePassword" class="btn btn-primary"> Passwort ändern</button>
@@ -49,9 +50,10 @@
         </div>
     </div>
     <div id="worldVersionsPage">
-        <div class="row d-flex justify-content-center">
+        <div class="row">
             <div id="maxVersion" class="col-12 text-center">
             </div>
+            <div class="col-lg-4"></div>
             <div class="col-xs-12 col-lg-4">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Version ändern</span>
@@ -61,13 +63,22 @@
                     </datalist>
                 </div>
             </div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-xs-12 col-lg-4 mt-2">
+                <div class="input-group input-group-sm">
+                    <button id="changeVersion" class="btn btn-primary"> Version ändern</button>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="/assets/js/date-eu.js"></script>
 <script>
+    let DataTable
     $(document).ready(function () {
-        let DataTable = $('#admin').DataTable({
+        DataTable = $('#admin').DataTable({
             "paging": true,
             "searching": true,
             "info": true,
@@ -77,9 +88,9 @@
                 "orderable": false
             }],
             "columns": [
-                { "type": "html"},
-                { "type": "date-euro"},
-                { "type": "date-euro"},
+                {"type": "html"},
+                {"type": "date-euro"},
+                {"type": "date-euro"},
                 null,
                 null
             ],
@@ -98,15 +109,82 @@
         })
     });
     $.getJSON("/ajax/admin/getMaxWorldVersion.php", function (result) {
-        $("#maxVersion").text("Max Version: "+result);
+        $("#maxVersion").text("Max Version: " + result);
     });
     $.getJSON("/ajax/admin/getAllVersions.php", function (result) {
         result.forEach(element => {
             $("#allWorldVersions").append(`<option>${element}</option>`)
         })
     });
-</script>
 
+    $(document).on("click", ".deactivatedUser", function () {
+        let userName = $(this).attr('id');
+        $(this).text("Benutzer aktivieren");
+        $(this).removeClass("deactivatedUser");
+        $(this).addClass("activatedUser");
+        $.ajax({
+            url: "/ajax/admin/deactivatedUser.php",
+            data: {userName: userName},
+            type: 'post',
+            success: function (data) {
+            }
+        });
+    })
+
+    $(document).on("click", ".activatedUser", function () {
+        let userName = $(this).attr('id');
+        $(this).text("Benutzer deaktivieren");
+        $(this).removeClass("activatedUser");
+        $(this).addClass("deactivatedUser");
+        $.ajax({
+            url: "/ajax/admin/activatedUser.php",
+            data: {userName: userName},
+            type: 'post',
+            success: function (data) {
+            }
+        });
+    })
+
+    $(document).on("click", ".deleteUser", function () {
+        let userName = $(this).attr('id');
+        $(this).closest("tr").hide()
+        $.ajax({
+            url: "/ajax/admin/deleteUser.php",
+            data: {userName: userName},
+            type: 'post',
+            success: function (data) {
+                DataTable.ajax.reload();
+            }
+        });
+    })
+
+    $("#changePassword").on("click",function (){
+        let userName = $("input[name=playerName]").val();
+        let password = $("input[name=newPassword]").val();
+        $("input[name=playerName]").val("")
+        $("input[name=newPassword]").val("")
+        $.ajax({
+            url: "/ajax/admin/changeUserPassword.php",
+            data: {userName: userName,password : password},
+            type: 'post',
+            success: function (data) {
+            }
+        });
+    })
+
+    $("#changeVersion").on("click",function (){
+        let worldVersion = $("input[name=worldVersion]").val();
+        $("input[name=worldVersion]").val("")
+        $.ajax({
+            url: "/ajax/admin/changeVersion.php",
+            data: {version: worldVersion},
+            type: 'post',
+            success: function (data) {
+            }
+        });
+    })
+
+</script>
 <script>
 
     $("#usersEditPage").css("display", "none");
