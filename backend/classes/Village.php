@@ -47,7 +47,7 @@ class Village extends DB
         if (count($conquer) == 0) {
             return "-";
         } else {
-            return date("d.m.Y h:i", $conquer[0]["timestamp"]);
+            return date("d.m.Y H:i", $conquer[0]["timestamp"]);
         }
     }
 
