@@ -2,7 +2,6 @@
 session_start();
 
 if (!isset($_SESSION["name"])) return;
-require dirname(__DIR__, 2) . "/backend/classes/DB.php";
 require dirname(__DIR__, 2) . "/backend/classes/World_User.php";
 require dirname(__DIR__, 2) . "/backend/classes/Database/Admin.php";
 
@@ -12,7 +11,5 @@ if (!$World_User->isAdmin()) {
     General::redirectHeader();
 }
 
-$Admin = new Admin($World_User->getWorld(),$World_User->getVersion());
-$Return = $Admin->getAllUserNamesAjax();
-
-echo json_encode($Return);
+$Admin = new Admin();
+$Return = $Admin->deactivatedUser($_POST["userName"]??"");
