@@ -38,11 +38,11 @@ class Admin extends DB
             $lastLogin = date("d.m.Y H:i:s", $user["lastlogin"]);
             $register = date("d.m.Y H:i:s", $user["register"]);
             if ($user["activated"] == 1) {
-                $activated = "<button class='ms-3 btn btn-primary {$user["name"]} deactivatedUser'> Benutzer deaktivieren </button>";
+                $activated = "<button id='{$user["name"]}' class='ms-3 btn btn-primary deactivatedUser'> Benutzer deaktivieren </button>";
             } else {
-                $activated = "<button class='ms-3 btn btn-primary {$user["name"]} activatedUser'> Benutzer aktivieren </button>";
+                $activated = "<button id='{$user["name"]}' class='ms-3 btn btn-primary activatedUser'> Benutzer aktivieren </button>";
             }
-            $deleteUser = "<button class='btn btn-primary {$user["name"]} deleteUser'> Benutzer löschen </button>";
+            $deleteUser = "<button id='{$user["name"]}' class='btn btn-primary deleteUser'> Benutzer löschen </button>";
             $Return[] = [$user["name"], $register, $lastLogin, $activated, $deleteUser];
         }
         return $Return;
@@ -56,5 +56,34 @@ class Admin extends DB
             $Return[] = $user["name"];
         }
         return $Return;
+    }
+
+    function deactivatedUser($userName)
+    {
+        $stmt = $this->conn->prepare("UPDATE `users` SET `activated` = '0' WHERE `users`.`name` = ?;");
+        $stmt->execute([$userName]);
+    }
+
+    function activatedUser($userName)
+    {
+        $stmt = $this->conn->prepare("UPDATE `users` SET `activated` = '1' WHERE `users`.`name` = ?;");
+        $stmt->execute([$userName]);
+    }
+
+    function deleteUser($userName){
+        $stmt = $this->conn->prepare("DELETE FROM `users` WHERE `users`.`name` = ?;");
+        $stmt->execute([$userName]);
+    }
+
+    function changeUserPassword($userName,$password){
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->conn->prepare("UPDATE `users` SET `passwort` = ? WHERE `users`.`name` = ?;");
+        $stmt->execute([$hash,$userName]);
+    }
+
+    function changeVersion($userName,$world,$version){
+        var_dump($version,$userName,$world);
+        $stmt = $this->conn->prepare("UPDATE `userrollen` SET `Version` = ? WHERE `userrollen`.`name` = ? AND `userrollen`.`world` = ?;");
+        $stmt->execute([$version,$userName,$world]);
     }
 }
