@@ -84,7 +84,7 @@ class World_User extends DB
 
     function getName()
     {
-        return $this->World_Account["name"];
+        return $this->World_Account["Name"];
     }
 
     function getPlayerID()
