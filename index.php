@@ -133,6 +133,9 @@ if (!isset($_SESSION["name"])) {
             case("interactiveMap"):
                 require __DIR__ . "/backend/pages/graphics/interactiveMap.html";
                 break;
+            case("improvement"):
+                require __DIR__ . "/backend/pages/footer/improvement.php";
+                break;
             default:
                 require __DIR__ . "/backend/pages/overview/overview.html";
         }
