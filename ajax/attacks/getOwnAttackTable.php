@@ -168,7 +168,7 @@ foreach ($stmt->get_result() as $row) {
 
     $watchtowerTime = "";
     if ($row["watchtowertime"] > 1 && $row["watchtowertime"] < $row["timeunix"]) {
-        $watchtowerTime = date("d.m.Y h:i:s", $row["eingelesen_am"]);
+        $watchtowerTime = date("d.m.Y h:i:s", $row["watchtowertime"]);
     }
 
     $doubler = $row["counter"];

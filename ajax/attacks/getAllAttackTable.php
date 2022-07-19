@@ -8,6 +8,7 @@ require dirname(__DIR__, 2) . "/backend/classes/Players.php";
 require dirname(__DIR__, 2) . "/backend/classes/Player.php";
 require dirname(__DIR__, 2) . "/backend/classes/General.php";
 require dirname(__DIR__, 2) . "/backend/classes/DataTables.php";
+require dirname(__DIR__, 2) . "/backend/classes/World.php";
 
 $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
 
@@ -17,6 +18,8 @@ if (!$World_User->isActivated()) {
 
 $DB = new DB();
 $DB->connectTo($World_User->getWorldVersion());
+
+$World = new World($World_User->getWorld());
 
 $bindParams = [];
 $Query = "SELECT * FROM `sos` WHERE 1 = 1";
@@ -190,8 +193,13 @@ foreach ($stmt->get_result() as $row) {
     if(strtolower($row["type2"]) == "snob" OR strtolower($row["type2"]) == "ag"){
         $typ = "AG";
     }
-    $arrivalTime = date("d.m.Y h:i:s", $row["timeunix"]);
 
+    $arrivalTime = date("d.m.Y H:i:s", $row["timeunix"]);
+    if($World->isWatchtowerAvailable()){
+        if ($row["watchtowertime"] > 1 && $row["watchtowertime"] < $row["timeunix"]) {
+            $arrivalTime .= "<br> (".date("d.m.Y H:i:s", $row["watchtowertime"]) .")";
+        }
+    }
     $deleteButton = "<input type='checkbox' class='deleteAttack' id='{$row["id"]}'>";
 
     if($World_User->isMod() || $World_User->isSF()){
