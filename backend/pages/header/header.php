@@ -138,7 +138,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                                 <font class="dropitem">Sourcemap</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/createAttackplan">
-                                <font class="dropitem">Neuer Angriffsplaner</font>
+                                <font class="dropitem">Angriffsplaner</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/transferAttacks">
                                 <font class="dropitem">Angriffe übertragen</font>
