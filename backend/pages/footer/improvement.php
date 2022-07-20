@@ -49,7 +49,24 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
             $("#msg").text("Bitte ausführlichen Vorschlag schreiben.")
             return;
         } else {
-
+            $.ajax({
+                url: "/ajax/improvement/addImprovement.php",
+                data: {improvement: improvement},
+                type: 'post',
+                success: function (data) {
+                    let result = JSON.parse(data);
+                    if (result) {
+                        let row = `<tr>
+                            <td>${result}</td>
+                            <td>${improvement}</td>
+                            <td></td>
+                           </tr>`
+                        $("#improvementBody").append(row)
+                    } else {
+                        $("#msg").text("Bitte ausführlichen Vorschlag schreiben.")
+                    }
+                }
+            });
         }
     })
 
@@ -80,7 +97,14 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
         let answer = $(this).val().trim();
         let user = $(this).closest("tr").find("td:eq(0)").text().trim();
         let improvement = $(this).closest("tr").find("td:eq(1)").text().trim();
-        console.log(answer)
+        $.ajax({
+            url: "/ajax/improvement/addImprovementAnswer.php",
+            data: {improvement: improvement, user: user, answer: answer},
+            type: 'post',
+            success: function (data) {
+                console.log(data)
+            }
+        });
     })
     <?php
     }
