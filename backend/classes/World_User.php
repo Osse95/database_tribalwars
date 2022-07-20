@@ -184,7 +184,7 @@ class World_User extends DB
     function seeAllAttacks() : bool
     {
         if($this->World_Account["attacks"] == 1){
-            return true;
+            return $this->getName();
         }else{
             return false;
         }
@@ -197,5 +197,20 @@ class World_User extends DB
         }else{
             return false;
         }
+    }
+
+    function addImprovement($improvement){
+        $stmt = $this->conn->prepare("INSERT INTO `vorschlag` (user,vorschlag) VALUES ('{$this->getName()}',?)");
+        $stmt->execute([$improvement]);
+    }
+
+    function getImprovements(): array
+    {
+        $return = [];
+        $query = $this->query("SELECT * FROM `vorschlag`");
+        foreach ($query as $improvement){
+            $return[] = [$improvement["user"],$improvement["vorschlag"],$improvement["answer"]];
+        }
+        return $return;
     }
 }

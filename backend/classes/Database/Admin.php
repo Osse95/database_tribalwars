@@ -70,29 +70,29 @@ class Admin extends DB
         $stmt->execute([$userName]);
     }
 
-    function deleteUser($userName){
+    function deleteUser($userName)
+    {
         $stmt = $this->conn->prepare("DELETE FROM `users` WHERE `users`.`name` = ?;");
         $stmt->execute([$userName]);
     }
 
-    function changeUserPassword($userName,$password){
+    function changeUserPassword($userName, $password)
+    {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->conn->prepare("UPDATE `users` SET `passwort` = ? WHERE `users`.`name` = ?;");
-        $stmt->execute([$hash,$userName]);
+        $stmt->execute([$hash, $userName]);
     }
 
-    function changeVersion($userName,$world,$version){
-        $stmt = $this->conn->prepare("UPDATE `userrollen` SET `Version` = ? WHERE `userrollen`.`name` = ? AND `userrollen`.`world` = ?;");
-        $stmt->execute([$version,$userName,$world]);
-    }
-
-    function getImprovements(): array
+    function changeVersion($userName, $world, $version)
     {
-        $return = [];
-        $query = $this->query("SELECT * FROM `vorschlag`");
-        foreach ($query as $improvement){
-            $return[] = [$improvement["user"],$improvement["vorschlag"],$improvement["answer"]];
-        }
-        return $return;
+        $stmt = $this->conn->prepare("UPDATE `userrollen` SET `Version` = ? WHERE `userrollen`.`name` = ? AND `userrollen`.`world` = ?;");
+        $stmt->execute([$version, $userName, $world]);
     }
+
+    function addImprovementAnswer ($answer, $user, $improvement)
+    {
+        $stmt = $this->conn->prepare("UPDATE `vorschlag` SET `answer` = ? WHERE `vorschlag`.`vorschlag` = ? AND `vorschlag`.`user` = ?;");
+        $stmt->execute([$answer, $improvement, $user]);
+    }
+
 }
