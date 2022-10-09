@@ -21,13 +21,6 @@
             <li class="list-inline-item mr-0">
                 <small>
                     <font>
-                        Changeworld
-                    </font>
-                </small>
-            </li>
-            <li class="list-inline-item mr-0">
-                <small>
-                    <font>
                         Ladezeit: <?php echo round((microtime(true) - $time)*1000,2); ?> ms
                     </font>
                 </small>
@@ -39,6 +32,18 @@
                     </font>
                 </small>
             </li>
+            <li class="list-inline-item mr-0">
+                <small>
+                    <select class="form-select form-select-sm" id="changeWorld">
+                    </select>
+                </small>
+            </li>
         </ul>
     </div>
 </footer>
+
+<script>
+    if (localStorage.getItem("LastWorld") !== null) {
+        $("#changeWorld").append("<option>"+localStorage.getItem("LastWorld")+"</option>");
+    }
+</script>
