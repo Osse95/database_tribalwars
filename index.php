@@ -91,11 +91,17 @@ if (!isset($_SESSION["name"])) {
             case("villages"):
                 require __DIR__ . "/backend/pages/villages/villages.html";
                 break;
+            case("ownAttacks"):
+                require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
+                break;
             case("allAttacks"):
                 require __DIR__ . "/backend/pages/attacks/allAttacks.php";
                 break;
-            case("ownAttacks"):
-                require __DIR__ . "/backend/pages/attacks/ownAttacks.php";
+            case("tab"):
+                require __DIR__ . "/backend/pages/attacks/tab.php";
+                break;
+            case("tabManually"):
+                require __DIR__ . "/backend/pages/attacks/tabManually.php";
                 break;
             case("retimes"):
                 require __DIR__ . "/backend/pages/attacks/retimes.html";

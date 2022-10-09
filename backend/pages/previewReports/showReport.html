@@ -6,6 +6,9 @@
 </style>
 
 <div class="justify-content-center d-flex">
+    <div id="waiting">
+        <div class="m-2 spinner-border" role="status"></div>
+    </div>
     <table id="showReport">
         <tbody>
         <tr style="border: solid 1px black; padding: 4px;">
@@ -501,7 +504,7 @@
 </div>
 
 <script>
-
+    $("#showReport").hide();
     let id = window.location.search.substring(1).split("=");
 
     if (window.location.search.includes("preview")) {
@@ -516,6 +519,8 @@
         data: {id: id[1]},
         type: 'post',
         success: function (data) {
+            $("#showReport").show();
+            $("#waiting").hide();
             let result = JSON.parse(data);
             if (result["reportAvailable"] === true) {
                 $("#subject").text(result["subject"]);
