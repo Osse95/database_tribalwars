@@ -7,5 +7,4 @@ $("#coordX").on('input', function () {
         $("#coordY").val("");
         $("#coordY").focus();
     }
-
 });
