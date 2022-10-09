@@ -125,7 +125,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                         <li><a class="dropdown-item bg-primary" href="/tab">
                                 <font class="dropitem">Tab it</font>
                             </a></li>
-                        <li><a class="dropdown-item bg-primary" href="/tabHaendisch">
+                        <li><a class="dropdown-item bg-primary" href="/tabManually">
                                 <font class="dropitem">Tab it (Händisch)</font>
                             </a></li>
                         <li><a class="dropdown-item bg-primary" href="/retimes">
