@@ -6,7 +6,7 @@ require_once __DIR__ . "/backend/classes/World_User.php";
 require_once __DIR__ . "/backend/classes/General.php";
 require_once __DIR__ . "/backend/classes/Players.php";
 error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+//ini_set('display_errors', 'On');
 if (!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])) {
     $World_User = new World_User();
     $Cookie = $World_User->loadCookie($_COOKIE["cookie"]);
