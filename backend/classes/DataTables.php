@@ -46,6 +46,21 @@ class DataTables{
         };
     }
 
+    public static function sortAllMembers($column): string
+    {
+        return match ($column) {
+            "1" => "playerid",
+            "3" => "level",
+            "4" => "mods",
+            "5" => "offkoord",
+            "6" => "deffkoord",
+            "7" => "reports",
+            "8" => "attacks",
+            "9" => "Version",
+            default => "name",
+        };
+    }
+
     public static function sortReportTable($column): string
     {
         return match ($column) {

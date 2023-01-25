@@ -1,0 +1,396 @@
+<div class="container p-4">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <button ID="tabMember" class="btn btn-primary m-1"> Mitglieder</button>
+            <button ID="tabOwnTroops" class="btn btn-primary m-1"> Eigene Truppen</button>
+            <button ID="tabTroops" class="btn btn-primary m-1"> Truppen</button>
+            <button ID="tabLastInsert" class="btn btn-primary m-1"> Zuletzt eingelesen</button>
+            <button ID="tabDiplo" class="btn btn-primary m-1"> Diplo</button>
+            <button ID="tabVillages" class="btn btn-primary m-1"> Dörfer hinzufügen</button>
+            <button ID="tabDiscord" class="btn btn-primary m-1"> Discordbot</button>
+            <button ID="tabAPI" class="btn btn-primary m-1"> API</button>
+        </div>
+    </div>
+</div>
+
+<div class="container p-4" id="memberList">
+    <div class="table-responsive">
+        <table id="usersTable" class="table table-dark table-hover table-striped">
+            <thead>
+            <tr>
+                <th> User</th>
+                <th> Account</th>
+                <th> Login</th>
+                <th> Level</th>
+                <th> Mod</th>
+                <th> Off_Koord</th>
+                <th> Deff_Koord</th>
+                <th> alle Berichte</th>
+                <th> alle Angriffe</th>
+                <th> Aktiv</th>
+                <th> Passwort</th>
+            </tr>
+            </thead>
+        </table>
+        <script>
+            $(document).ready(function () {
+                let DataTable = $('#usersTable').DataTable({
+                    "paging": true,
+                    "searching": true,
+                    "info": true,
+                    processing: true,
+                    serverSide: true,
+                    "columnDefs": [{
+                        "targets": 10,
+                        "orderable": false
+                    }],
+                    stateSave: true,
+                    "lengthMenu": [[10, 20, 50, 75, 100, 200, 500, 1000], [10, 20, 50, 75, 100, 200, 500, 1000]],
+                    ajax: {
+                        url: '/ajax/leadership/getMembersTable.php',
+                        type: 'POST',
+                        async: true
+                    }
+                });
+            });
+        </script>
+    </div>
+</div>
+
+<div class="container p-4" id="allTroops">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-lg-8">
+            <table class="table table-dark table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Insgesamt</th>
+                    <th><img src="/assets/images/inno/report/unit_spear.png" title="Speerträger"></th>
+                    <th><img src="/assets/images/inno/report/unit_sword.png" title="Schwertkämpfer"></th>
+                    <th><img src="/assets/images/inno/report/unit_axe.png" title="Axtkämpfer"></th>
+                    <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen"></th>
+                    <th><img src="/assets/images/inno/report/unit_spy.png" title="Späher"></th>
+                    <th class="archer"><img src="/assets/images/inno/report/unit_light.png" title="Leichte Kavallerie"></th>
+                    <th><img src="/assets/images/inno/report/unit_marcher.png" title="Beritten"></th>
+                    <th><img src="/assets/images/inno/report/unit_heavy.png" title="Schwere Kavallerie"></th>
+                    <th><img src="/assets/images/inno/report/unit_ram.png" title="Rammbock"></th>
+                    <th><img src="/assets/images/inno/report/unit_catapult.png" title="Katapult"></th>
+                    <th><img src="/assets/images/inno/report/unit_snob.png" title="Adelsgeschlecht"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>eigene</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-12">
+            <button class="btn-primary btn"> Alle aufdecken</button>
+            <button class="btn-primary btn"> Alle verdecken</button>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-lg-8">
+            <table class="table table-dark table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Spieler</th>
+                    <th><img src="/assets/images/inno/report/unit_spear.png" title="Speerträger"></th>
+                    <th><img src="/assets/images/inno/report/unit_sword.png" title="Schwertkämpfer"></th>
+                    <th><img src="/assets/images/inno/report/unit_axe.png" title="Axtkämpfer"></th>
+                    <th class="archer"><img src="/assets/images/inno/report/unit_archer.png" title="Bogen"></th>
+                    <th><img src="/assets/images/inno/report/unit_spy.png" title="Späher"></th>
+                    <th><img src="/assets/images/inno/report/unit_light.png" title="Leichte Kavallerie"></th>
+                    <th class="archer"><img src="/assets/images/inno/report/unit_marcher.png" title="Beritten"></th>
+                    <th><img src="/assets/images/inno/report/unit_heavy.png" title="Schwere Kavallerie"></th>
+                    <th><img src="/assets/images/inno/report/unit_ram.png" title="Rammbock"></th>
+                    <th><img src="/assets/images/inno/report/unit_catapult.png" title="Katapult"></th>
+                    <th><img src="/assets/images/inno/report/unit_snob.png" title="Adelsgeschlecht"></th>
+                    <th><img src="/assets/images/inno/report/unit_snob.png" title="Adelsgeschlecht"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Placeholder</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container p-4" id="troops">
+    <div class="row justify-content-md-center">
+        <div class="col-12">
+            <div class="row justify-content-md-center">
+                <div class="col-xxl-3 col-lg-4 col-md-6 col-xs-10">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">Accountname</span>
+                        <input name="memberTroop" list="databaseMembers" placeholder="Account" class="form-control"
+                               aria-describedby="inputGroup-sizing-sm">
+                        <datalist id="databaseMembers">
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row justify-content-md-center">
+                <div class="col-xxl-3 col-lg-4 col-md-6 col-xs-10">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text">Koords</span>
+                        <input type="text" id="coordX" name="coordX" placeholder="500" class="form-control">
+                        <input type="text" id="coordY" maxlength="3" name="coordY" placeholder="500"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 ">
+        </div>
+        <div class="col-md-4 col-xs-12 d-flex justify-content-center">
+            <button class="mt-2 btn btn-primary" type="submit">Suchen</button>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <script type="text/javascript" src="/assets/js/fillCoords.js"></script>
+</div>
+
+<div class="container p-4" id="lastInsert">
+    <div class="row justify-content-md-center">
+        <div class="col-xl-8 col-md-10 col-xs-12 table-responsive">
+            <table id="lastInsertTable" class="table table-dark table-hover table-striped">
+                <thead>
+                <tr>
+                    <th> Account</th>
+                    <th> SoS Anfragen</th>
+                    <th> Berichte</th>
+                    <th> Truppen</th>
+                    <th> Gebäude</th>
+                    <th> AG Limit</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container p-4" id="changeDiplo">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-4 col-md-6 col-xs-12 mb-3">
+            <div class="input-group input-group-sm">
+                <span class="input-group-text">Stamm</span>
+                <input name="tribe" list="tribeNames" placeholder="Stamm" class="form-control">
+                <datalist id="tribeNames">
+                </datalist>
+            </div>
+        </div>
+        <div class="col-12"></div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-xs-12 mb-3">
+            <select class="form-control" name="diplo">
+                <option value="1">Eigener Stamm</option>
+                <option value="2">Feind</option>
+                <option value="3">NAP</option>
+                <option value="4">BND</option>
+            </select>
+        </div>
+        <div class="col-12"></div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-xs-12 d-flex justify-content-center">
+            <button class="btn btn-primary">Hinzufügen</button>
+        </div>
+    </div>
+</div>
+
+<div class="container p-4" id="addVillage">
+    <div class="row justify-content-md-center">
+        <div class="col-xl-4 col-md-8 col-xs-12">
+            <textarea class="form-control" name="insert_koords" placeholder="Dorfkoordinaten einfügen"></textarea>
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-xl-4 col-md-8 mt-2 col-xs-12 d-flex justify-content-center">
+            <span class="input-group-text">Dörfertyp</span>
+            <select class="form-control" name="coordType">
+                <option value="1">Off</option>
+                <option value="0">Deff</option>
+            </select>
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-xs-12 mt-2 d-flex justify-content-center">
+            <button class="btn btn-primary">Hinzufügen</button>
+        </div>
+        <div class="col-12 mt-4 text-center">
+        </div>
+    </div>
+</div>
+
+<div class="container p-4" id="changeDiscord">
+    <div class="row">
+        <div class="col-xl-2 col-lg-1">
+        </div>
+        <div class="col-xl-8 col-lg-10 col-xs-12 justify-content-center">
+            <div class="input-group input-group-sm mb-3">
+                <label class="input-group-text">Discordserver</label>
+                <select class="form-select" id="discordServer">
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-1">
+        </div>
+        <div class="col-md-4 col-xs-6">
+        </div>
+        <div class="col-md-4 col-xs-6 d-flex justify-content-center">
+            <button class="mt-2 btn btn-primary">Bearbeiten</button>
+        </div>
+        <div class="col-md-4 col-xs-6">
+        </div>
+        <div class="col-12 mt-4 text-center">
+            Einfach den Discordserver auswählen und auf Bearbeiten klicken,<br>
+            sollte der Bot deaktiviert sein, wird er aktiviert,<br>
+            sollte der Bot aktiviert sein, wird er deaktiviert.
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/js/date-eu.js"></script>
+
+<script>
+    $("#memberList").show();
+    $("#allTroops").hide();
+    $("#troops").hide();
+    $("#lastInsert").hide();
+    $("#changeDiplo").hide();
+    $("#addVillage").hide();
+    $("#changeDiscord").hide();
+
+    $("#tabMember").on("click", function () {
+        $("#memberList").show();
+        $("#allTroops").hide();
+        $("#troops").hide();
+        $("#lastInsert").hide();
+        $("#changeDiplo").hide();
+        $("#addVillage").hide();
+        $("#changeDiscord").hide();
+    })
+    let firstOwnTroopsLoad = false;
+    $("#tabOwnTroops").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").show();
+        $("#troops").hide();
+        $("#lastInsert").hide();
+        $("#changeDiplo").hide();
+        $("#addVillage").hide();
+        $("#changeDiscord").hide();
+        if(!firstOwnTroopsLoad){
+            firstOwnTroopsLoad = true;
+            $.getJSON("/ajax/leadership/getMembers.php", function (result) {
+                result.forEach(element => {
+                    $("#databaseMembers").append(`<option>${element}</option>`)
+                })
+            })
+        }
+    })
+    let firstTroopLoad = false;
+    $("#tabTroops").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").hide();
+        $("#troops").show();
+        $("#lastInsert").hide();
+        $("#changeDiplo").hide();
+        $("#addVillage").hide();
+        $("#changeDiscord").hide();
+        if (!firstTroopLoad) {
+            firstTroopLoad = true;
+            $.getJSON("/ajax/leadership/getMembers.php", function (result) {
+                result.forEach(element => {
+                    $("#databaseMembers").append(`<option>${element}</option>`)
+                })
+            })
+        }
+    })
+    let firstLoadInsert = false;
+    $("#tabLastInsert").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").hide();
+        $("#troops").hide();
+        $("#lastInsert").show();
+        $("#changeDiplo").hide();
+        $("#addVillage").hide();
+        $("#changeDiscord").hide();
+        if (!firstLoadInsert) {
+            firstLoadInsert = true;
+            $(document).ready(function () {
+                $('#lastInsertTable').DataTable({
+                    ajax: '/ajax/leadership/getLastInsert.php',
+                    "paging": false,
+                    "searching": true,
+                    "info": false,
+                    "ordering": false
+                });
+            });
+        }
+    })
+    let firstDiploLoad = false;
+    $("#tabDiplo").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").hide();
+        $("#troops").hide();
+        $("#lastInsert").hide();
+        $("#changeDiplo").show();
+        $("#addVillage").hide();
+        $("#changeDiscord").hide();
+        if (!firstDiploLoad) {
+            firstDiploLoad = true;
+            $.getJSON("/ajax/general/getTribeNames.php", function (result) {
+                result["tribeNames"].forEach(element => {
+                    $("#tribeNames").append(`<option>${element}</option>`)
+                })
+            });
+        }
+    })
+    $("#tabVillages").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").hide();
+        $("#troops").hide();
+        $("#lastInsert").hide();
+        $("#changeDiplo").hide();
+        $("#addVillage").show();
+        $("#changeDiscord").hide();
+    })
+    $("#tabDiscord").on("click", function () {
+        $("#memberList").hide();
+        $("#allTroops").hide();
+        $("#troops").hide();
+        $("#lastInsert").hide();
+        $("#changeDiplo").hide();
+        $("#addVillage").hide();
+        $("#changeDiscord").show();
+    })
+</script>

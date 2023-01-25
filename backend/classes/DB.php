@@ -32,7 +32,7 @@ class DB
         }
     }
 
-    function connectTo($DB)
+    function connectTo($DB="Allgemein")
     {
         global $DB_Config;
         $this->conn = new mysqli($DB_Config["Server"], $DB, $DB_Config["Password"], $DB);

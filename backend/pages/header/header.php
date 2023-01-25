@@ -220,7 +220,7 @@ $World_User = new World_User($_SESSION["name"], $_SESSION["world"]);
                 <?php
                 if ($World_User->isSF()) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/sf"><i class="fa-regular fa-chess-queen tablet"></i> SF</a>
+                        <a class="nav-link" href="/leader"><i class="fa-regular fa-chess-queen tablet"></i> SF</a>
                     </li>
                     <?php
                 } ?>

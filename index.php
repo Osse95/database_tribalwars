@@ -139,6 +139,9 @@ if (!isset($_SESSION["name"])) {
             case("interactiveMap"):
                 require __DIR__ . "/backend/pages/graphics/interactiveMap.html";
                 break;
+            case("leader"):
+                require __DIR__ . "/backend/pages/leader/leader.html";
+                break;
             case("improvement"):
                 require __DIR__ . "/backend/pages/footer/improvement.php";
                 break;
