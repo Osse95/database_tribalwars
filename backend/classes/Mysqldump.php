@@ -12,7 +12,7 @@
  * @link     https://github.com/ifsnop/mysqldump-php
  *
  */
-
+ 
 namespace Ifsnop\Mysqldump;
 
 use Exception;
@@ -345,7 +345,7 @@ class Mysqldump
         return true;
     }
 
-    /**
+    /** 
      * Connect with PDO.
      *
      * @return null
