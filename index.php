@@ -1,12 +1,14 @@
 <?php
+
 session_start();
 $time = microtime(true);
 require_once __DIR__ . "/backend/classes/User.php";
 require_once __DIR__ . "/backend/classes/World_User.php";
 require_once __DIR__ . "/backend/classes/General.php";
 require_once __DIR__ . "/backend/classes/Players.php";
-error_reporting(E_ALL);
-//ini_set('display_errors', 'On');
+//error_reporting(E_ALL);
+
+ini_set('display_errors', 'On');
 if (!isset($_SESSION["name"]) && isset($_COOKIE["cookie"])) {
     $World_User = new World_User();
     $Cookie = $World_User->loadCookie($_COOKIE["cookie"]);
@@ -145,8 +147,20 @@ if (!isset($_SESSION["name"])) {
             case("improvement"):
                 require __DIR__ . "/backend/pages/footer/improvement.php";
                 break;
+            case("settings"):
+                require __DIR__ . "/backend/pages/settings/settings.html";
+                break;
+            case("coinCalculator"):
+                require __DIR__ . "/backend/pages/other/coinCalculator.php";
+                break;
+            case("distanceCalculator"):
+                require __DIR__ . "/backend/pages/other/distanceCalculator.php";
+                break;
+            case("pointsCalculator"):
+                require __DIR__ . "/backend/pages/other/pointsCalculator.php";
+                break;
             default:
-                require __DIR__ . "/backend/pages/overview/overview.html";
+                require __DIR__ . "/backend/pages/overview/overview.php";
         }
     }
     if (!str_contains($_SERVER['REQUEST_URI'], "preview")) {
