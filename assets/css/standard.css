@@ -13,11 +13,6 @@ body {
     margin-bottom: 10px;
 }
 
-.nav-link:hover,
-.dropdown-item:hover {
-    font-weight: bold;
-}
-
 .placeholder {
     width: 100%;
     margin-top: 50px;
@@ -39,8 +34,8 @@ body {
         border-radius: 5px;
         margin-bottom: 10px;
     }
-
 }
+
 @media screen and (max-width: 1200px) {
     a:hover + .preview, .preview:hover {
         display: none;
